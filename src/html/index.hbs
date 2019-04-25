@@ -18,13 +18,16 @@
 
 <body>
 
-	{{> base/header 'sticky'}}
-
 	<main id='content'>
 
+		{{> base/header }}
+		
 		{{> story/intro }}
-		{{!-- delete guide and put your html here --}}
-		{{> base/guide }}
+
+		{{> story/lead}}
+
+		{{> story/ranking}}
+
 
 	</main>
 
