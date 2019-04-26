@@ -1,6 +1,6 @@
 * [Development](#development)
   * [HTML](#html)
-    * [Sticky Header](#sticky-header)
+    * [Sticky](#sticky-header)
     * [Metadata](#metadata)
     * [Analytics](#analytics)
     * [Copy](#copy)
