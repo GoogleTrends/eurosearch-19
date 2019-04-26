@@ -8,6 +8,7 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "flubber": "^0.4.2",
     "lodash.debounce": "^4.0.8",
     "nouislider": "^12.1.0",
     "superagent": "^4.1.0"
