@@ -26,7 +26,17 @@ function init() {
     let rankingSvg = d3.select("#ranking")
       .attr("width", rankingWidth) 
       .attr("height", rankingHeight)
-    
+
+    let filter = rankingSvg.append("defs").append("filter")
+      .attr("id", "glow");
+      
+    filter.append("feGaussianBlur")
+      .attr("stDeviation", 2.5)
+      .attr("result", "coloredBlur");
+    let feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode").attr("in", "coloredBlur");
+    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
     let countryScale = d3.scaleBand()
       .domain(rankingdata.map((d) => d.country))
       .range([rankingMargin.top, rankingHeight])
@@ -83,7 +93,8 @@ function init() {
       .attr("y", (d) => countryScale(d.country) - countryheight/2)
       .attr('class', function (d) { return 'id-' + d.Country; })
       .attr('width', countryheight - 2)
-      .attr('height', countryheight - 2);
+      .attr('height', countryheight - 2)
+      .style("filter", "url('#glow')");
     rankingSvg.selectAll('image.question.tele')
       .data(rankingdata)
       .enter().append('image')
