@@ -1,5 +1,5 @@
 /* global d3 */
-import { toRect, interpolate } from "flubber";
+import { toRect, interpolate, combine, splitPathString} from "flubber";
 
 function resize() {}
 
@@ -40,9 +40,10 @@ function init() {
       .attr('x', (d) => voteScale(d))
       .attr('y', 20)
       .text((d) => d)
+      .attr("class", (d) => `label-${d}`)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
-      .attr('font-family', 'Roboto');
+      .attr('font-family', 'Rubik');
 
     const countryheight = 24;
 
@@ -107,11 +108,11 @@ function init() {
       .attr('x', 0)
       .attr('y', (d) => countryScale(d.country))
       .attr("dy", "0.3em")
-      .style('font-family', 'Roboto')
+      .style('font-family', 'Rubik')
       .style('font-size', '14px')
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
-      .style('fill', '#000037')
+      //.style('fill', '#000037')
       .html(function (d, i) { return (i + 1) + '. ' + d.country; });
 
   /** MAP **/
@@ -189,17 +190,25 @@ function init() {
     TUR: { x: 8, y: 6 }
   }
 
-  const rectDim = 48
+  const rectDim = 48;
+  function rectToPath(x, y, dim){
+    return `M${x},${y} L${x + dim},${y} L${x + dim},${y + dim} L${x},${y + dim}`
+  }
+
   d3.select("input#mapswitch").on("change", function(){
     if(this.checked){
       mapSvg.selectAll("path.country")
         .transition().duration(2000)
         .attrTween("d", function(d){
-          return toRect(d3.select(this).attr("d"),
+          console.log(rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim));
+          return combine(splitPathString(d3.select(this).attr("d")),
+            rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim)
+          )
+          /*return toRect(d3.select(this).attr("d"),
           grid[d3.select(this).attr("id")].x * rectDim,
           grid[d3.select(this).attr("id")].y * rectDim,
           rectDim,
-          rectDim);
+          rectDim);*/
         });
     }
     if(!this.checked){
