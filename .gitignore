@@ -4,4 +4,5 @@
 .vscode
 npm-debug.log
 node_modules
+dev
 dist
