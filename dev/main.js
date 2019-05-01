@@ -583,7 +583,7 @@ function init() {
     };
     var rankingSvg = d3.select("#ranking").attr("width", rankingWidth).attr("height", rankingHeight);
     var flagfilter = rankingSvg.append("filter").attr("id", "flagglow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
-    flagfilter.append("feGaussianBlur").attr("stdDeviation", "5").attr("result", "coloredBlur");
+    flagfilter.append("feGaussianBlur").attr("stdDeviation", "3").attr("result", "coloredBlur");
     var flagfeMerge = flagfilter.append("feMerge");
     flagfeMerge.append("feMergeNode").attr("in", "coloredBlur");
     flagfeMerge.append("feMergeNode").attr("in", "SourceGraphic");
@@ -604,48 +604,30 @@ function init() {
       return voteScale(d.key);
     }).y(function (d) {
       return d.value * countryScale.bandwidth() + countryheight / 2;
-    }).curve(d3.curveCatmullRom.alpha(1));
-    var prtdata = [{
-      "country": "PRT",
-      "values": [{
-        "key": "search",
-        "value": 1
-      }, {
-        "key": "tele",
-        "value": 3
-      }, {
-        "key": "overall",
-        "value": 2
-      }]
-    }];
-    rankingSvg.selectAll("line.connection").data(prtdata).enter().append("path").attr("d", function (d) {
-      return line(d.values);
-    }).style("stroke-width", 2).style("stroke", "red").style("fill", "none");
-    /*rankingSvg.selectAll("line.connection")
-      .data(rankingdata)
-      .enter()
-      .append("line")
-      .attr("class", "connection")
-      .attr('x1', voteScale("search"))
-      .attr('x2', voteScale("overall"))
-      .attr('y1', (d) => countryScale(d.country))
-      .attr('y2', (d) => countryScale(d.country))
-      .style("stroke", "#cccccc")
-      .style("stroke-width", 1);*/
+    }).curve(d3.curveMonotoneX); //.curve(d3.curveCatmullRom.alpha(1));
 
-    /*var connections = svgFive.selectAll('line.connection')
-        .data(rankingconnect)
-        .enter().append('line')
-        .attr('class', function (d) { return 'connection id-' + d.key; })
-        .attr('x1', 150)
-        .attr('x2', 230)
-        .attr('y1', function (d) { return countryheight*d.googlerank + 18; })
-        .attr('y2', function (d) { return countryheight*d.realrank + 18; })
-        .style('stroke', function(d){
-            return '#eeeeee';
-        })
-        .style('stroke-width', 2);*/
-    //Left part, search results
+    var linedata = [];
+    rankingdata.forEach(function (el) {
+      var obj = {};
+      obj.country = el.country;
+      obj.values = [];
+      obj.values.push({
+        "key": "search",
+        "value": el.search
+      });
+      obj.values.push({
+        "key": "tele",
+        "value": el.tele
+      });
+      obj.values.push({
+        "key": "overall",
+        "value": el.overall
+      });
+      linedata.push(obj);
+    });
+    rankingSvg.selectAll("line.connection").data(linedata).enter().append("path").attr("d", function (d) {
+      return line(d.values);
+    }).style("stroke-width", 1).style("stroke", "white").style("fill", "none").style("filter", "url(#flagglow)"); //Left part, search results
 
     rankingSvg.selectAll('image.flag').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
       return 'assets/images/flags/' + d.country + '.svg';
