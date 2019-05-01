@@ -792,4 +792,40 @@ svg#ranking text {
 .connection {
   opacity: 0.2;
 }
+#scatter-container svg {
+  display: block;
+  margin: auto;
+}
+.circle-mean {
+  fill: #fff;
+  opacity: 0.7;
+}
+.axis line {
+  opacity: 0.1;
+}
+.axis path {
+  visibility: hidden;
+}
+.axis text {
+  font-family: Rubik;
+}
+.axis-title {
+  fill: #fff;
+  font-size: 14px;
+  font-family: Rubik;
+}
+.x.axis-title {
+  text-anchor: end;
+}
+.fourtyfive {
+  stroke: #fff;
+  stroke-width: 2;
+  opacity: 0.5;
+}
+.scatter-label {
+  text-anchor: middle;
+  fill: #fff;
+  font-size: 10px;
+  opacity: 0.8;
+}
 /*# sourceMappingURL=bundle.css.map */

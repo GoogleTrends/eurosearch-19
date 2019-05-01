@@ -14,10 +14,17 @@ function init() {
         overall: +d.overall
       };
     }),
-    d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson')
-
+    d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'),
+    d3.dsv(",", "assets/data/tele-search-by-year.csv", function(d) {
+      return {
+        to: d.to,
+        searchpoints: +d.searchpoints,
+        year: +d.year,
+        votepoints: +d.votepoints
+      };
+    })
   ])
-  .then(([rankingdata, geodata]) => {
+  .then(([rankingdata, geodata, points]) => {
     /**RANKING **/
     const rankingHeight = 800;
     const rankingWidth = 600;
@@ -27,15 +34,20 @@ function init() {
       .attr("width", rankingWidth) 
       .attr("height", rankingHeight)
 
-    let filter = rankingSvg.append("defs").append("filter")
-      .attr("id", "glow");
-      
-    filter.append("feGaussianBlur")
-      .attr("stDeviation", 2.5)
-      .attr("result", "coloredBlur");
-    let feMerge = filter.append("feMerge");
-    feMerge.append("feMergeNode").attr("in", "coloredBlur");
-    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+    let flagfilter = rankingSvg.append("filter")
+      .attr("id","flagglow")
+      .attr("x", "-50%")
+      .attr("y", "-50%")
+      .attr("width", "200%")
+      .attr("height", "200%");
+    flagfilter.append("feGaussianBlur")
+      .attr("stdDeviation","5")
+      .attr("result","coloredBlur");
+    let flagfeMerge = flagfilter.append("feMerge");
+    flagfeMerge.append("feMergeNode")
+      .attr("in","coloredBlur");
+    flagfeMerge.append("feMergeNode")
+      .attr("in","SourceGraphic");
 
     let countryScale = d3.scaleBand()
       .domain(rankingdata.map((d) => d.country))
@@ -94,7 +106,7 @@ function init() {
       .attr('class', function (d) { return 'id-' + d.Country; })
       .attr('width', countryheight - 2)
       .attr('height', countryheight - 2)
-      .style("filter", "url('#glow')");
+      .style("filter", "url(#flagglow)");
     rankingSvg.selectAll('image.question.tele')
       .data(rankingdata)
       .enter().append('image')
@@ -231,7 +243,121 @@ function init() {
     }
   })
 
+  /*SCATTER TOTAL*/
+  //Calculate total points awarded to each country over the 15 years
+  let pointsMean = d3.nest()
+    .key((d) => d.to)
+    .rollup((d) => {return {
+      searchpoints: d3.mean(d, (g) => g.searchpoints),
+      votepoints: d3.mean(d, (g) => g.votepoints)
+    }})
+    .entries(points);
+  
+  const maxSearchPoints = d3.max(pointsMean, (d) => d.value.searchpoints);
+  const maxVotePoints = d3.max(pointsMean, (d) => d.value.votepoints);
+  const maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
 
+  const scatterWidth = 800;
+  const scatterHeight = 600;
+
+  const scatterMargins = {top: 20, right: 40, bottom: 40, left: 40};
+
+  let scatterOverallSvg = d3.select("svg#scatter")
+    .attr("width", scatterWidth)
+    .attr("height", scatterHeight)
+    .append("g")
+      .attr("transform", `translate(${scatterMargins.left},${scatterMargins.top})`);
+  
+  let defs = scatterOverallSvg.append("defs");
+
+  let filter = defs.append("filter")
+    .attr("id","glow")
+    .attr("x", "-50%")
+    .attr("y", "-50%")
+    .attr("width", "200%")
+    .attr("height", "200%");
+  filter.append("feGaussianBlur")
+    .attr("stdDeviation","4")
+    .attr("result","coloredBlur");
+  let feMerge = filter.append("feMerge");
+  feMerge.append("feMergeNode")
+    .attr("in","coloredBlur");
+  feMerge.append("feMergeNode")
+    .attr("in","SourceGraphic");
+  
+  let scatterScaleX = d3.scaleLinear()
+    .domain([0,maxPoints])
+    .range([0,scatterWidth - scatterMargins.right]);
+  
+  let scatterScaleY = d3.scaleLinear()
+    .domain([0,maxPoints])
+    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+
+  let xAxis = d3.axisBottom(scatterScaleX)
+    .tickValues([50,100,150])
+    .tickSize(-scatterHeight);
+  let yAxis = d3.axisLeft(scatterScaleY)
+    .tickValues([50,100,150,200])
+    .ticks(5)
+    .tickSize(-scatterWidth);
+
+  scatterOverallSvg.append("g")
+    .attr("class", "axis x-axis")
+    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .call(xAxis);
+  scatterOverallSvg.append("text")
+    .text("Search activity points")
+    .attr("x", scatterWidth - 50)
+    .attr("y", scatterHeight - 30)
+    .attr("class", "x axis-title")
+  scatterOverallSvg.append("text")
+    .text("Televoting points")
+    .attr("x", -20)
+    .attr("y", 10)
+    .attr("class", "y axis-title")
+
+  scatterOverallSvg.append("g")
+    .attr("class", "axis y-axis")
+    .attr("transform", `translate(0,0)`)
+    .call(yAxis);
+
+  scatterOverallSvg.append("line")
+    .attr("x1", scatterScaleX(0))
+    .attr("x2", scatterScaleX(200))
+    .attr("y1", scatterScaleY(0))
+    .attr("y2", scatterScaleY(200))
+    .attr("class", "fourtyfive")
+
+  scatterOverallSvg.selectAll("circle")
+    .data(pointsMean)
+    .enter().append("circle")
+    .attr("cx", (d) => scatterScaleX(d.value.searchpoints))
+    .attr("cy", (d) => scatterScaleY(d.value.votepoints))
+    .attr("r", 5)
+    .attr("class", "circle-mean")
+    .style("filter", "url(#glow)")
+    .attr("id", (d) => d.key);
+
+  let scatterLabels = [
+    {"Russia": "end"},
+    {"Bulgaria": "middle"},
+    {"Serbia & Montenegro": "middle"},
+    {"Sweden": "start"},
+    {"Czech Republic": "start"}
+  ]
+
+  let labeldata = pointsMean.filter((d) => {
+    return d.key == "Russia" || d.key == "Bulgaria" || d.key == "Serbia and Montenegro" || d.key == "Sweden" || d.key == "Czech Republic"  || d.key == "Italy" || d.key == "Turkey" || d.key == "Ukraine"
+  })
+
+  scatterOverallSvg.selectAll("text.label")
+    .data(labeldata)
+    .enter().append("text")
+    .attr("x", (d) => scatterScaleX(d.value.searchpoints))
+    .attr("y", (d) => scatterScaleY(d.value.votepoints))
+    .text((d) => d.key)
+    .attr("class", "scatter-label")
+    .attr("dy", -10);
 
   });
 
