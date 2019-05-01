@@ -575,10 +575,11 @@ function init() {
 
     /**RANKING **/
     var rankingHeight = 800;
-    var rankingWidth = 600;
+    var rankingWidth = document.querySelector("#ranking-container").clientWidth;
     var rankingMargin = {
       top: 40,
-      left: 100
+      left: 80,
+      right: 80
     };
     var rankingSvg = d3.select("#ranking").attr("width", rankingWidth).attr("height", rankingHeight);
     var flagfilter = rankingSvg.append("filter").attr("id", "flagglow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
@@ -589,7 +590,7 @@ function init() {
     var countryScale = d3.scaleBand().domain(rankingdata.map(function (d) {
       return d.country;
     })).range([rankingMargin.top, rankingHeight]);
-    var voteScale = d3.scaleBand().domain(["search", "tele", "overall"]).range([rankingMargin.left, rankingWidth]);
+    var voteScale = d3.scalePoint().domain(["search", "tele", "overall"]).range([rankingMargin.left, rankingWidth - rankingMargin.right]).padding(0);
     rankingSvg.selectAll('text.header').data(["search", "tele", "overall"]).enter().append("text").attr('x', function (d) {
       return voteScale(d);
     }).attr('y', 20).text(function (d) {
@@ -599,11 +600,39 @@ function init() {
     }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik');
     var countryheight = 24; //Connecting lines
 
-    rankingSvg.selectAll("line.connection").data(rankingdata).enter().append("line").attr("class", "connection").attr('x1', voteScale("search")).attr('x2', voteScale("overall")).attr('y1', function (d) {
-      return countryScale(d.country);
-    }).attr('y2', function (d) {
-      return countryScale(d.country);
-    }).style("stroke", "#cccccc").style("stroke-width", 1);
+    var line = d3.line().x(function (d) {
+      return voteScale(d.key);
+    }).y(function (d) {
+      return d.value * countryScale.bandwidth() + countryheight / 2;
+    }).curve(d3.curveCatmullRom.alpha(1));
+    var prtdata = [{
+      "country": "PRT",
+      "values": [{
+        "key": "search",
+        "value": 1
+      }, {
+        "key": "tele",
+        "value": 3
+      }, {
+        "key": "overall",
+        "value": 2
+      }]
+    }];
+    rankingSvg.selectAll("line.connection").data(prtdata).enter().append("path").attr("d", function (d) {
+      return line(d.values);
+    }).style("stroke-width", 2).style("stroke", "red").style("fill", "none");
+    /*rankingSvg.selectAll("line.connection")
+      .data(rankingdata)
+      .enter()
+      .append("line")
+      .attr("class", "connection")
+      .attr('x1', voteScale("search"))
+      .attr('x2', voteScale("overall"))
+      .attr('y1', (d) => countryScale(d.country))
+      .attr('y2', (d) => countryScale(d.country))
+      .style("stroke", "#cccccc")
+      .style("stroke-width", 1);*/
+
     /*var connections = svgFive.selectAll('line.connection')
         .data(rankingconnect)
         .enter().append('line')
@@ -636,15 +665,24 @@ function init() {
     }).attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
       return countryScale(d.country) - countryheight / 2;
     }).attr('class', 'question').attr('width', countryheight - 2).attr('height', countryheight - 2);
-    rankingSvg.selectAll('text.countrylabel').data(rankingdata).enter().append('text').attr('x', 0).attr('y', function (d) {
+    rankingSvg.selectAll('text.countrylabel-left').data(rankingdata).enter().append('text').attr('x', 0).attr('y', function (d) {
       return countryScale(d.country);
     }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').attr('class', function (d) {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
       return d.key;
-    }) //.style('fill', '#000037')
-    .html(function (d, i) {
+    }).html(function (d, i) {
       return i + 1 + '. ' + d.country;
+    });
+    rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth).attr('y', function (d) {
+      return countryScale(d.country);
+    }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
+      return 'countrylabel id-' + d.country;
+    }).attr('id', function (d) {
+      return d.key;
+    }) //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
+    .html(function (d, i) {
+      return i + 1 + '. ???';
     });
     /** MAP **/
 

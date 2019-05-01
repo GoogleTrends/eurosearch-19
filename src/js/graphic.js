@@ -27,8 +27,8 @@ function init() {
   .then(([rankingdata, geodata, points]) => {
     /**RANKING **/
     const rankingHeight = 800;
-    const rankingWidth = 600;
-    const rankingMargin = {top: 40, left: 100};
+    const rankingWidth = document.querySelector("#ranking-container").clientWidth;
+    const rankingMargin = {top: 40, left: 80, right: 80};
 
     let rankingSvg = d3.select("#ranking")
       .attr("width", rankingWidth) 
@@ -52,9 +52,10 @@ function init() {
     let countryScale = d3.scaleBand()
       .domain(rankingdata.map((d) => d.country))
       .range([rankingMargin.top, rankingHeight])
-    let voteScale = d3.scaleBand()
+    let voteScale = d3.scalePoint()
       .domain(["search", "tele", "overall"])
-      .range([rankingMargin.left, rankingWidth])
+      .range([rankingMargin.left, rankingWidth - rankingMargin.right])
+      .padding(0);
 
     rankingSvg.selectAll('text.header')
       .data(["search", "tele", "overall"])
@@ -69,8 +70,37 @@ function init() {
 
     const countryheight = 24;
 
-      //Connecting lines
+    //Connecting lines
+
+    let line = d3.line()
+      .x((d) => voteScale(d.key))
+      .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
+      .curve(d3.curveCatmullRom.alpha(1));
+    let prtdata = [
+      {
+        "country": "PRT",
+        "values": [{
+          "key": "search",
+          "value": 1
+          },
+            {
+          "key": "tele",
+          "value": 3
+          },
+          {
+          "key": "overall",
+          "value": 2
+          }
+    ]
+  }]
     rankingSvg.selectAll("line.connection")
+      .data(prtdata)
+      .enter().append("path")
+      .attr("d", (d) => line(d.values))
+      .style("stroke-width", 2)
+      .style("stroke", "red")
+      .style("fill", "none");
+    /*rankingSvg.selectAll("line.connection")
       .data(rankingdata)
       .enter()
       .append("line")
@@ -80,7 +110,7 @@ function init() {
       .attr('y1', (d) => countryScale(d.country))
       .attr('y2', (d) => countryScale(d.country))
       .style("stroke", "#cccccc")
-      .style("stroke-width", 1);
+      .style("stroke-width", 1);*/
   /*var connections = svgFive.selectAll('line.connection')
       .data(rankingconnect)
       .enter().append('line')
@@ -125,7 +155,7 @@ function init() {
       .attr('class', 'question')
       .attr('width', countryheight - 2)
       .attr('height', countryheight - 2);
-  rankingSvg.selectAll('text.countrylabel')
+  rankingSvg.selectAll('text.countrylabel-left')
       .data(rankingdata)
       .enter().append('text')
       .attr('x', 0)
@@ -135,8 +165,20 @@ function init() {
       .style('font-size', '14px')
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
-      //.style('fill', '#000037')
       .html(function (d, i) { return (i + 1) + '. ' + d.country; });
+    rankingSvg.selectAll('text.countrylabel-right')
+      .data(rankingdata)
+      .enter().append('text')
+      .attr('x', rankingWidth)
+      .attr('y', (d) => countryScale(d.country))
+      .attr("dy", "0.3em")
+      .style('font-family', 'Rubik')
+      .style('font-size', '14px')
+      .style('text-anchor', 'end')
+      .attr('class', function (d) { return 'countrylabel id-' + d.country; })
+      .attr('id', function (d) { return d.key; })
+      //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
+      .html(function (d, i) { return (i + 1) + '. ???'; });
 
   /** MAP **/
   const mapWidth = 800;

@@ -784,6 +784,9 @@ h1 {
 .intro__byline a {
   color: #b18f6d;
 }
+#ranking-container {
+  width: 100%;
+}
 svg#ranking text {
   fill: #fff;
 }
