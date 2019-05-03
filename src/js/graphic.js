@@ -1,5 +1,6 @@
 /* global d3 */
 import { separate, combine, splitPathString} from "flubber";
+import noUiSlider from 'nouislider';
 
 function resize() {}
 
@@ -349,7 +350,7 @@ function init() {
   })
 
   /*SCATTER TOTAL*/
-  //Calculate total points awarded to each country over the 15 years
+  //Calculate average points awarded to each country over the 15 years
   let pointsMean = d3.nest()
     .key((d) => d.to)
     .rollup((d) => {return {
@@ -444,15 +445,15 @@ function init() {
     .attr("id", (d) => d.key);
 
   let scatterLabels = [
-    {"Russia": "end"},
-    {"Bulgaria": "middle"},
-    {"Serbia & Montenegro": "middle"},
-    {"Sweden": "start"},
-    {"Czech Republic": "start"}
+    {"RUS": "end"},
+    {"BGR": "middle"},
+    {"SRB": "middle"},
+    {"SWE": "start"},
+    {"CZE": "start"}
   ]
 
   let labeldata = pointsMean.filter((d) => {
-    return d.key == "Russia" || d.key == "Bulgaria" || d.key == "Serbia and Montenegro" || d.key == "Sweden" || d.key == "Czech Republic"  || d.key == "Italy" || d.key == "Turkey" || d.key == "Ukraine"
+    return d.key == "RUS" || d.key == "BGR" || d.key == "SRB" || d.key == "SWE" || d.key == "CZE"  || d.key == "ITA" || d.key == "TRK" || d.key == "UKR"
   })
 
   scatterOverallSvg.selectAll("text.label")
@@ -464,6 +465,31 @@ function init() {
     .attr("class", "scatter-label")
     .attr("dy", -10);
 
+  });
+
+  /*YEARLY SCATTER*/
+  var slider = document.getElementById('slider');
+
+  noUiSlider.create(slider, {
+      start: 2018,
+      connect: true,
+      tooltips: true,
+      format: {
+        to: function(value){
+          return d3.format("(.0f")(value);
+        },
+        from: function(value){
+          return value;
+        }
+      },
+      step: 1,
+      range: {
+          'min': 2004,
+          'max': 2018
+      }
+  });
+  slider.noUiSlider.on("change", function(){
+    console.log(slider.noUiSlider.get());
   });
 
 }
