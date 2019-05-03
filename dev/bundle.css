@@ -1129,6 +1129,7 @@ svg#ranking text {
   visibility: hidden;
 }
 .stv-radio-button + label {
+  font-size: 0.7em;
   float: left;
   padding: 0.3em 0.5em;
   cursor: pointer;

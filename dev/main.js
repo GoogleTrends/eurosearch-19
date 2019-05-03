@@ -2998,9 +2998,10 @@ function init() {
       return i + 1 + '. ???';
     });
     /** MAP **/
+    //const mapWidth = 900;
 
-    var mapWidth = 600;
-    var mapHeight = 600;
+    var mapWidth = document.querySelector("#map-container").clientWidth;
+    var mapHeight = 800;
     var mapPadding = 20;
     var mapSvg = d3.select("#map").attr("width", mapWidth).attr("height", mapHeight);
     var extent = {
@@ -3337,8 +3338,11 @@ function init() {
       return d.value.votepoints;
     });
     var maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
-    var scatterWidth = 800;
-    var scatterHeight = 600;
+    var scatterWidth = document.querySelector("#scatter-container").clientWidth * 0.8;
+    var scatterRatio = 2 / 3;
+    var scatterHeight = scatterWidth * scatterRatio; //const scatterWidth = 800;
+    //const scatterHeight = 600;
+
     var scatterMargins = {
       top: 20,
       right: 40,

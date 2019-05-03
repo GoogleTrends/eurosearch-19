@@ -171,8 +171,9 @@ function init() {
       .html(function (d, i) { return (i + 1) + '. ???'; });
 
   /** MAP **/
-  const mapWidth = 600;
-  const mapHeight = 600;
+  //const mapWidth = 900;
+  const mapWidth = document.querySelector("#map-container").clientWidth;
+  const mapHeight = 800;
   const mapPadding = 20;
   let mapSvg = d3.select("#map")
     .attr("width", mapWidth)
@@ -372,8 +373,11 @@ function init() {
   const maxVotePoints = d3.max(pointsMean, (d) => d.value.votepoints);
   const maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
 
-  const scatterWidth = 800;
-  const scatterHeight = 600;
+  const scatterWidth = document.querySelector("#scatter-container").clientWidth * 0.8;
+  let scatterRatio = 2/3;
+  const scatterHeight = scatterWidth * scatterRatio;
+  //const scatterWidth = 800;
+  //const scatterHeight = 600;
 
   const scatterMargins = {top: 20, right: 40, bottom: 40, left: 40};
 
