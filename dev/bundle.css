@@ -1146,7 +1146,8 @@ svg#ranking text {
 .stv-radio-button:checked + label {
   background-color: #3277b3;
 }
-#map-container svg {
+#map-container svg,
+#scatteryearly-container svg {
   display: block;
   margin: auto;
 }
@@ -1166,6 +1167,20 @@ svg#ranking text {
 .circle-mean {
   fill: #fff;
   opacity: 0.7;
+}
+.circle-year {
+  fill: #fff;
+  opacity: 0.5;
+}
+.circle-year.highlight {
+  -webkit-animation-name: pop;
+          animation-name: pop;
+  -webkit-animation-duration: 0.25s;
+          animation-duration: 0.25s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
 }
 .axis line {
   opacity: 0.1;
@@ -1194,5 +1209,25 @@ svg#ranking text {
   fill: #fff;
   font-size: 10px;
   opacity: 0.8;
+}
+@-webkit-keyframes pop {
+  from {
+    opacity: 0.5;
+    r: 2;
+  }
+  to {
+    opacity: 1;
+    r: 10;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0.5;
+    r: 2;
+  }
+  to {
+    opacity: 1;
+    r: 10;
+  }
 }
 /*# sourceMappingURL=bundle.css.map */

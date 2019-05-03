@@ -465,9 +465,75 @@ function init() {
     .attr("class", "scatter-label")
     .attr("dy", -10);
 
-  });
-
   /*YEARLY SCATTER*/
+  const maxSearchYearlyPoints = d3.max(points, (d) => d.searchpoints);
+  const maxVoteYearlyPoints = d3.max(points, (d) => d.votepoints);
+  const maxYearlyPoints = d3.max([maxSearchYearlyPoints, maxVoteYearlyPoints]);
+
+  let scatterYearlySvg = d3.select("svg#scatteryearly")
+    .attr("width", scatterWidth)
+    .attr("height", scatterHeight)
+    .append("g")
+    .attr("transform", `translate(${scatterMargins.left},${scatterMargins.top})`);
+      
+  let scatterYearlyScaleX = d3.scaleLinear()
+    .domain([0,maxYearlyPoints])
+    .range([0,scatterWidth - scatterMargins.right]);
+      
+  let scatterYearlyScaleY = d3.scaleLinear()
+    .domain([0,maxYearlyPoints])
+    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+ 
+  let xYearlyAxis = d3.axisBottom(scatterYearlyScaleX)
+    .tickValues([100,200,300])
+    .tickSize(-scatterHeight);
+  let yYearlyAxis = d3.axisLeft(scatterYearlyScaleY)
+    .tickValues([100,200,300])
+    .ticks(5)
+    .tickSize(-scatterWidth);
+    
+  scatterYearlySvg.append("g")
+    .attr("class", "axis x-axis")
+    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .call(xYearlyAxis);
+  scatterYearlySvg.append("text")
+    .text("Search activity points")
+    .attr("x", scatterWidth - 50)
+    .attr("y", scatterHeight - 30)
+    .attr("class", "x axis-title")
+  scatterYearlySvg.append("text")
+    .text("Televoting points")
+    .attr("x", -20)
+    .attr("y", 10)
+    .attr("class", "y axis-title")
+    
+  scatterYearlySvg.append("g")
+    .attr("class", "axis y-axis")
+    .attr("transform", `translate(0,0)`)
+    .call(yYearlyAxis);
+    
+  scatterYearlySvg.append("line")
+    .attr("x1", scatterScaleX(0))
+    .attr("x2", scatterScaleX(200))
+    .attr("y1", scatterScaleY(0))
+    .attr("y2", scatterScaleY(200))
+    .attr("class", "fourtyfive")
+    
+  let yearlyCircles = scatterYearlySvg.selectAll("circle")
+    .data(points)
+    .enter().append("circle")
+    .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
+    .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
+    .attr("r", 2)
+    .attr("class", (d) => "circle-year circle-" + d.year)
+    .style("filter", "url(#glow)")
+    .attr("id", (d) => d.key);
+
+  function highlightYear(yr){
+    yearlyCircles.classed("highlight", false);
+    let highlighted = d3.selectAll(".circle-" + yr).classed("highlight", true);
+  }
+
   var slider = document.getElementById('slider');
 
   noUiSlider.create(slider, {
@@ -489,8 +555,12 @@ function init() {
       }
   });
   slider.noUiSlider.on("change", function(){
-    console.log(slider.noUiSlider.get());
+    highlightYear(+slider.noUiSlider.get());
   });
+
+  });
+
+
 
 }
 
