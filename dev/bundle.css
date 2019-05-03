@@ -1147,7 +1147,8 @@ svg#ranking text {
   background-color: #3277b3;
 }
 #map-container svg,
-#scatteryearly-container svg {
+#scatteryearly-container svg,
+#votingpattern-container svg {
   display: block;
   margin: auto;
 }
@@ -1175,12 +1176,16 @@ svg#ranking text {
 .circle-year.highlight {
   -webkit-animation-name: pop;
           animation-name: pop;
-  -webkit-animation-duration: 0.25s;
-          animation-duration: 0.25s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
   -webkit-animation-timing-function: ease-out;
           animation-timing-function: ease-out;
+}
+.circle-pattern {
+  fill: #fff;
+  opacity: 0.7;
 }
 .axis line {
   opacity: 0.1;
@@ -1217,7 +1222,7 @@ svg#ranking text {
   }
   to {
     opacity: 1;
-    r: 10;
+    r: 8;
   }
 }
 @keyframes pop {
@@ -1227,7 +1232,7 @@ svg#ranking text {
   }
   to {
     opacity: 1;
-    r: 10;
+    r: 8;
   }
 }
 /*# sourceMappingURL=bundle.css.map */

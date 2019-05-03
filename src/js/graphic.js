@@ -31,10 +31,19 @@ function init() {
         search: +d.search,
         tele: +d.tele
       }
+    }),
+    d3.dsv(",", "assets/data/patterns.csv", function(d){
+      return {
+        from: d.from,
+        to: d.to,
+        search: +d.search,
+        tele: +d.tele
+      }
     })
   ])
-  .then(([rankingdata, geodata, points, votingdata]) => {
+  .then(([rankingdata, geodata, points, votingdata, patterns]) => {
     /**RANKING **/
+    console.log(patterns);
     const rankingHeight = 800;
     const rankingWidth = document.querySelector("#ranking-container").clientWidth;
     const rankingMargin = {top: 40, left: 80, right: 80};
@@ -558,9 +567,71 @@ function init() {
     highlightYear(+slider.noUiSlider.get());
   });
 
+  /*SCATTER PATTERNS*/
+  const maxSearchPatternPoints = d3.max(patterns, (d) => d.search);
+  const maxVotePatternPoints = d3.max(patterns, (d) => d.tele);
+  const maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
+
+  let scatterPatternSvg = d3.select("svg#votingpattern")
+    .attr("width", scatterWidth)
+    .attr("height", scatterHeight)
+    .append("g")
+    .attr("transform", `translate(${scatterMargins.left},${scatterMargins.top})`);
+      
+  let scatterPatternScaleX = d3.scaleLinear()
+    .domain([0,maxPatternPoints])
+    .range([0,scatterWidth - scatterMargins.right]);
+      
+  let scatterPatternScaleY = d3.scaleLinear()
+    .domain([0,maxPatternPoints])
+    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+ 
+  let xPatternAxis = d3.axisBottom(scatterPatternScaleX)
+    .tickValues([100,200,300])
+    .tickSize(-scatterHeight);
+  let yPatternAxis = d3.axisLeft(scatterPatternScaleY)
+    .tickValues([100,200,300])
+    .ticks(5)
+    .tickSize(-scatterWidth);
+    
+  scatterPatternSvg.append("g")
+    .attr("class", "axis x-axis")
+    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .call(xPatternAxis);
+  scatterPatternSvg.append("text")
+    .text("Search activity points")
+    .attr("x", scatterWidth - 50)
+    .attr("y", scatterHeight - 30)
+    .attr("class", "x axis-title")
+  scatterPatternSvg.append("text")
+    .text("Televoting points")
+    .attr("x", -20)
+    .attr("y", 10)
+    .attr("class", "y axis-title")
+    
+  scatterPatternSvg.append("g")
+    .attr("class", "axis y-axis")
+    .attr("transform", `translate(0,0)`)
+    .call(yPatternAxis);
+    
+  scatterPatternSvg.append("line")
+    .attr("x1", scatterPatternScaleX(0))
+    .attr("x2", scatterPatternScaleX(200))
+    .attr("y1", scatterPatternScaleY(0))
+    .attr("y2", scatterPatternScaleY(200))
+    .attr("class", "fourtyfive")
+    
+  let patternCircles = scatterPatternSvg.selectAll("circle")
+    .data(patterns)
+    .enter().append("circle")
+    .attr("cx", (d) => scatterPatternScaleX(d.search))
+    .attr("cy", (d) => scatterPatternScaleY(d.tele))
+    .attr("r", (d) => Math.sqrt(d.tele))
+    .attr("class", (d) => "circle-pattern circle-" + d.from + "-" + d.to)
+    .style("filter", "url(#glow)");
+    //.attr("id", (d) => d.key);
+
   });
-
-
 
 }
 

@@ -2842,7 +2842,7 @@ var define;
     };
 });
 
-},{}],"TAPd":[function(require,module,exports) {
+},{}],"graphic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2888,14 +2888,23 @@ function init() {
       search: +d.search,
       tele: +d.tele
     };
+  }), d3.dsv(",", "assets/data/patterns.csv", function (d) {
+    return {
+      from: d.from,
+      to: d.to,
+      search: +d.search,
+      tele: +d.tele
+    };
   })]).then(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 4),
+    var _ref2 = _slicedToArray(_ref, 5),
         rankingdata = _ref2[0],
         geodata = _ref2[1],
         points = _ref2[2],
-        votingdata = _ref2[3];
+        votingdata = _ref2[3],
+        patterns = _ref2[4];
 
     /**RANKING **/
+    console.log(patterns);
     var rankingHeight = 800;
     var rankingWidth = document.querySelector("#ranking-container").clientWidth;
     var rankingMargin = {
@@ -3438,6 +3447,34 @@ function init() {
     slider.noUiSlider.on("change", function () {
       highlightYear(+slider.noUiSlider.get());
     });
+    /*SCATTER PATTERNS*/
+
+    var maxSearchPatternPoints = d3.max(patterns, function (d) {
+      return d.search;
+    });
+    var maxVotePatternPoints = d3.max(patterns, function (d) {
+      return d.tele;
+    });
+    var maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
+    var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
+    var scatterPatternScaleX = d3.scaleLinear().domain([0, maxPatternPoints]).range([0, scatterWidth - scatterMargins.right]);
+    var scatterPatternScaleY = d3.scaleLinear().domain([0, maxPatternPoints]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    var xPatternAxis = d3.axisBottom(scatterPatternScaleX).tickValues([100, 200, 300]).tickSize(-scatterHeight);
+    var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([100, 200, 300]).ticks(5).tickSize(-scatterWidth);
+    scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xPatternAxis);
+    scatterPatternSvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
+    scatterPatternSvg.append("text").text("Televoting points").attr("x", -20).attr("y", 10).attr("class", "y axis-title");
+    scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
+    scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
+    var patternCircles = scatterPatternSvg.selectAll("circle").data(patterns).enter().append("circle").attr("cx", function (d) {
+      return scatterPatternScaleX(d.search);
+    }).attr("cy", function (d) {
+      return scatterPatternScaleY(d.tele);
+    }).attr("r", function (d) {
+      return Math.sqrt(d.tele);
+    }).attr("class", function (d) {
+      return "circle-pattern circle-" + d.from + "-" + d.to;
+    }).style("filter", "url(#glow)"); //.attr("id", (d) => d.key);
   });
 }
 
@@ -3602,5 +3639,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd","./footer":"v9Q8"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js","./footer":"v9Q8"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map

@@ -1,0 +1,1978 @@
+"from","to","search","tele"
+"Albania","Armenia",24,4
+"Albania","Australia",15,15
+"Albania","Austria",12,7
+"Albania","Azerbaijan",16,23
+"Albania","Belarus",0,2
+"Albania","Belgium",12,6
+"Albania","Bosnia and Herzegovina",12,48
+"Albania","Bulgaria",16,24
+"Albania","Croatia",0,9
+"Albania","Cyprus",22,23
+"Albania","Czech Republic",8,0
+"Albania","Denmark",8,3
+"Albania","Estonia",0,8
+"Albania","Finland",3,0
+"Albania","France",7,16
+"Albania","Georgia",3,0
+"Albania","Germany",12,43
+"Albania","Greece",65,122
+"Albania","Hungary",13,23
+"Albania","Iceland",0,6
+"Albania","Ireland",2,12
+"Albania","Israel",6,17
+"Albania","Italy",61,87
+"Albania","Lithuania",2,4
+"Albania","Malta",2,9
+"Albania","Moldova",4,0
+"Albania","Montenegro",0,12
+"Albania","Netherlands",4,4
+"Albania","North Macedonia",0,30
+"Albania","Norway",21,16
+"Albania","Poland",3,5
+"Albania","Portugal",20,8
+"Albania","Romania",2,21
+"Albania","Russia",40,32
+"Albania","San Marino",0,3
+"Albania","Serbia",0,13
+"Albania","Serbia and Montenegro",0,13
+"Albania","Spain",13,49
+"Albania","Sweden",46,42
+"Albania","Switzerland",5,0
+"Albania","Turkey",10,71
+"Albania","Ukraine",12,22
+"Albania","United Kingdom",10,18
+"Andorra","Azerbaijan",0,7
+"Andorra","Belgium",0,1
+"Andorra","Cyprus",0,4
+"Andorra","Denmark",0,8
+"Andorra","Finland",0,21
+"Andorra","France",12,26
+"Andorra","Germany",0,5
+"Andorra","Greece",12,21
+"Andorra","Hungary",0,12
+"Andorra","Iceland",0,8
+"Andorra","Ireland",0,4
+"Andorra","Israel",0,15
+"Andorra","Latvia",0,12
+"Andorra","Lithuania",0,8
+"Andorra","Malta",0,7
+"Andorra","Moldova",0,4
+"Andorra","Norway",0,13
+"Andorra","Portugal",0,16
+"Andorra","Romania",0,20
+"Andorra","Russia",0,14
+"Andorra","Serbia and Montenegro",0,2
+"Andorra","Spain",0,60
+"Andorra","Sweden",0,17
+"Andorra","Switzerland",0,1
+"Andorra","Turkey",0,3
+"Andorra","Ukraine",0,33
+"Andorra","United Kingdom",0,6
+"Armenia","Albania",5,0
+"Armenia","Armenia",12,0
+"Armenia","Australia",9,1
+"Armenia","Austria",18,13
+"Armenia","Azerbaijan",24,1
+"Armenia","Belarus",2,23
+"Armenia","Belgium",9,9
+"Armenia","Bosnia and Herzegovina",0,6
+"Armenia","Bulgaria",17,11
+"Armenia","Croatia",0,2
+"Armenia","Cyprus",15,30
+"Armenia","Czech Republic",12,8
+"Armenia","Denmark",6,10
+"Armenia","Estonia",3,2
+"Armenia","Finland",5,0
+"Armenia","France",14,50
+"Armenia","Georgia",12,65
+"Armenia","Germany",37,6
+"Armenia","Greece",9,65
+"Armenia","Hungary",8,3
+"Armenia","Iceland",0,5
+"Armenia","Ireland",6,3
+"Armenia","Israel",18,16
+"Armenia","Italy",18,20
+"Armenia","Latvia",0,2
+"Armenia","Lithuania",5,0
+"Armenia","Malta",7,11
+"Armenia","Moldova",5,12
+"Armenia","Montenegro",0,20
+"Armenia","Netherlands",13,4
+"Armenia","North Macedonia",0,7
+"Armenia","Norway",15,28
+"Armenia","Poland",5,1
+"Armenia","Portugal",12,14
+"Armenia","Romania",0,7
+"Armenia","Russia",93,107
+"Armenia","San Marino",0,3
+"Armenia","Serbia",0,11
+"Armenia","Spain",4,10
+"Armenia","Sweden",32,22
+"Armenia","Switzerland",0,5
+"Armenia","Turkey",10,4
+"Armenia","Ukraine",64,70
+"Armenia","United Kingdom",23,9
+"Australia","Albania",5,0
+"Australia","Armenia",4,0
+"Australia","Austria",7,3
+"Australia","Azerbaijan",2,0
+"Australia","Belgium",7,22
+"Australia","Bulgaria",4,15
+"Australia","Croatia",1,1
+"Australia","Cyprus",10,7
+"Australia","Czech Republic",8,3
+"Australia","Denmark",12,18
+"Australia","Estonia",0,3
+"Australia","Finland",3,4
+"Australia","France",0,7
+"Australia","Georgia",0,1
+"Australia","Germany",0,2
+"Australia","Greece",6,0
+"Australia","Hungary",4,0
+"Australia","Ireland",7,8
+"Australia","Israel",12,14
+"Australia","Italy",14,10
+"Australia","Latvia",0,7
+"Australia","Lithuania",6,1
+"Australia","Malta",8,6
+"Australia","Moldova",3,17
+"Australia","Netherlands",10,0
+"Australia","Norway",8,5
+"Australia","Poland",17,0
+"Australia","Portugal",8,7
+"Australia","Romania",3,10
+"Australia","Russia",24,15
+"Australia","Serbia",0,5
+"Australia","Spain",8,2
+"Australia","Sweden",17,18
+"Australia","Ukraine",5,8
+"Australia","United Kingdom",9,13
+"Austria","Albania",20,18
+"Austria","Armenia",17,17
+"Austria","Australia",10,15
+"Austria","Azerbaijan",1,20
+"Austria","Belarus",6,0
+"Austria","Belgium",6,16
+"Austria","Bosnia and Herzegovina",18,44
+"Austria","Bulgaria",13,18
+"Austria","Croatia",5,15
+"Austria","Cyprus",10,7
+"Austria","Czech Republic",18,12
+"Austria","Denmark",12,10
+"Austria","Estonia",0,6
+"Austria","Finland",0,4
+"Austria","France",0,3
+"Austria","Georgia",7,0
+"Austria","Germany",71,45
+"Austria","Greece",18,13
+"Austria","Hungary",27,19
+"Austria","Iceland",0,2
+"Austria","Ireland",24,8
+"Austria","Israel",8,10
+"Austria","Italy",16,42
+"Austria","Latvia",0,1
+"Austria","Lithuania",1,0
+"Austria","Malta",10,5
+"Austria","Moldova",0,13
+"Austria","Netherlands",30,24
+"Austria","North Macedonia",10,1
+"Austria","Norway",18,5
+"Austria","Poland",18,14
+"Austria","Portugal",12,12
+"Austria","Romania",11,32
+"Austria","Russia",42,21
+"Austria","Serbia",23,44
+"Austria","Serbia and Montenegro",12,24
+"Austria","Slovenia",6,3
+"Austria","Spain",8,6
+"Austria","Sweden",40,34
+"Austria","Switzerland",13,3
+"Austria","Turkey",13,28
+"Austria","Ukraine",28,24
+"Austria","United Kingdom",17,0
+"Azerbaijan","Albania",3,1
+"Azerbaijan","Armenia",52,0
+"Azerbaijan","Australia",9,2
+"Azerbaijan","Austria",17,1
+"Azerbaijan","Azerbaijan",12,0
+"Azerbaijan","Belarus",3,14
+"Azerbaijan","Belgium",9,4
+"Azerbaijan","Bosnia and Herzegovina",0,5
+"Azerbaijan","Bulgaria",16,21
+"Azerbaijan","Croatia",0,5
+"Azerbaijan","Cyprus",21,12
+"Azerbaijan","Czech Republic",6,6
+"Azerbaijan","Denmark",8,9
+"Azerbaijan","Estonia",4,8
+"Azerbaijan","Finland",4,0
+"Azerbaijan","France",9,9
+"Azerbaijan","Georgia",20,43
+"Azerbaijan","Germany",24,4
+"Azerbaijan","Greece",26,27
+"Azerbaijan","Hungary",9,24
+"Azerbaijan","Iceland",6,0
+"Azerbaijan","Ireland",6,1
+"Azerbaijan","Israel",19,38
+"Azerbaijan","Italy",15,20
+"Azerbaijan","Latvia",0,5
+"Azerbaijan","Lithuania",7,8
+"Azerbaijan","Malta",6,26
+"Azerbaijan","Moldova",10,35
+"Azerbaijan","Montenegro",0,2
+"Azerbaijan","Netherlands",13,0
+"Azerbaijan","Norway",38,22
+"Azerbaijan","Poland",2,5
+"Azerbaijan","Portugal",10,8
+"Azerbaijan","Romania",13,36
+"Azerbaijan","Russia",69,67
+"Azerbaijan","San Marino",0,3
+"Azerbaijan","Serbia",0,2
+"Azerbaijan","Slovenia",0,3
+"Azerbaijan","Spain",5,1
+"Azerbaijan","Sweden",33,21
+"Azerbaijan","Switzerland",4,0
+"Azerbaijan","Turkey",44,48
+"Azerbaijan","Ukraine",61,85
+"Azerbaijan","United Kingdom",19,7
+"Belarus","Armenia",28,49
+"Belarus","Australia",7,7
+"Belarus","Austria",13,0
+"Belarus","Azerbaijan",29,58
+"Belarus","Belgium",16,14
+"Belarus","Bosnia and Herzegovina",0,4
+"Belarus","Bulgaria",22,17
+"Belarus","Croatia",0,5
+"Belarus","Cyprus",7,11
+"Belarus","Czech Republic",7,5
+"Belarus","Denmark",19,9
+"Belarus","Estonia",10,15
+"Belarus","Finland",10,8
+"Belarus","France",8,11
+"Belarus","Georgia",16,34
+"Belarus","Germany",20,8
+"Belarus","Greece",16,30
+"Belarus","Hungary",8,20
+"Belarus","Iceland",0,4
+"Belarus","Ireland",13,1
+"Belarus","Israel",18,30
+"Belarus","Italy",21,8
+"Belarus","Latvia",0,16
+"Belarus","Lithuania",8,21
+"Belarus","Malta",3,15
+"Belarus","Moldova",8,51
+"Belarus","Netherlands",15,2
+"Belarus","North Macedonia",0,2
+"Belarus","Norway",37,44
+"Belarus","Poland",18,13
+"Belarus","Portugal",8,7
+"Belarus","Romania",6,8
+"Belarus","Russia",119,141
+"Belarus","Serbia",10,8
+"Belarus","Serbia and Montenegro",0,10
+"Belarus","Slovenia",0,4
+"Belarus","Spain",2,2
+"Belarus","Sweden",41,34
+"Belarus","Switzerland",0,10
+"Belarus","Turkey",13,9
+"Belarus","Ukraine",95,119
+"Belarus","United Kingdom",19,6
+"Belgium","Albania",12,20
+"Belgium","Armenia",16,58
+"Belgium","Australia",13,8
+"Belgium","Austria",12,18
+"Belgium","Azerbaijan",12,23
+"Belgium","Belarus",7,0
+"Belgium","Bosnia and Herzegovina",2,6
+"Belgium","Bulgaria",9,17
+"Belgium","Croatia",10,0
+"Belgium","Cyprus",7,11
+"Belgium","Czech Republic",5,1
+"Belgium","Denmark",15,27
+"Belgium","Estonia",0,4
+"Belgium","Finland",29,11
+"Belgium","France",110,42
+"Belgium","Georgia",0,11
+"Belgium","Germany",26,20
+"Belgium","Greece",54,75
+"Belgium","Hungary",8,15
+"Belgium","Iceland",2,8
+"Belgium","Ireland",28,15
+"Belgium","Israel",21,29
+"Belgium","Italy",17,31
+"Belgium","Latvia",0,12
+"Belgium","Lithuania",19,4
+"Belgium","Malta",3,8
+"Belgium","Moldova",0,16
+"Belgium","Netherlands",58,58
+"Belgium","Norway",33,22
+"Belgium","Poland",16,16
+"Belgium","Portugal",8,24
+"Belgium","Romania",25,38
+"Belgium","Russia",53,34
+"Belgium","Serbia",14,12
+"Belgium","Serbia and Montenegro",0,3
+"Belgium","Slovenia",9,2
+"Belgium","Spain",11,23
+"Belgium","Sweden",63,49
+"Belgium","Turkey",33,76
+"Belgium","Ukraine",35,21
+"Belgium","United Kingdom",39,2
+"Bosnia and Herzegovina","Albania",2,21
+"Bosnia and Herzegovina","Armenia",33,6
+"Bosnia and Herzegovina","Australia",4,3
+"Bosnia and Herzegovina","Austria",0,12
+"Bosnia and Herzegovina","Azerbaijan",20,33
+"Bosnia and Herzegovina","Belarus",0,4
+"Bosnia and Herzegovina","Belgium",6,0
+"Bosnia and Herzegovina","Bulgaria",3,8
+"Bosnia and Herzegovina","Croatia",26,66
+"Bosnia and Herzegovina","Cyprus",5,0
+"Bosnia and Herzegovina","Czech Republic",1,0
+"Bosnia and Herzegovina","Finland",14,7
+"Bosnia and Herzegovina","France",4,19
+"Bosnia and Herzegovina","Georgia",2,5
+"Bosnia and Herzegovina","Germany",21,16
+"Bosnia and Herzegovina","Greece",33,34
+"Bosnia and Herzegovina","Hungary",0,2
+"Bosnia and Herzegovina","Iceland",5,1
+"Bosnia and Herzegovina","Ireland",7,2
+"Bosnia and Herzegovina","Israel",4,14
+"Bosnia and Herzegovina","Italy",0,6
+"Bosnia and Herzegovina","Lithuania",5,0
+"Bosnia and Herzegovina","Malta",8,1
+"Bosnia and Herzegovina","Moldova",0,4
+"Bosnia and Herzegovina","Netherlands",6,0
+"Bosnia and Herzegovina","North Macedonia",32,43
+"Bosnia and Herzegovina","Norway",22,15
+"Bosnia and Herzegovina","Poland",5,0
+"Bosnia and Herzegovina","Portugal",0,1
+"Bosnia and Herzegovina","Romania",5,6
+"Bosnia and Herzegovina","Russia",41,21
+"Bosnia and Herzegovina","Serbia",46,68
+"Bosnia and Herzegovina","Serbia and Montenegro",20,22
+"Bosnia and Herzegovina","Slovenia",10,19
+"Bosnia and Herzegovina","Spain",0,5
+"Bosnia and Herzegovina","Sweden",19,18
+"Bosnia and Herzegovina","Switzerland",14,4
+"Bosnia and Herzegovina","Turkey",19,64
+"Bosnia and Herzegovina","Ukraine",34,26
+"Bosnia and Herzegovina","United Kingdom",2,4
+"Bulgaria","Albania",0,4
+"Bulgaria","Armenia",31,54
+"Bulgaria","Australia",1,5
+"Bulgaria","Austria",13,13
+"Bulgaria","Azerbaijan",30,46
+"Bulgaria","Belarus",15,2
+"Bulgaria","Belgium",7,4
+"Bulgaria","Bosnia and Herzegovina",12,13
+"Bulgaria","Croatia",0,3
+"Bulgaria","Cyprus",17,36
+"Bulgaria","Czech Republic",9,3
+"Bulgaria","Denmark",7,9
+"Bulgaria","Estonia",11,2
+"Bulgaria","Finland",23,8
+"Bulgaria","France",22,12
+"Bulgaria","Georgia",0,7
+"Bulgaria","Germany",33,15
+"Bulgaria","Greece",38,86
+"Bulgaria","Hungary",12,22
+"Bulgaria","Iceland",0,5
+"Bulgaria","Ireland",1,3
+"Bulgaria","Israel",23,14
+"Bulgaria","Italy",17,6
+"Bulgaria","Lithuania",4,7
+"Bulgaria","Malta",3,0
+"Bulgaria","Moldova",6,31
+"Bulgaria","Netherlands",12,0
+"Bulgaria","North Macedonia",12,25
+"Bulgaria","Norway",22,5
+"Bulgaria","Poland",6,6
+"Bulgaria","Portugal",10,7
+"Bulgaria","Romania",14,26
+"Bulgaria","Russia",45,48
+"Bulgaria","Serbia",22,29
+"Bulgaria","Serbia and Montenegro",0,4
+"Bulgaria","Slovenia",6,0
+"Bulgaria","Spain",0,5
+"Bulgaria","Sweden",20,17
+"Bulgaria","Turkey",18,46
+"Bulgaria","Ukraine",38,49
+"Bulgaria","United Kingdom",28,19
+"Croatia","Albania",1,35
+"Croatia","Armenia",28,0
+"Croatia","Australia",7,5
+"Croatia","Austria",1,9
+"Croatia","Azerbaijan",13,27
+"Croatia","Belarus",5,0
+"Croatia","Belgium",9,5
+"Croatia","Bosnia and Herzegovina",57,93
+"Croatia","Bulgaria",8,16
+"Croatia","Cyprus",19,16
+"Croatia","Czech Republic",7,5
+"Croatia","Denmark",15,14
+"Croatia","Estonia",4,6
+"Croatia","Finland",20,10
+"Croatia","France",0,14
+"Croatia","Georgia",0,9
+"Croatia","Germany",26,15
+"Croatia","Greece",39,29
+"Croatia","Hungary",7,29
+"Croatia","Iceland",8,2
+"Croatia","Ireland",12,6
+"Croatia","Israel",19,8
+"Croatia","Italy",19,27
+"Croatia","Latvia",7,12
+"Croatia","Lithuania",2,8
+"Croatia","Malta",6,6
+"Croatia","Moldova",3,9
+"Croatia","Netherlands",18,3
+"Croatia","North Macedonia",28,37
+"Croatia","Norway",37,12
+"Croatia","Poland",12,4
+"Croatia","Portugal",13,13
+"Croatia","Romania",17,11
+"Croatia","Russia",47,36
+"Croatia","Serbia",48,74
+"Croatia","Serbia and Montenegro",17,24
+"Croatia","Slovenia",17,26
+"Croatia","Spain",13,0
+"Croatia","Sweden",24,24
+"Croatia","Switzerland",3,3
+"Croatia","Turkey",7,16
+"Croatia","Ukraine",34,51
+"Croatia","United Kingdom",29,5
+"Cyprus","Albania",4,4
+"Cyprus","Armenia",28,45
+"Cyprus","Australia",9,9
+"Cyprus","Azerbaijan",27,42
+"Cyprus","Belarus",0,6
+"Cyprus","Belgium",11,10
+"Cyprus","Bosnia and Herzegovina",0,2
+"Cyprus","Bulgaria",21,44
+"Cyprus","Croatia",8,0
+"Cyprus","Czech Republic",8,8
+"Cyprus","Denmark",22,16
+"Cyprus","Estonia",0,9
+"Cyprus","Finland",18,5
+"Cyprus","France",2,21
+"Cyprus","Georgia",5,13
+"Cyprus","Germany",18,7
+"Cyprus","Greece",142,140
+"Cyprus","Hungary",1,11
+"Cyprus","Iceland",0,6
+"Cyprus","Ireland",17,2
+"Cyprus","Israel",16,20
+"Cyprus","Italy",19,36
+"Cyprus","Latvia",0,4
+"Cyprus","Lithuania",7,13
+"Cyprus","Malta",6,9
+"Cyprus","Moldova",0,10
+"Cyprus","Netherlands",13,0
+"Cyprus","Norway",20,22
+"Cyprus","Poland",11,4
+"Cyprus","Portugal",8,7
+"Cyprus","Romania",15,47
+"Cyprus","Russia",64,57
+"Cyprus","Serbia",4,16
+"Cyprus","Serbia and Montenegro",0,20
+"Cyprus","Slovenia",4,6
+"Cyprus","Spain",14,17
+"Cyprus","Sweden",39,42
+"Cyprus","Switzerland",0,7
+"Cyprus","Turkey",23,4
+"Cyprus","Ukraine",44,54
+"Cyprus","United Kingdom",23,17
+"Czech Republic","Albania",1,0
+"Czech Republic","Armenia",15,46
+"Czech Republic","Australia",10,1
+"Czech Republic","Austria",3,4
+"Czech Republic","Azerbaijan",12,48
+"Czech Republic","Belarus",4,5
+"Czech Republic","Belgium",7,10
+"Czech Republic","Bosnia and Herzegovina",0,5
+"Czech Republic","Bulgaria",14,25
+"Czech Republic","Croatia",1,0
+"Czech Republic","Cyprus",7,8
+"Czech Republic","Denmark",5,9
+"Czech Republic","Estonia",0,5
+"Czech Republic","Finland",12,0
+"Czech Republic","France",16,0
+"Czech Republic","Georgia",5,9
+"Czech Republic","Germany",0,3
+"Czech Republic","Greece",6,8
+"Czech Republic","Hungary",11,4
+"Czech Republic","Iceland",7,2
+"Czech Republic","Ireland",4,4
+"Czech Republic","Israel",16,14
+"Czech Republic","Italy",17,10
+"Czech Republic","Latvia",0,8
+"Czech Republic","Lithuania",9,0
+"Czech Republic","Malta",1,0
+"Czech Republic","Moldova",7,11
+"Czech Republic","Netherlands",9,0
+"Czech Republic","North Macedonia",0,5
+"Czech Republic","Norway",20,3
+"Czech Republic","Poland",16,7
+"Czech Republic","Portugal",15,15
+"Czech Republic","Romania",2,6
+"Czech Republic","Russia",42,39
+"Czech Republic","Serbia",8,17
+"Czech Republic","Spain",6,0
+"Czech Republic","Sweden",22,12
+"Czech Republic","Turkey",12,1
+"Czech Republic","Ukraine",48,56
+"Czech Republic","United Kingdom",0,6
+"Denmark","Albania",4,9
+"Denmark","Armenia",19,2
+"Denmark","Australia",27,22
+"Denmark","Austria",13,20
+"Denmark","Azerbaijan",19,10
+"Denmark","Belarus",12,0
+"Denmark","Belgium",12,36
+"Denmark","Bosnia and Herzegovina",23,29
+"Denmark","Bulgaria",11,10
+"Denmark","Croatia",7,0
+"Denmark","Cyprus",7,8
+"Denmark","Czech Republic",4,6
+"Denmark","Estonia",0,13
+"Denmark","Finland",33,27
+"Denmark","France",8,16
+"Denmark","Georgia",7,0
+"Denmark","Germany",38,57
+"Denmark","Greece",19,15
+"Denmark","Hungary",4,14
+"Denmark","Iceland",14,45
+"Denmark","Ireland",24,25
+"Denmark","Israel",19,5
+"Denmark","Italy",14,8
+"Denmark","Latvia",0,16
+"Denmark","Lithuania",22,15
+"Denmark","Malta",0,15
+"Denmark","Moldova",8,15
+"Denmark","Netherlands",33,33
+"Denmark","North Macedonia",3,0
+"Denmark","Norway",54,76
+"Denmark","Poland",18,5
+"Denmark","Portugal",12,9
+"Denmark","Romania",17,28
+"Denmark","Russia",27,33
+"Denmark","Serbia",27,6
+"Denmark","Serbia and Montenegro",0,7
+"Denmark","Slovenia",0,7
+"Denmark","Spain",7,1
+"Denmark","Sweden",102,138
+"Denmark","Switzerland",13,1
+"Denmark","Turkey",23,46
+"Denmark","Ukraine",67,22
+"Denmark","United Kingdom",46,20
+"Estonia","Albania",2,1
+"Estonia","Armenia",19,5
+"Estonia","Australia",12,9
+"Estonia","Austria",13,16
+"Estonia","Azerbaijan",24,15
+"Estonia","Belarus",10,9
+"Estonia","Belgium",25,24
+"Estonia","Bosnia and Herzegovina",8,0
+"Estonia","Bulgaria",11,8
+"Estonia","Croatia",6,2
+"Estonia","Cyprus",11,14
+"Estonia","Czech Republic",6,5
+"Estonia","Denmark",18,42
+"Estonia","Finland",42,55
+"Estonia","France",11,12
+"Estonia","Georgia",7,22
+"Estonia","Germany",35,27
+"Estonia","Greece",25,6
+"Estonia","Hungary",7,37
+"Estonia","Iceland",6,24
+"Estonia","Ireland",14,8
+"Estonia","Israel",21,6
+"Estonia","Italy",12,28
+"Estonia","Latvia",15,43
+"Estonia","Lithuania",28,32
+"Estonia","Malta",9,15
+"Estonia","Moldova",23,11
+"Estonia","Netherlands",17,22
+"Estonia","North Macedonia",14,0
+"Estonia","Norway",40,47
+"Estonia","Poland",21,1
+"Estonia","Portugal",14,13
+"Estonia","Romania",9,11
+"Estonia","Russia",97,119
+"Estonia","Serbia",10,0
+"Estonia","Serbia and Montenegro",0,1
+"Estonia","Slovenia",0,2
+"Estonia","Spain",4,10
+"Estonia","Sweden",74,83
+"Estonia","Switzerland",12,12
+"Estonia","Turkey",6,6
+"Estonia","Ukraine",62,56
+"Estonia","United Kingdom",25,11
+"Finland","Albania",10,9
+"Finland","Armenia",17,5
+"Finland","Australia",21,12
+"Finland","Austria",16,22
+"Finland","Azerbaijan",7,7
+"Finland","Belarus",3,0
+"Finland","Belgium",21,26
+"Finland","Bosnia and Herzegovina",8,22
+"Finland","Bulgaria",6,16
+"Finland","Croatia",10,2
+"Finland","Cyprus",10,9
+"Finland","Czech Republic",12,5
+"Finland","Denmark",19,35
+"Finland","Estonia",14,57
+"Finland","France",16,27
+"Finland","Georgia",6,7
+"Finland","Germany",46,14
+"Finland","Greece",41,18
+"Finland","Hungary",1,49
+"Finland","Iceland",10,44
+"Finland","Ireland",19,19
+"Finland","Israel",26,33
+"Finland","Italy",23,19
+"Finland","Latvia",6,12
+"Finland","Lithuania",17,8
+"Finland","Malta",11,14
+"Finland","Moldova",11,7
+"Finland","Netherlands",15,18
+"Finland","North Macedonia",6,0
+"Finland","Norway",44,62
+"Finland","Poland",7,5
+"Finland","Portugal",18,12
+"Finland","Romania",7,9
+"Finland","Russia",61,62
+"Finland","Serbia",14,16
+"Finland","Serbia and Montenegro",7,10
+"Finland","Slovenia",3,1
+"Finland","Spain",10,8
+"Finland","Sweden",129,105
+"Finland","Switzerland",12,10
+"Finland","Turkey",12,21
+"Finland","Ukraine",48,33
+"Finland","United Kingdom",48,0
+"France","Albania",3,2
+"France","Armenia",38,84
+"France","Australia",9,2
+"France","Austria",12,22
+"France","Azerbaijan",18,15
+"France","Belarus",6,0
+"France","Belgium",27,36
+"France","Bosnia and Herzegovina",7,19
+"France","Bulgaria",9,14
+"France","Croatia",10,0
+"France","Cyprus",10,8
+"France","Czech Republic",4,0
+"France","Denmark",7,29
+"France","Estonia",0,17
+"France","Finland",31,11
+"France","Georgia",2,0
+"France","Germany",34,23
+"France","Greece",34,29
+"France","Hungary",16,8
+"France","Iceland",1,7
+"France","Ireland",17,1
+"France","Israel",31,49
+"France","Italy",38,41
+"France","Latvia",0,7
+"France","Lithuania",7,3
+"France","Malta",1,9
+"France","Moldova",9,23
+"France","Netherlands",33,8
+"France","Norway",26,10
+"France","Poland",27,17
+"France","Portugal",18,43
+"France","Romania",34,36
+"France","Russia",54,31
+"France","Serbia",20,34
+"France","Serbia and Montenegro",0,16
+"France","Slovenia",2,0
+"France","Spain",55,58
+"France","Sweden",51,44
+"France","Switzerland",8,0
+"France","Turkey",56,87
+"France","Ukraine",35,22
+"France","United Kingdom",33,5
+"Georgia","Albania",3,3
+"Georgia","Armenia",30,90
+"Georgia","Australia",11,1
+"Georgia","Austria",12,14
+"Georgia","Azerbaijan",55,81
+"Georgia","Belarus",7,31
+"Georgia","Belgium",11,6
+"Georgia","Bulgaria",9,10
+"Georgia","Croatia",0,1
+"Georgia","Cyprus",23,12
+"Georgia","Czech Republic",10,0
+"Georgia","Denmark",6,9
+"Georgia","Estonia",3,8
+"Georgia","Finland",5,0
+"Georgia","France",9,9
+"Georgia","Germany",7,7
+"Georgia","Greece",0,19
+"Georgia","Hungary",4,7
+"Georgia","Iceland",6,0
+"Georgia","Ireland",7,0
+"Georgia","Israel",10,20
+"Georgia","Italy",13,31
+"Georgia","Latvia",0,12
+"Georgia","Lithuania",3,40
+"Georgia","Malta",5,3
+"Georgia","Moldova",0,12
+"Georgia","Netherlands",12,0
+"Georgia","North Macedonia",0,1
+"Georgia","Norway",16,15
+"Georgia","Poland",9,4
+"Georgia","Portugal",12,8
+"Georgia","Romania",8,0
+"Georgia","Russia",72,51
+"Georgia","Serbia",5,6
+"Georgia","Spain",15,2
+"Georgia","Sweden",26,19
+"Georgia","Switzerland",0,1
+"Georgia","Turkey",7,20
+"Georgia","Ukraine",37,79
+"Georgia","United Kingdom",8,6
+"Germany","Albania",8,12
+"Germany","Armenia",27,26
+"Germany","Australia",15,12
+"Germany","Austria",24,31
+"Germany","Azerbaijan",20,5
+"Germany","Belarus",5,0
+"Germany","Belgium",13,30
+"Germany","Bosnia and Herzegovina",18,24
+"Germany","Bulgaria",10,13
+"Germany","Croatia",15,15
+"Germany","Cyprus",12,14
+"Germany","Czech Republic",7,8
+"Germany","Denmark",21,38
+"Germany","Estonia",1,7
+"Germany","Finland",22,18
+"Germany","France",15,6
+"Germany","Greece",52,80
+"Germany","Hungary",15,25
+"Germany","Iceland",3,24
+"Germany","Ireland",20,21
+"Germany","Israel",25,23
+"Germany","Italy",18,25
+"Germany","Latvia",0,13
+"Germany","Lithuania",4,5
+"Germany","Malta",3,17
+"Germany","Moldova",8,12
+"Germany","Netherlands",32,16
+"Germany","North Macedonia",10,0
+"Germany","Norway",34,28
+"Germany","Poland",27,26
+"Germany","Portugal",10,22
+"Germany","Romania",18,11
+"Germany","Russia",86,62
+"Germany","Serbia",20,31
+"Germany","Serbia and Montenegro",12,13
+"Germany","Slovenia",0,1
+"Germany","Spain",11,3
+"Germany","Sweden",50,36
+"Germany","Switzerland",16,7
+"Germany","Turkey",64,84
+"Germany","Ukraine",64,17
+"Germany","United Kingdom",35,9
+"Greece","Albania",25,73
+"Greece","Armenia",37,53
+"Greece","Australia",13,10
+"Greece","Austria",12,18
+"Greece","Azerbaijan",26,34
+"Greece","Belarus",8,6
+"Greece","Belgium",32,18
+"Greece","Bosnia and Herzegovina",6,9
+"Greece","Bulgaria",12,34
+"Greece","Croatia",12,2
+"Greece","Cyprus",41,94
+"Greece","Czech Republic",7,7
+"Greece","Denmark",10,7
+"Greece","Estonia",0,9
+"Greece","Finland",13,12
+"Greece","France",20,34
+"Greece","Georgia",29,27
+"Greece","Germany",33,8
+"Greece","Hungary",6,12
+"Greece","Iceland",4,7
+"Greece","Ireland",18,0
+"Greece","Israel",24,7
+"Greece","Italy",28,46
+"Greece","Latvia",0,4
+"Greece","Lithuania",3,4
+"Greece","Malta",10,12
+"Greece","Moldova",8,27
+"Greece","Netherlands",23,8
+"Greece","North Macedonia",7,0
+"Greece","Norway",46,28
+"Greece","Poland",3,8
+"Greece","Portugal",10,8
+"Greece","Romania",25,36
+"Greece","Russia",51,58
+"Greece","Serbia",12,17
+"Greece","Serbia and Montenegro",0,14
+"Greece","Slovenia",3,0
+"Greece","Spain",11,13
+"Greece","Sweden",50,21
+"Greece","Switzerland",17,7
+"Greece","Turkey",22,12
+"Greece","Ukraine",64,52
+"Greece","United Kingdom",34,14
+"Hungary","Albania",8,10
+"Hungary","Armenia",18,10
+"Hungary","Australia",6,11
+"Hungary","Austria",13,21
+"Hungary","Azerbaijan",16,41
+"Hungary","Belarus",0,4
+"Hungary","Belgium",19,24
+"Hungary","Bulgaria",18,26
+"Hungary","Croatia",0,12
+"Hungary","Cyprus",4,14
+"Hungary","Czech Republic",13,8
+"Hungary","Denmark",14,33
+"Hungary","Estonia",11,13
+"Hungary","Finland",22,6
+"Hungary","France",1,2
+"Hungary","Georgia",14,10
+"Hungary","Germany",33,11
+"Hungary","Greece",13,40
+"Hungary","Iceland",8,36
+"Hungary","Ireland",23,0
+"Hungary","Israel",35,21
+"Hungary","Italy",20,21
+"Hungary","Latvia",0,6
+"Hungary","Lithuania",2,0
+"Hungary","Malta",2,13
+"Hungary","Moldova",14,23
+"Hungary","Netherlands",22,23
+"Hungary","North Macedonia",8,0
+"Hungary","Norway",38,27
+"Hungary","Poland",3,11
+"Hungary","Portugal",12,7
+"Hungary","Romania",35,26
+"Hungary","Russia",37,42
+"Hungary","San Marino",5,4
+"Hungary","Serbia",13,23
+"Hungary","Serbia and Montenegro",0,2
+"Hungary","Slovenia",2,6
+"Hungary","Spain",8,1
+"Hungary","Sweden",57,51
+"Hungary","Switzerland",14,4
+"Hungary","Turkey",8,14
+"Hungary","Ukraine",26,38
+"Hungary","United Kingdom",24,1
+"Iceland","Albania",4,11
+"Iceland","Armenia",15,8
+"Iceland","Australia",20,16
+"Iceland","Austria",12,17
+"Iceland","Azerbaijan",17,20
+"Iceland","Belarus",0,4
+"Iceland","Belgium",37,27
+"Iceland","Bosnia and Herzegovina",0,5
+"Iceland","Bulgaria",4,4
+"Iceland","Croatia",10,2
+"Iceland","Cyprus",5,19
+"Iceland","Czech Republic",8,10
+"Iceland","Denmark",27,95
+"Iceland","Estonia",6,21
+"Iceland","Finland",34,57
+"Iceland","France",23,39
+"Iceland","Georgia",7,2
+"Iceland","Germany",23,19
+"Iceland","Greece",24,21
+"Iceland","Hungary",4,27
+"Iceland","Ireland",28,9
+"Iceland","Israel",19,12
+"Iceland","Italy",13,16
+"Iceland","Latvia",0,14
+"Iceland","Lithuania",26,14
+"Iceland","Malta",5,9
+"Iceland","Moldova",10,14
+"Iceland","Netherlands",29,26
+"Iceland","Norway",46,65
+"Iceland","Poland",32,19
+"Iceland","Portugal",12,26
+"Iceland","Romania",13,23
+"Iceland","Russia",23,25
+"Iceland","Serbia",4,12
+"Iceland","Serbia and Montenegro",0,7
+"Iceland","Slovenia",0,2
+"Iceland","Spain",6,3
+"Iceland","Sweden",98,95
+"Iceland","Switzerland",0,7
+"Iceland","Turkey",3,8
+"Iceland","Ukraine",12,32
+"Iceland","United Kingdom",42,8
+"Ireland","Albania",3,2
+"Ireland","Armenia",12,0
+"Ireland","Australia",25,11
+"Ireland","Austria",15,13
+"Ireland","Azerbaijan",8,6
+"Ireland","Belarus",2,0
+"Ireland","Belgium",26,21
+"Ireland","Bosnia and Herzegovina",4,5
+"Ireland","Bulgaria",12,11
+"Ireland","Croatia",8,3
+"Ireland","Cyprus",10,15
+"Ireland","Czech Republic",7,7
+"Ireland","Denmark",22,50
+"Ireland","Estonia",0,25
+"Ireland","Finland",29,13
+"Ireland","France",21,9
+"Ireland","Georgia",0,6
+"Ireland","Germany",54,34
+"Ireland","Greece",25,11
+"Ireland","Hungary",14,8
+"Ireland","Iceland",0,12
+"Ireland","Israel",22,12
+"Ireland","Italy",26,14
+"Ireland","Latvia",7,57
+"Ireland","Lithuania",31,80
+"Ireland","Malta",4,24
+"Ireland","Moldova",12,22
+"Ireland","Netherlands",17,19
+"Ireland","North Macedonia",6,0
+"Ireland","Norway",23,32
+"Ireland","Poland",34,30
+"Ireland","Portugal",8,10
+"Ireland","Romania",16,46
+"Ireland","Russia",43,48
+"Ireland","Serbia",12,4
+"Ireland","Serbia and Montenegro",0,3
+"Ireland","Slovenia",6,2
+"Ireland","Spain",36,6
+"Ireland","Sweden",44,56
+"Ireland","Switzerland",13,8
+"Ireland","Turkey",11,2
+"Ireland","Ukraine",33,37
+"Ireland","United Kingdom",99,96
+"Israel","Albania",9,0
+"Israel","Armenia",16,53
+"Israel","Australia",8,12
+"Israel","Austria",21,16
+"Israel","Azerbaijan",29,42
+"Israel","Belarus",18,18
+"Israel","Belgium",16,11
+"Israel","Bosnia and Herzegovina",0,2
+"Israel","Bulgaria",12,17
+"Israel","Croatia",8,0
+"Israel","Cyprus",16,8
+"Israel","Czech Republic",8,12
+"Israel","Denmark",3,29
+"Israel","Estonia",9,16
+"Israel","Finland",27,11
+"Israel","France",46,35
+"Israel","Georgia",15,15
+"Israel","Germany",19,8
+"Israel","Greece",24,29
+"Israel","Hungary",8,16
+"Israel","Iceland",2,14
+"Israel","Ireland",20,6
+"Israel","Italy",15,29
+"Israel","Latvia",0,6
+"Israel","Lithuania",6,3
+"Israel","Malta",0,14
+"Israel","Moldova",20,30
+"Israel","Netherlands",15,0
+"Israel","Norway",31,26
+"Israel","Poland",5,4
+"Israel","Portugal",8,12
+"Israel","Romania",10,76
+"Israel","Russia",108,98
+"Israel","San Marino",1,0
+"Israel","Serbia",17,5
+"Israel","Serbia and Montenegro",0,7
+"Israel","Slovenia",0,9
+"Israel","Spain",2,26
+"Israel","Sweden",35,58
+"Israel","Switzerland",8,6
+"Israel","Turkey",17,7
+"Israel","Ukraine",94,79
+"Israel","United Kingdom",14,5
+"Italy","Albania",34,24
+"Italy","Armenia",4,1
+"Italy","Australia",8,6
+"Italy","Austria",13,12
+"Italy","Belarus",1,0
+"Italy","Belgium",4,9
+"Italy","Bosnia and Herzegovina",5,4
+"Italy","Bulgaria",11,15
+"Italy","Croatia",0,6
+"Italy","Cyprus",12,16
+"Italy","Czech Republic",4,0
+"Italy","Denmark",11,18
+"Italy","Estonia",0,8
+"Italy","Finland",1,6
+"Italy","France",8,7
+"Italy","Georgia",5,3
+"Italy","Germany",22,17
+"Italy","Greece",6,12
+"Italy","Hungary",1,9
+"Italy","Iceland",0,12
+"Italy","Ireland",12,0
+"Italy","Israel",18,15
+"Italy","Latvia",0,4
+"Italy","Lithuania",7,8
+"Italy","Malta",6,11
+"Italy","Moldova",14,38
+"Italy","Netherlands",25,4
+"Italy","North Macedonia",0,1
+"Italy","Norway",3,13
+"Italy","Poland",12,22
+"Italy","Portugal",12,5
+"Italy","Romania",51,35
+"Italy","Russia",39,28
+"Italy","San Marino",6,0
+"Italy","Serbia",0,17
+"Italy","Slovenia",2,0
+"Italy","Spain",7,2
+"Italy","Sweden",31,12
+"Italy","Switzerland",8,2
+"Italy","Ukraine",38,52
+"Italy","United Kingdom",23,10
+"Latvia","Albania",3,2
+"Latvia","Armenia",13,11
+"Latvia","Australia",8,11
+"Latvia","Austria",12,10
+"Latvia","Azerbaijan",35,18
+"Latvia","Belarus",14,14
+"Latvia","Belgium",23,22
+"Latvia","Bosnia and Herzegovina",7,0
+"Latvia","Bulgaria",12,10
+"Latvia","Croatia",5,12
+"Latvia","Cyprus",7,5
+"Latvia","Czech Republic",6,4
+"Latvia","Denmark",19,41
+"Latvia","Estonia",12,48
+"Latvia","Finland",10,12
+"Latvia","France",12,12
+"Latvia","Georgia",17,16
+"Latvia","Germany",30,30
+"Latvia","Greece",26,8
+"Latvia","Hungary",12,11
+"Latvia","Iceland",1,10
+"Latvia","Ireland",22,19
+"Latvia","Israel",13,11
+"Latvia","Italy",24,29
+"Latvia","Lithuania",32,65
+"Latvia","Malta",4,17
+"Latvia","Moldova",6,23
+"Latvia","Netherlands",13,12
+"Latvia","Norway",37,48
+"Latvia","Poland",11,5
+"Latvia","Portugal",12,16
+"Latvia","Romania",6,11
+"Latvia","Russia",116,111
+"Latvia","Serbia",3,3
+"Latvia","Serbia and Montenegro",0,6
+"Latvia","Slovenia",0,10
+"Latvia","Spain",1,9
+"Latvia","Sweden",56,62
+"Latvia","Switzerland",0,12
+"Latvia","Turkey",2,2
+"Latvia","Ukraine",72,79
+"Latvia","United Kingdom",18,13
+"Lithuania","Albania",9,0
+"Lithuania","Armenia",17,2
+"Lithuania","Australia",16,8
+"Lithuania","Austria",15,14
+"Lithuania","Azerbaijan",24,46
+"Lithuania","Belarus",12,12
+"Lithuania","Belgium",36,24
+"Lithuania","Bosnia and Herzegovina",1,4
+"Lithuania","Bulgaria",12,7
+"Lithuania","Croatia",10,6
+"Lithuania","Cyprus",10,12
+"Lithuania","Czech Republic",8,8
+"Lithuania","Denmark",29,24
+"Lithuania","Estonia",7,48
+"Lithuania","Finland",14,16
+"Lithuania","France",18,25
+"Lithuania","Georgia",25,59
+"Lithuania","Germany",39,18
+"Lithuania","Greece",24,14
+"Lithuania","Hungary",6,13
+"Lithuania","Iceland",11,8
+"Lithuania","Ireland",27,6
+"Lithuania","Israel",20,7
+"Lithuania","Italy",14,27
+"Lithuania","Latvia",12,64
+"Lithuania","Malta",12,14
+"Lithuania","Moldova",7,24
+"Lithuania","Netherlands",16,16
+"Lithuania","Norway",51,46
+"Lithuania","Poland",10,13
+"Lithuania","Portugal",12,12
+"Lithuania","Romania",26,7
+"Lithuania","Russia",97,90
+"Lithuania","Serbia",8,10
+"Lithuania","Serbia and Montenegro",0,2
+"Lithuania","Slovenia",0,5
+"Lithuania","Spain",5,12
+"Lithuania","Sweden",69,53
+"Lithuania","Switzerland",9,10
+"Lithuania","Turkey",9,8
+"Lithuania","Ukraine",68,70
+"Lithuania","United Kingdom",24,6
+"Malta","Albania",3,11
+"Malta","Armenia",18,7
+"Malta","Australia",18,24
+"Malta","Austria",12,12
+"Malta","Azerbaijan",13,63
+"Malta","Belarus",0,12
+"Malta","Belgium",18,15
+"Malta","Bulgaria",12,32
+"Malta","Croatia",23,3
+"Malta","Cyprus",10,29
+"Malta","Czech Republic",4,3
+"Malta","Denmark",8,34
+"Malta","Estonia",0,3
+"Malta","Finland",36,10
+"Malta","France",0,5
+"Malta","Georgia",12,5
+"Malta","Germany",36,10
+"Malta","Greece",30,47
+"Malta","Hungary",6,8
+"Malta","Iceland",0,24
+"Malta","Ireland",28,12
+"Malta","Israel",26,21
+"Malta","Italy",55,83
+"Malta","Latvia",23,25
+"Malta","Lithuania",7,10
+"Malta","Moldova",0,3
+"Malta","Netherlands",16,5
+"Malta","North Macedonia",0,1
+"Malta","Norway",40,26
+"Malta","Poland",4,0
+"Malta","Portugal",12,9
+"Malta","Romania",16,43
+"Malta","Russia",51,44
+"Malta","Serbia",13,14
+"Malta","Serbia and Montenegro",0,6
+"Malta","Slovenia",3,8
+"Malta","Spain",12,5
+"Malta","Sweden",61,63
+"Malta","Switzerland",0,16
+"Malta","Turkey",18,13
+"Malta","Ukraine",32,50
+"Malta","United Kingdom",46,56
+"Moldova","Albania",4,0
+"Moldova","Armenia",24,28
+"Moldova","Australia",4,9
+"Moldova","Austria",12,11
+"Moldova","Azerbaijan",24,74
+"Moldova","Belarus",9,23
+"Moldova","Belgium",15,8
+"Moldova","Bosnia and Herzegovina",0,5
+"Moldova","Bulgaria",22,16
+"Moldova","Croatia",0,2
+"Moldova","Cyprus",11,7
+"Moldova","Czech Republic",8,6
+"Moldova","Denmark",5,11
+"Moldova","Estonia",1,16
+"Moldova","Finland",0,6
+"Moldova","France",12,13
+"Moldova","Georgia",12,27
+"Moldova","Germany",28,6
+"Moldova","Greece",23,29
+"Moldova","Hungary",14,7
+"Moldova","Iceland",0,3
+"Moldova","Ireland",11,0
+"Moldova","Israel",13,25
+"Moldova","Italy",19,24
+"Moldova","Latvia",0,15
+"Moldova","Lithuania",17,7
+"Moldova","Malta",7,0
+"Moldova","Norway",30,26
+"Moldova","Poland",8,2
+"Moldova","Portugal",7,6
+"Moldova","Romania",66,137
+"Moldova","Russia",98,102
+"Moldova","San Marino",0,1
+"Moldova","Serbia",8,9
+"Moldova","Serbia and Montenegro",0,1
+"Moldova","Spain",3,5
+"Moldova","Sweden",32,39
+"Moldova","Switzerland",1,0
+"Moldova","Turkey",2,1
+"Moldova","Ukraine",69,100
+"Moldova","United Kingdom",21,5
+"Monaco","Bosnia and Herzegovina",0,16
+"Monaco","Croatia",0,11
+"Monaco","Cyprus",0,2
+"Monaco","Denmark",0,10
+"Monaco","Finland",12,0
+"Monaco","France",0,15
+"Monaco","Germany",0,9
+"Monaco","Greece",0,10
+"Monaco","Iceland",0,5
+"Monaco","Ireland",0,10
+"Monaco","Israel",0,12
+"Monaco","Latvia",0,8
+"Monaco","Lithuania",0,7
+"Monaco","Malta",0,5
+"Monaco","North Macedonia",0,1
+"Monaco","Norway",0,1
+"Monaco","Romania",0,4
+"Monaco","Serbia and Montenegro",0,7
+"Monaco","Spain",0,3
+"Monaco","Sweden",0,8
+"Monaco","Switzerland",0,14
+"Monaco","Turkey",0,8
+"Monaco","Ukraine",0,8
+"Montenegro","Albania",12,44
+"Montenegro","Armenia",8,11
+"Montenegro","Australia",6,0
+"Montenegro","Austria",12,2
+"Montenegro","Azerbaijan",10,43
+"Montenegro","Belarus",0,7
+"Montenegro","Belgium",9,4
+"Montenegro","Bosnia and Herzegovina",5,35
+"Montenegro","Bulgaria",6,20
+"Montenegro","Croatia",22,28
+"Montenegro","Cyprus",18,6
+"Montenegro","Czech Republic",6,0
+"Montenegro","Denmark",10,10
+"Montenegro","Estonia",0,1
+"Montenegro","France",7,4
+"Montenegro","Georgia",4,2
+"Montenegro","Germany",15,0
+"Montenegro","Greece",33,16
+"Montenegro","Hungary",0,25
+"Montenegro","Iceland",0,5
+"Montenegro","Ireland",7,0
+"Montenegro","Israel",12,13
+"Montenegro","Italy",16,42
+"Montenegro","Latvia",0,3
+"Montenegro","Lithuania",6,3
+"Montenegro","Malta",5,0
+"Montenegro","Moldova",0,11
+"Montenegro","Netherlands",7,0
+"Montenegro","North Macedonia",8,18
+"Montenegro","Norway",8,14
+"Montenegro","Poland",3,4
+"Montenegro","Portugal",10,8
+"Montenegro","Romania",4,1
+"Montenegro","Russia",24,42
+"Montenegro","Serbia",36,72
+"Montenegro","Slovenia",2,26
+"Montenegro","Spain",6,6
+"Montenegro","Sweden",40,17
+"Montenegro","Switzerland",0,5
+"Montenegro","Turkey",1,4
+"Montenegro","Ukraine",23,28
+"Netherlands","Albania",0,1
+"Netherlands","Armenia",25,64
+"Netherlands","Australia",22,13
+"Netherlands","Austria",12,22
+"Netherlands","Azerbaijan",13,20
+"Netherlands","Belarus",8,0
+"Netherlands","Belgium",51,57
+"Netherlands","Bosnia and Herzegovina",13,42
+"Netherlands","Bulgaria",9,9
+"Netherlands","Croatia",8,5
+"Netherlands","Cyprus",11,13
+"Netherlands","Czech Republic",10,6
+"Netherlands","Denmark",24,41
+"Netherlands","Estonia",0,11
+"Netherlands","Finland",23,9
+"Netherlands","France",26,10
+"Netherlands","Georgia",0,2
+"Netherlands","Germany",34,39
+"Netherlands","Greece",46,37
+"Netherlands","Hungary",18,23
+"Netherlands","Iceland",4,13
+"Netherlands","Ireland",28,18
+"Netherlands","Israel",27,35
+"Netherlands","Italy",11,16
+"Netherlands","Latvia",0,5
+"Netherlands","Lithuania",8,7
+"Netherlands","Malta",10,18
+"Netherlands","Moldova",6,5
+"Netherlands","Norway",47,40
+"Netherlands","Poland",18,11
+"Netherlands","Portugal",10,17
+"Netherlands","Romania",11,19
+"Netherlands","Russia",58,20
+"Netherlands","Serbia",9,31
+"Netherlands","Serbia and Montenegro",3,14
+"Netherlands","Slovenia",5,2
+"Netherlands","Spain",12,10
+"Netherlands","Sweden",66,49
+"Netherlands","Switzerland",12,3
+"Netherlands","Turkey",56,82
+"Netherlands","Ukraine",68,28
+"Netherlands","United Kingdom",38,3
+"North Macedonia","Albania",47,91
+"North Macedonia","Armenia",18,24
+"North Macedonia","Australia",11,3
+"North Macedonia","Austria",12,5
+"North Macedonia","Azerbaijan",23,16
+"North Macedonia","Belarus",0,12
+"North Macedonia","Belgium",16,9
+"North Macedonia","Bosnia and Herzegovina",23,63
+"North Macedonia","Bulgaria",23,37
+"North Macedonia","Croatia",19,44
+"North Macedonia","Cyprus",12,8
+"North Macedonia","Czech Republic",10,5
+"North Macedonia","Denmark",14,14
+"North Macedonia","Estonia",0,2
+"North Macedonia","Finland",14,6
+"North Macedonia","France",13,8
+"North Macedonia","Georgia",0,5
+"North Macedonia","Germany",16,8
+"North Macedonia","Greece",41,34
+"North Macedonia","Hungary",6,14
+"North Macedonia","Iceland",6,2
+"North Macedonia","Ireland",9,0
+"North Macedonia","Israel",13,4
+"North Macedonia","Italy",17,40
+"North Macedonia","Lithuania",8,3
+"North Macedonia","Malta",4,7
+"North Macedonia","Moldova",10,16
+"North Macedonia","Montenegro",10,16
+"North Macedonia","Netherlands",11,9
+"North Macedonia","Norway",29,16
+"North Macedonia","Poland",4,7
+"North Macedonia","Portugal",10,7
+"North Macedonia","Romania",9,13
+"North Macedonia","Russia",43,49
+"North Macedonia","Serbia",46,79
+"North Macedonia","Serbia and Montenegro",12,20
+"North Macedonia","Slovenia",0,27
+"North Macedonia","Spain",9,5
+"North Macedonia","Sweden",51,31
+"North Macedonia","Turkey",23,61
+"North Macedonia","Ukraine",27,39
+"North Macedonia","United Kingdom",19,11
+"Norway","Albania",4,3
+"Norway","Armenia",22,0
+"Norway","Australia",26,18
+"Norway","Austria",13,18
+"Norway","Azerbaijan",18,17
+"Norway","Belarus",12,0
+"Norway","Belgium",10,22
+"Norway","Bosnia and Herzegovina",10,45
+"Norway","Bulgaria",10,13
+"Norway","Croatia",11,3
+"Norway","Cyprus",12,6
+"Norway","Czech Republic",9,4
+"Norway","Denmark",28,73
+"Norway","Estonia",0,12
+"Norway","Finland",44,39
+"Norway","France",14,8
+"Norway","Georgia",3,1
+"Norway","Germany",32,34
+"Norway","Greece",50,11
+"Norway","Hungary",7,14
+"Norway","Iceland",2,54
+"Norway","Ireland",15,7
+"Norway","Israel",13,24
+"Norway","Italy",8,11
+"Norway","Latvia",3,22
+"Norway","Lithuania",21,44
+"Norway","Malta",1,20
+"Norway","Moldova",19,10
+"Norway","Netherlands",15,25
+"Norway","Poland",25,15
+"Norway","Portugal",11,12
+"Norway","Romania",33,40
+"Norway","Russia",35,29
+"Norway","Serbia",12,32
+"Norway","Serbia and Montenegro",0,6
+"Norway","Slovenia",0,1
+"Norway","Spain",7,5
+"Norway","Sweden",124,115
+"Norway","Switzerland",12,3
+"Norway","Turkey",15,26
+"Norway","Ukraine",35,20
+"Norway","United Kingdom",37,8
+"Poland","Albania",5,2
+"Poland","Armenia",11,37
+"Poland","Australia",18,15
+"Poland","Austria",12,4
+"Poland","Azerbaijan",29,29
+"Poland","Belarus",5,11
+"Poland","Belgium",24,27
+"Poland","Bosnia and Herzegovina",17,4
+"Poland","Bulgaria",12,11
+"Poland","Croatia",7,3
+"Poland","Cyprus",6,13
+"Poland","Czech Republic",11,4
+"Poland","Denmark",1,39
+"Poland","Estonia",6,10
+"Poland","Finland",31,22
+"Poland","France",8,4
+"Poland","Georgia",9,16
+"Poland","Germany",35,26
+"Poland","Greece",30,12
+"Poland","Hungary",12,30
+"Poland","Iceland",6,1
+"Poland","Ireland",12,5
+"Poland","Israel",19,19
+"Poland","Italy",18,22
+"Poland","Latvia",2,20
+"Poland","Lithuania",25,20
+"Poland","Malta",6,3
+"Poland","Moldova",39,20
+"Poland","Netherlands",8,12
+"Poland","North Macedonia",1,0
+"Poland","Norway",32,38
+"Poland","Portugal",12,10
+"Poland","Romania",15,23
+"Poland","Russia",59,36
+"Poland","Serbia",15,18
+"Poland","Serbia and Montenegro",0,5
+"Poland","Slovenia",0,5
+"Poland","Spain",11,3
+"Poland","Sweden",35,46
+"Poland","Switzerland",18,16
+"Poland","Turkey",2,8
+"Poland","Ukraine",68,98
+"Poland","United Kingdom",4,7
+"Portugal","Albania",2,0
+"Portugal","Armenia",3,8
+"Portugal","Australia",10,0
+"Portugal","Austria",12,12
+"Portugal","Azerbaijan",17,8
+"Portugal","Belarus",0,1
+"Portugal","Belgium",21,20
+"Portugal","Bosnia and Herzegovina",1,2
+"Portugal","Bulgaria",7,14
+"Portugal","Croatia",0,3
+"Portugal","Cyprus",10,8
+"Portugal","Czech Republic",7,0
+"Portugal","Denmark",0,17
+"Portugal","Estonia",0,15
+"Portugal","Finland",25,6
+"Portugal","France",24,17
+"Portugal","Georgia",18,1
+"Portugal","Germany",18,28
+"Portugal","Greece",31,17
+"Portugal","Hungary",19,12
+"Portugal","Iceland",1,19
+"Portugal","Ireland",8,14
+"Portugal","Israel",19,13
+"Portugal","Italy",24,38
+"Portugal","Latvia",19,16
+"Portugal","Lithuania",4,4
+"Portugal","Malta",5,1
+"Portugal","Moldova",13,70
+"Portugal","Netherlands",13,10
+"Portugal","Norway",36,19
+"Portugal","Poland",12,0
+"Portugal","Romania",4,65
+"Portugal","Russia",66,39
+"Portugal","Serbia",8,10
+"Portugal","Serbia and Montenegro",0,7
+"Portugal","Slovenia",0,4
+"Portugal","Spain",37,101
+"Portugal","Sweden",48,33
+"Portugal","Switzerland",0,12
+"Portugal","Turkey",9,3
+"Portugal","Ukraine",40,74
+"Portugal","United Kingdom",23,13
+"Romania","Albania",4,3
+"Romania","Armenia",16,25
+"Romania","Australia",2,2
+"Romania","Austria",12,8
+"Romania","Azerbaijan",28,29
+"Romania","Belarus",5,1
+"Romania","Belgium",8,16
+"Romania","Bosnia and Herzegovina",0,7
+"Romania","Bulgaria",8,18
+"Romania","Croatia",7,9
+"Romania","Cyprus",16,13
+"Romania","Czech Republic",4,3
+"Romania","Denmark",22,30
+"Romania","Estonia",0,1
+"Romania","Finland",18,4
+"Romania","France",9,4
+"Romania","Georgia",9,0
+"Romania","Germany",23,13
+"Romania","Greece",50,93
+"Romania","Hungary",66,64
+"Romania","Iceland",5,10
+"Romania","Ireland",15,3
+"Romania","Israel",13,22
+"Romania","Italy",22,31
+"Romania","Latvia",7,7
+"Romania","Lithuania",2,1
+"Romania","Malta",5,10
+"Romania","Moldova",88,118
+"Romania","Netherlands",12,5
+"Romania","Norway",40,25
+"Romania","Poland",1,0
+"Romania","Portugal",10,7
+"Romania","Russia",32,35
+"Romania","Serbia",13,18
+"Romania","Serbia and Montenegro",0,14
+"Romania","Slovenia",3,4
+"Romania","Spain",22,23
+"Romania","Sweden",42,47
+"Romania","Switzerland",0,6
+"Romania","Turkey",20,51
+"Romania","Ukraine",27,27
+"Romania","United Kingdom",23,5
+"Russia","Albania",16,0
+"Russia","Armenia",46,79
+"Russia","Australia",8,8
+"Russia","Austria",15,13
+"Russia","Azerbaijan",53,78
+"Russia","Belarus",23,26
+"Russia","Belgium",22,23
+"Russia","Bosnia and Herzegovina",1,6
+"Russia","Bulgaria",8,4
+"Russia","Croatia",12,7
+"Russia","Cyprus",9,19
+"Russia","Czech Republic",9,2
+"Russia","Denmark",18,12
+"Russia","Estonia",6,24
+"Russia","Finland",19,8
+"Russia","France",10,20
+"Russia","Georgia",22,40
+"Russia","Germany",17,6
+"Russia","Greece",29,43
+"Russia","Hungary",9,9
+"Russia","Iceland",7,6
+"Russia","Ireland",18,0
+"Russia","Israel",10,24
+"Russia","Italy",7,18
+"Russia","Latvia",0,9
+"Russia","Lithuania",8,12
+"Russia","Malta",4,12
+"Russia","Moldova",29,52
+"Russia","Netherlands",5,6
+"Russia","North Macedonia",6,0
+"Russia","Norway",31,36
+"Russia","Poland",5,5
+"Russia","Romania",7,9
+"Russia","San Marino",3,0
+"Russia","Serbia",11,13
+"Russia","Serbia and Montenegro",0,16
+"Russia","Slovenia",0,8
+"Russia","Spain",8,5
+"Russia","Sweden",47,31
+"Russia","Switzerland",0,7
+"Russia","Turkey",20,12
+"Russia","Ukraine",106,93
+"Russia","United Kingdom",27,11
+"San Marino","Albania",15,15
+"San Marino","Armenia",7,17
+"San Marino","Australia",0,13
+"San Marino","Austria",16,0
+"San Marino","Azerbaijan",0,29
+"San Marino","Belgium",0,15
+"San Marino","Bulgaria",6,15
+"San Marino","Croatia",0,3
+"San Marino","Cyprus",0,7
+"San Marino","Czech Republic",0,10
+"San Marino","Denmark",5,13
+"San Marino","Estonia",6,0
+"San Marino","Finland",4,6
+"San Marino","France",0,12
+"San Marino","Georgia",0,7
+"San Marino","Germany",0,4
+"San Marino","Greece",0,32
+"San Marino","Hungary",10,22
+"San Marino","Iceland",0,8
+"San Marino","Ireland",8,3
+"San Marino","Israel",11,24
+"San Marino","Italy",48,51
+"San Marino","Latvia",0,18
+"San Marino","Lithuania",0,8
+"San Marino","Malta",0,16
+"San Marino","Moldova",8,18
+"San Marino","Netherlands",8,2
+"San Marino","Norway",2,20
+"San Marino","Poland",0,7
+"San Marino","Portugal",10,12
+"San Marino","Romania",0,7
+"San Marino","Russia",10,20
+"San Marino","Serbia",0,11
+"San Marino","Slovenia",0,1
+"San Marino","Spain",0,1
+"San Marino","Sweden",12,32
+"San Marino","Turkey",0,9
+"San Marino","Ukraine",20,17
+"San Marino","United Kingdom",0,17
+"Serbia","Albania",39,1
+"Serbia","Armenia",22,8
+"Serbia","Australia",3,9
+"Serbia","Azerbaijan",13,12
+"Serbia","Belarus",0,2
+"Serbia","Belgium",15,20
+"Serbia","Bosnia and Herzegovina",27,61
+"Serbia","Bulgaria",14,26
+"Serbia","Croatia",16,17
+"Serbia","Cyprus",19,21
+"Serbia","Czech Republic",8,5
+"Serbia","Denmark",16,17
+"Serbia","Estonia",2,2
+"Serbia","France",6,9
+"Serbia","Georgia",7,0
+"Serbia","Germany",27,8
+"Serbia","Greece",40,35
+"Serbia","Hungary",44,58
+"Serbia","Iceland",4,0
+"Serbia","Ireland",7,0
+"Serbia","Israel",18,20
+"Serbia","Italy",14,25
+"Serbia","Latvia",2,1
+"Serbia","Lithuania",2,7
+"Serbia","Malta",5,13
+"Serbia","Moldova",3,15
+"Serbia","Montenegro",8,12
+"Serbia","Netherlands",8,0
+"Serbia","North Macedonia",22,22
+"Serbia","Norway",30,24
+"Serbia","Poland",11,0
+"Serbia","Portugal",8,11
+"Serbia","Romania",9,12
+"Serbia","Russia",40,58
+"Serbia","Slovenia",7,28
+"Serbia","Spain",7,0
+"Serbia","Sweden",41,24
+"Serbia","Switzerland",0,5
+"Serbia","Turkey",11,3
+"Serbia","Ukraine",22,39
+"Serbia","United Kingdom",5,8
+"Serbia and Montenegro","Albania",17,16
+"Serbia and Montenegro","Belgium",10,0
+"Serbia and Montenegro","Bosnia and Herzegovina",0,22
+"Serbia and Montenegro","Croatia",0,25
+"Serbia and Montenegro","Cyprus",0,4
+"Serbia and Montenegro","Finland",0,7
+"Serbia and Montenegro","Greece",15,25
+"Serbia and Montenegro","Hungary",0,6
+"Serbia and Montenegro","Lithuania",0,3
+"Serbia and Montenegro","Moldova",6,5
+"Serbia and Montenegro","North Macedonia",15,27
+"Serbia and Montenegro","Norway",0,2
+"Serbia and Montenegro","Romania",0,7
+"Serbia and Montenegro","Russia",0,6
+"Serbia and Montenegro","Spain",4,0
+"Serbia and Montenegro","Sweden",0,5
+"Serbia and Montenegro","Switzerland",12,0
+"Serbia and Montenegro","Turkey",0,2
+"Serbia and Montenegro","Ukraine",6,12
+"Serbia and Montenegro","United Kingdom",10,0
+"Slovakia","Armenia",5,7
+"Slovakia","Austria",0,3
+"Slovakia","Azerbaijan",22,17
+"Slovakia","Belgium",4,10
+"Slovakia","Bosnia and Herzegovina",3,10
+"Slovakia","Cyprus",0,2
+"Slovakia","Denmark",9,13
+"Slovakia","Estonia",7,22
+"Slovakia","France",7,0
+"Slovakia","Georgia",2,0
+"Slovakia","Germany",14,12
+"Slovakia","Greece",10,5
+"Slovakia","Hungary",19,8
+"Slovakia","Iceland",4,10
+"Slovakia","Ireland",6,8
+"Slovakia","Israel",0,13
+"Slovakia","Italy",0,5
+"Slovakia","Malta",2,0
+"Slovakia","Moldova",13,5
+"Slovakia","North Macedonia",4,1
+"Slovakia","Norway",17,13
+"Slovakia","Portugal",0,2
+"Slovakia","Romania",13,1
+"Slovakia","Russia",2,9
+"Slovakia","Serbia",18,7
+"Slovakia","Slovenia",0,1
+"Slovakia","Spain",0,2
+"Slovakia","Sweden",25,22
+"Slovakia","Switzerland",0,4
+"Slovakia","Turkey",2,0
+"Slovakia","Ukraine",16,13
+"Slovakia","United Kingdom",7,7
+"Slovenia","Albania",12,14
+"Slovenia","Armenia",18,5
+"Slovenia","Australia",5,5
+"Slovenia","Austria",12,25
+"Slovenia","Azerbaijan",14,9
+"Slovenia","Belarus",4,0
+"Slovenia","Belgium",8,11
+"Slovenia","Bosnia and Herzegovina",56,81
+"Slovenia","Bulgaria",8,16
+"Slovenia","Croatia",22,61
+"Slovenia","Cyprus",14,8
+"Slovenia","Czech Republic",10,8
+"Slovenia","Denmark",17,53
+"Slovenia","Finland",26,8
+"Slovenia","France",6,10
+"Slovenia","Georgia",9,3
+"Slovenia","Germany",44,28
+"Slovenia","Greece",45,18
+"Slovenia","Hungary",3,13
+"Slovenia","Iceland",6,13
+"Slovenia","Ireland",13,1
+"Slovenia","Israel",16,9
+"Slovenia","Italy",41,45
+"Slovenia","Latvia",0,20
+"Slovenia","Lithuania",12,3
+"Slovenia","Malta",5,1
+"Slovenia","Moldova",13,8
+"Slovenia","Montenegro",0,17
+"Slovenia","Netherlands",17,17
+"Slovenia","North Macedonia",4,34
+"Slovenia","Norway",38,35
+"Slovenia","Poland",20,5
+"Slovenia","Portugal",10,8
+"Slovenia","Romania",13,14
+"Slovenia","Russia",39,47
+"Slovenia","Serbia",46,84
+"Slovenia","Serbia and Montenegro",12,22
+"Slovenia","Spain",3,11
+"Slovenia","Sweden",67,55
+"Slovenia","Switzerland",17,9
+"Slovenia","Turkey",7,2
+"Slovenia","Ukraine",37,29
+"Slovenia","United Kingdom",29,5
+"Spain","Albania",2,0
+"Spain","Armenia",22,48
+"Spain","Australia",8,11
+"Spain","Austria",24,14
+"Spain","Azerbaijan",15,14
+"Spain","Belgium",26,10
+"Spain","Bosnia and Herzegovina",0,1
+"Spain","Bulgaria",16,37
+"Spain","Croatia",5,0
+"Spain","Cyprus",24,16
+"Spain","Czech Republic",8,10
+"Spain","Denmark",14,25
+"Spain","Estonia",6,11
+"Spain","Finland",22,10
+"Spain","France",39,36
+"Spain","Georgia",4,1
+"Spain","Germany",38,49
+"Spain","Greece",49,26
+"Spain","Hungary",4,13
+"Spain","Iceland",0,11
+"Spain","Ireland",21,8
+"Spain","Israel",21,19
+"Spain","Italy",25,55
+"Spain","Latvia",0,6
+"Spain","Lithuania",3,5
+"Spain","Malta",5,8
+"Spain","Moldova",24,32
+"Spain","Netherlands",32,9
+"Spain","North Macedonia",11,0
+"Spain","Norway",39,31
+"Spain","Poland",8,6
+"Spain","Portugal",15,34
+"Spain","Romania",51,113
+"Spain","Russia",48,48
+"Spain","Serbia",5,5
+"Spain","Serbia and Montenegro",12,6
+"Spain","Slovenia",4,3
+"Spain","Sweden",75,55
+"Spain","Switzerland",10,0
+"Spain","Turkey",24,7
+"Spain","Ukraine",55,57
+"Spain","United Kingdom",40,20
+"Sweden","Albania",13,9
+"Sweden","Armenia",22,11
+"Sweden","Australia",37,24
+"Sweden","Austria",12,23
+"Sweden","Azerbaijan",24,11
+"Sweden","Belarus",10,0
+"Sweden","Belgium",26,31
+"Sweden","Bosnia and Herzegovina",23,54
+"Sweden","Bulgaria",9,11
+"Sweden","Croatia",7,2
+"Sweden","Cyprus",20,25
+"Sweden","Czech Republic",6,3
+"Sweden","Denmark",33,71
+"Sweden","Estonia",1,18
+"Sweden","Finland",53,54
+"Sweden","France",25,10
+"Sweden","Georgia",3,6
+"Sweden","Germany",34,24
+"Sweden","Greece",56,27
+"Sweden","Hungary",8,27
+"Sweden","Iceland",8,29
+"Sweden","Ireland",29,24
+"Sweden","Israel",16,15
+"Sweden","Italy",18,9
+"Sweden","Latvia",0,11
+"Sweden","Lithuania",9,16
+"Sweden","Malta",7,6
+"Sweden","Moldova",14,10
+"Sweden","Montenegro",0,2
+"Sweden","Netherlands",20,21
+"Sweden","North Macedonia",9,0
+"Sweden","Norway",51,80
+"Sweden","Poland",26,18
+"Sweden","Portugal",12,10
+"Sweden","Romania",19,25
+"Sweden","Russia",56,38
+"Sweden","Serbia",24,33
+"Sweden","Serbia and Montenegro",5,16
+"Sweden","Slovenia",0,1
+"Sweden","Spain",11,5
+"Sweden","Switzerland",5,5
+"Sweden","Turkey",13,29
+"Sweden","Ukraine",61,23
+"Sweden","United Kingdom",33,3
+"Switzerland","Albania",39,58
+"Switzerland","Armenia",24,0
+"Switzerland","Australia",11,9
+"Switzerland","Austria",18,33
+"Switzerland","Azerbaijan",10,9
+"Switzerland","Belgium",6,16
+"Switzerland","Bosnia and Herzegovina",12,54
+"Switzerland","Bulgaria",4,6
+"Switzerland","Croatia",18,28
+"Switzerland","Cyprus",12,5
+"Switzerland","Czech Republic",5,0
+"Switzerland","Denmark",5,8
+"Switzerland","Finland",15,18
+"Switzerland","France",66,18
+"Switzerland","Georgia",2,1
+"Switzerland","Germany",84,75
+"Switzerland","Greece",39,37
+"Switzerland","Hungary",17,19
+"Switzerland","Iceland",6,20
+"Switzerland","Ireland",25,9
+"Switzerland","Israel",14,11
+"Switzerland","Italy",61,54
+"Switzerland","Latvia",0,4
+"Switzerland","Lithuania",4,0
+"Switzerland","Malta",2,3
+"Switzerland","Moldova",18,2
+"Switzerland","Netherlands",18,14
+"Switzerland","North Macedonia",12,13
+"Switzerland","Norway",22,30
+"Switzerland","Poland",13,5
+"Switzerland","Portugal",12,47
+"Switzerland","Romania",26,9
+"Switzerland","Russia",45,13
+"Switzerland","Serbia",30,79
+"Switzerland","Serbia and Montenegro",10,24
+"Switzerland","Spain",21,45
+"Switzerland","Sweden",36,28
+"Switzerland","Turkey",26,58
+"Switzerland","Ukraine",52,6
+"Switzerland","United Kingdom",18,2
+"Turkey","Albania",4,31
+"Turkey","Armenia",15,44
+"Turkey","Austria",0,1
+"Turkey","Azerbaijan",36,60
+"Turkey","Belarus",2,0
+"Turkey","Belgium",14,0
+"Turkey","Bosnia and Herzegovina",5,81
+"Turkey","Bulgaria",0,6
+"Turkey","Croatia",12,2
+"Turkey","Cyprus",7,1
+"Turkey","Estonia",4,0
+"Turkey","Finland",7,7
+"Turkey","France",11,0
+"Turkey","Georgia",20,22
+"Turkey","Germany",38,19
+"Turkey","Greece",91,43
+"Turkey","Hungary",0,7
+"Turkey","Iceland",4,2
+"Turkey","Ireland",5,0
+"Turkey","Israel",3,3
+"Turkey","Italy",6,0
+"Turkey","Latvia",10,0
+"Turkey","Malta",0,10
+"Turkey","Moldova",10,22
+"Turkey","North Macedonia",17,24
+"Turkey","Norway",22,5
+"Turkey","Romania",11,25
+"Turkey","Russia",32,33
+"Turkey","Serbia",5,0
+"Turkey","Serbia and Montenegro",7,8
+"Turkey","Slovenia",0,2
+"Turkey","Spain",0,5
+"Turkey","Sweden",21,13
+"Turkey","Ukraine",34,39
+"Turkey","United Kingdom",20,7
+"Ukraine","Armenia",36,51
+"Ukraine","Australia",7,4
+"Ukraine","Austria",16,8
+"Ukraine","Azerbaijan",44,75
+"Ukraine","Belarus",24,38
+"Ukraine","Belgium",2,6
+"Ukraine","Bosnia and Herzegovina",10,10
+"Ukraine","Bulgaria",24,7
+"Ukraine","Croatia",0,16
+"Ukraine","Cyprus",12,8
+"Ukraine","Czech Republic",11,10
+"Ukraine","Denmark",17,18
+"Ukraine","Estonia",2,10
+"Ukraine","Finland",7,7
+"Ukraine","France",18,21
+"Ukraine","Georgia",25,48
+"Ukraine","Germany",24,10
+"Ukraine","Greece",16,21
+"Ukraine","Hungary",6,14
+"Ukraine","Iceland",3,0
+"Ukraine","Ireland",11,2
+"Ukraine","Israel",14,28
+"Ukraine","Italy",14,9
+"Ukraine","Latvia",0,10
+"Ukraine","Lithuania",11,11
+"Ukraine","Malta",4,20
+"Ukraine","Moldova",26,67
+"Ukraine","Netherlands",4,0
+"Ukraine","North Macedonia",0,6
+"Ukraine","Norway",42,31
+"Ukraine","Poland",11,20
+"Ukraine","Portugal",8,13
+"Ukraine","Romania",8,8
+"Ukraine","Russia",109,104
+"Ukraine","Serbia",19,8
+"Ukraine","Serbia and Montenegro",0,15
+"Ukraine","Slovenia",6,4
+"Ukraine","Spain",0,6
+"Ukraine","Sweden",36,35
+"Ukraine","Switzerland",12,5
+"Ukraine","Turkey",13,19
+"Ukraine","United Kingdom",23,9
+"United Kingdom","Albania",16,2
+"United Kingdom","Armenia",14,0
+"United Kingdom","Australia",27,17
+"United Kingdom","Austria",15,14
+"United Kingdom","Azerbaijan",18,5
+"United Kingdom","Belgium",21,9
+"United Kingdom","Bosnia and Herzegovina",0,4
+"United Kingdom","Bulgaria",12,31
+"United Kingdom","Croatia",10,5
+"United Kingdom","Cyprus",13,23
+"United Kingdom","Czech Republic",3,5
+"United Kingdom","Denmark",11,39
+"United Kingdom","Estonia",0,4
+"United Kingdom","Finland",38,18
+"United Kingdom","France",39,5
+"United Kingdom","Germany",42,30
+"United Kingdom","Greece",53,80
+"United Kingdom","Hungary",11,3
+"United Kingdom","Iceland",1,24
+"United Kingdom","Ireland",64,55
+"United Kingdom","Israel",20,22
+"United Kingdom","Italy",16,17
+"United Kingdom","Latvia",1,32
+"United Kingdom","Lithuania",23,58
+"United Kingdom","Malta",5,40
+"United Kingdom","Moldova",10,20
+"United Kingdom","Netherlands",26,14
+"United Kingdom","Norway",19,22
+"United Kingdom","Poland",32,26
+"United Kingdom","Portugal",12,8
+"United Kingdom","Romania",27,25
+"United Kingdom","Russia",52,33
+"United Kingdom","Serbia",18,1
+"United Kingdom","Serbia and Montenegro",7,3
+"United Kingdom","Slovenia",4,0
+"United Kingdom","Spain",39,19
+"United Kingdom","Sweden",61,58
+"United Kingdom","Switzerland",12,11
+"United Kingdom","Turkey",25,53
+"United Kingdom","Ukraine",50,35
