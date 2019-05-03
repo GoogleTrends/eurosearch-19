@@ -560,7 +560,8 @@ function init() {
       tele: +d.tele,
       overall: +d.overall
     };
-  }), d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'), d3.dsv(",", "assets/data/tele-search-by-year.csv", function (d) {
+  }), //d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'),
+  d3.json('assets/data/eurovision_countries.geojson'), d3.dsv(",", "assets/data/tele-search-by-year.csv", function (d) {
     return {
       to: d.to,
       searchpoints: +d.searchpoints,
@@ -672,10 +673,10 @@ function init() {
     var mapHeight = 800;
     var mapSvg = d3.select("#map").attr("width", mapWidth).attr("height", mapHeight);
     var projection = d3.geoMercator().center([20, 51]).scale(mapWidth * 0.65).translate([mapWidth / 2, mapHeight / 2]);
-    var path = d3.geoPath().projection(projection);
+    var geoPath = d3.geoPath().projection(projection);
     mapSvg.selectAll('path').data(geodata.features).enter().append('path').attr("id", function (d) {
-      return d.properties.ISO_A3;
-    }).attr("class", "country").attr('d', path).style("fill", "#cccccc").style("stroke", "#ffffff").style("stroke-width", 1);
+      return d.properties.ADM0_A3;
+    }).attr("class", "country").attr('d', geoPath).style("fill", "#cccccc").style("stroke", "#ffffff").style("stroke-width", 1);
     var grid = {
       ALB: {
         x: 5,
@@ -873,25 +874,26 @@ function init() {
     var rectDim = 48;
 
     function rectToPath(x, y, dim) {
-      return "M".concat(x, ",").concat(y, " L").concat(x + dim, ",").concat(y, " L").concat(x + dim, ",").concat(y + dim, " L").concat(x, ",").concat(y + dim);
+      return "M".concat(x * rectDim, ",").concat(y * rectDim, " L").concat(x * rectDim + dim, ",").concat(y * rectDim, " L").concat(x * rectDim + dim, ",").concat(y * rectDim + dim, " L").concat(x * rectDim, ",").concat(y * rectDim + dim);
     }
 
     d3.select("input#mapswitch").on("change", function () {
       if (this.checked) {
-        mapSvg.selectAll("path.country").transition().duration(2000).attrTween("d", function (d) {
-          console.log(rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim));
-          return (0, _flubber.combine)((0, _flubber.splitPathString)(d3.select(this).attr("d")), rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim));
-          /*return toRect(d3.select(this).attr("d"),
-          grid[d3.select(this).attr("id")].x * rectDim,
-          grid[d3.select(this).attr("id")].y * rectDim,
-          rectDim,
-          rectDim);*/
+        mapSvg.selectAll("path.country").transition().duration(2000).attrTween("d", function () {
+          return (0, _flubber.combine)((0, _flubber.splitPathString)(d3.select(this).attr("d")), rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim), {
+            "single": true
+          });
         });
       }
 
       if (!this.checked) {
         mapSvg.selectAll("path.country").transition().duration(2000).attrTween("d", function (d) {
-          return (0, _flubber.interpolate)(d3.select(this).attr("d"), path(d.geometry));
+          var cntr = d3.select(this).attr("id");
+          return (0, _flubber.separate)(d3.select(this).attr("d"), (0, _flubber.splitPathString)(geoPath(geodata.features.filter(function (el) {
+            return el.properties.ADM0_A3 == cntr;
+          })[0])), {
+            "single": true
+          }); //return interpolate(d3.select(this).attr("d"),path(d.geometry));
         });
       }
     });

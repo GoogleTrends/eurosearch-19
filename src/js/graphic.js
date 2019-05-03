@@ -1,5 +1,5 @@
 /* global d3 */
-import { toRect, interpolate, combine, splitPathString} from "flubber";
+import { separate, combine, splitPathString} from "flubber";
 
 function resize() {}
 
@@ -14,7 +14,8 @@ function init() {
         overall: +d.overall
       };
     }),
-    d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'),
+    //d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'),
+    d3.json('assets/data/eurovision_countries.geojson'),
     d3.dsv(",", "assets/data/tele-search-by-year.csv", function(d) {
       return {
         to: d.to,
@@ -71,7 +72,6 @@ function init() {
     const countryheight = 24;
 
     //Connecting lines
-
     let line = d3.line()
       .x((d) => voteScale(d.key))
       .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
@@ -164,15 +164,15 @@ function init() {
     .scale(mapWidth * 0.65)
     .translate([mapWidth / 2, mapHeight / 2]);
 
-  const path = d3.geoPath()
+  const geoPath = d3.geoPath()
     .projection(projection);
 
   mapSvg.selectAll('path')
     .data(geodata.features)
     .enter().append('path')
-    .attr("id", (d) => d.properties.ISO_A3)
+    .attr("id", (d) => d.properties.ADM0_A3)
     .attr("class", "country")
-    .attr('d', path)
+    .attr('d', geoPath)
     .style("fill", "#cccccc")
     .style("stroke", "#ffffff")
     .style("stroke-width", 1);
@@ -230,30 +230,30 @@ function init() {
 
   const rectDim = 48;
   function rectToPath(x, y, dim){
-    return `M${x},${y} L${x + dim},${y} L${x + dim},${y + dim} L${x},${y + dim}`
+    return `M${x*rectDim},${y*rectDim} L${x*rectDim + dim},${y*rectDim} L${x*rectDim + dim},${y*rectDim + dim} L${x*rectDim},${y*rectDim + dim}`
   }
 
   d3.select("input#mapswitch").on("change", function(){
     if(this.checked){
       mapSvg.selectAll("path.country")
         .transition().duration(2000)
-        .attrTween("d", function(d){
-          console.log(rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim));
+        .attrTween("d", function(){
           return combine(splitPathString(d3.select(this).attr("d")),
-            rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim)
+            rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim),
+            {"single": true}
           )
-          /*return toRect(d3.select(this).attr("d"),
-          grid[d3.select(this).attr("id")].x * rectDim,
-          grid[d3.select(this).attr("id")].y * rectDim,
-          rectDim,
-          rectDim);*/
         });
     }
     if(!this.checked){
       mapSvg.selectAll("path.country")
         .transition().duration(2000)
         .attrTween("d", function(d){
-          return interpolate(d3.select(this).attr("d"),path(d.geometry));
+          let cntr = d3.select(this).attr("id");
+          return separate(d3.select(this).attr("d"),
+          splitPathString(geoPath(geodata.features.filter((el) => el.properties.ADM0_A3 == cntr)[0])),
+          {"single": true}
+          )
+          //return interpolate(d3.select(this).attr("d"),path(d.geometry));
         });
     }
   })
