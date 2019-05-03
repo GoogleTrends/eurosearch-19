@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1556866510484'>
+<html lang='en' data-version='1556887403597'>
 
 <head>
 
@@ -279,11 +279,34 @@
 		    <p>COMMENT ON THE RANKING (UPDATED AFTER THE FINAL)</p>
 		</section>		<section>
 		    <p>On the map below, you can see which countries searched the most for the contestant of your country, and for which contestants your country searched the most. Switch from the geographic  map to the grid map to better represent smaller countries.</p>
-		    <p><input type="checkbox" id="mapswitch"> Switch to rectangle map<br></p>
-		    <div id="map-container">
-		        <svg id="map"></svg>
+		    <div class="stv-radio-buttons-wrapper">
+			    <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="geo" id="button1" checked />
+			    <label for="button1">Geo</label>
+			    <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="rects" id="button2" />
+			    <label for="button2">Rects</label>
 		    </div>
-		</section>		<section>
+		    <div class="stv-radio-buttons-wrapper">
+			    <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="from" id="button3" checked />
+			    <label for="button3">Points from</label>
+			    <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="to" id="button4" />
+			    <label for="button4">Points to</label>
+		    </div>
+		    <div class="stv-radio-buttons-wrapper">
+			    <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="search" id="button5" checked />
+			    <label for="button5">Search</label>
+			    <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="tele" id="button6"/>
+			    <label for="button6">Televoting</label>
+		    </div>
+		    <div class="stv-radio-buttons-wrapper">
+		        <select id="countrylist">
+		            <option value="BEL">Belgium</option>
+		            <option value="NLD">Netherlands</option>
+		        </select>
+		    </div>
+		</section>
+		<div id="map-container">
+		    <svg id="map"></svg>
+		</div>		<section>
 		    <h2>A look back</h2>
 		    <p>Search activity has proved to be a good predictor for the Contest results in 2017 and 2018 [2017, 2018 and also this year]. But was this always the case, and can we confidently say that searches can reliably predict the Eurovision Song Contest? Or were the good predictions based on coincidence?</p>
 		    <p>To check this, we gathered the data from the past 15 editions of the Contest. Because the rules of the voting changed quite considerably during this period, we focus on the televoting data. The winner from the televoting was by definition the Contest winner for the years between 2004 and 2008, since 2009 the professional jury also has its say in the Contests outcome. But usually the televoting results are in line with the overall results: only once (2016) the televoting winner was not the overall winner.</p>
@@ -399,7 +422,7 @@
 	</footer>
 
 	<script src='https://d3js.org/d3.v5.js'></script>
-	<script src='main.js?version=1556866510484' async></script>
+	<script src='main.js?version=1556887403597' async></script>
 </body>
 
 </html>

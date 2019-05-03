@@ -29,6 +29,63 @@ svg#ranking text
 .label-tele, .label-overall, .connection
     opacity 0.2
 
+/*MAP*/
+/*BUTTONS*/
+/*html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}*/
+
+.stv-radio-buttons-wrapper {
+  clear: both;
+  display: inline-block;
+}
+
+.stv-radio-button {
+    position: absolute;
+    visibility: hidden;
+  
+  & + label {
+    float: left;
+    padding: .3em 0.5em;
+    cursor: pointer;
+    border: 1px solid #28608f;
+    margin-right: -1px;
+    color: #fff;
+    background-color: #428bca;
+    
+    &:first-of-type {
+      border-radius: .2em 0 0 .2em;
+    }
+    
+    &:last-of-type {
+      border-radius: 0 .2em .2em 0;
+    }
+  }
+  
+  &:checked + label {
+    background-color: #3277b3;
+  }
+}
+
+#map-container svg
+    display block
+    margin auto
+
+.country
+    stroke-width 1
+    stroke #868A97
+
+.map-label
+    font-size 0.7em
+    fill white
+    text-anchor middle
+
 /* SCATTERPLOT*/
 #scatter-container svg
     display block

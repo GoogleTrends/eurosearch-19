@@ -14,8 +14,7 @@ function init() {
         overall: +d.overall
       };
     }),
-    //d3.json('assets/data/eurovis-countries-simplified-sanmarino.geojson'),
-    d3.json('assets/data/eurovision_countries.geojson'),
+    d3.json('assets/data/eurovision_50m_simple.json'),
     d3.dsv(",", "assets/data/tele-search-by-year.csv", function(d) {
       return {
         to: d.to,
@@ -23,9 +22,17 @@ function init() {
         year: +d.year,
         votepoints: +d.votepoints
       };
+    }),
+    d3.dsv(",", "assets/data/votingdata_18.csv", function(d){
+      return {
+        to: d.to,
+        from: d.from,
+        search: +d.search,
+        tele: +d.tele
+      }
     })
   ])
-  .then(([rankingdata, geodata, points]) => {
+  .then(([rankingdata, geodata, points, votingdata]) => {
     /**RANKING **/
     const rankingHeight = 800;
     const rankingWidth = document.querySelector("#ranking-container").clientWidth;
@@ -154,28 +161,35 @@ function init() {
       .html(function (d, i) { return (i + 1) + '. ???'; });
 
   /** MAP **/
-  const mapWidth = 800;
-  const mapHeight = 800;
+  const mapWidth = 600;
+  const mapHeight = 600;
+  const mapPadding = 20;
   let mapSvg = d3.select("#map")
     .attr("width", mapWidth)
     .attr("height", mapHeight);
-  const projection = d3.geoMercator()
-    .center([20, 51])
-    .scale(mapWidth * 0.65)
-    .translate([mapWidth / 2, mapHeight / 2]);
+
+    let extent = {
+      'type': 'Feature',
+      'geometry': {
+      'type': 'Polygon',
+      'coordinates': [[[10, 70], [35, 70], [10, 30], [35, 30]]]
+      }
+    }
+  const projection = d3.geoAzimuthalEqualArea()
+    .rotate([-10,-52,0]);
+  projection.fitExtent([[mapPadding, mapPadding + 25], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
 
   const geoPath = d3.geoPath()
     .projection(projection);
 
-  mapSvg.selectAll('path')
+  let countries = mapSvg.selectAll('path')
     .data(geodata.features)
     .enter().append('path')
     .attr("id", (d) => d.properties.ADM0_A3)
     .attr("class", "country")
-    .attr('d', geoPath)
-    .style("fill", "#cccccc")
-    .style("stroke", "#ffffff")
-    .style("stroke-width", 1);
+    .attr("d", geoPath)
+    .style("fill", "#0D1730")
+    .style("filter", "url(#glow)");
 
   const grid = {
     ALB: { x: 5, y: 8 },
@@ -228,13 +242,60 @@ function init() {
     TUR: { x: 8, y: 6 }
   }
 
-  const rectDim = 48;
-  function rectToPath(x, y, dim){
-    return `M${x*rectDim},${y*rectDim} L${x*rectDim + dim},${y*rectDim} L${x*rectDim + dim},${y*rectDim + dim} L${x*rectDim},${y*rectDim + dim}`
+  /*COLOR MAP*/
+  let filtervalues = {
+    "country": "BEL",
+    "fromto": "from",
+    "searchtele": "search"
   }
 
-  d3.select("input#mapswitch").on("change", function(){
-    if(this.checked){
+  const cols = d3.scaleSequential(d3.interpolatePlasma)
+    .domain([1,12]);
+
+  function getCountryVotingData(filterparams) {
+    let countryVotingData = votingdata.filter((el) => el[filterparams.fromto] == filterparams.country)
+    let countryVoting = countryVotingData.map(el => {
+      const obj = {};
+      obj.to = el.to;
+      obj.from = el.from;
+      obj.points = el[filterparams.searchtele];
+      return obj;
+    })
+    //countryVoting = countryVoting.filter((cntr) => cntr.points > 0)
+    return countryVoting;
+  }
+
+  function colorMap(filterparams){
+    let countrydata = getCountryVotingData(filterparams);
+    let reversefromto = "from";
+    if(filterparams.fromto == "from"){
+      reversefromto = "to"
+    }
+    countries.transition().duration(1000).style("fill", (d) => {
+      let countrypoints = countrydata.filter((el) => el[reversefromto] == d.properties.ADM0_A3);
+      if(countrypoints.length == 1 && countrypoints[0].points > 0){
+        let points = countrypoints[0].points;
+        return cols(points);
+      }
+      else{
+        return "#0D1730";
+      }
+    })
+  };
+  colorMap(filtervalues);
+
+  /*MAP UPDATES*/
+  const rectDim = 48;
+  const gridMargin = 120/rectDim;
+  function rectToPath(x, y, dim){
+    x = x + gridMargin;
+    y = y + gridMargin;
+    return `M${x*rectDim},${y*rectDim} L${x*rectDim + dim},${y*rectDim} L${x*rectDim + dim},${y*rectDim + dim} L${x*rectDim},${y*rectDim + dim} L${x*rectDim},${y*rectDim}`
+  }
+
+  d3.selectAll("input.mapswitch").on("change", function(){
+    let selvalue = d3.select(this).node().value;
+    if(selvalue == "rects"){
       mapSvg.selectAll("path.country")
         .transition().duration(2000)
         .attrTween("d", function(){
@@ -243,8 +304,22 @@ function init() {
             {"single": true}
           )
         });
+        setTimeout(function () {
+          let country;
+          for (country in grid) {
+              var bbox = mapSvg.select("path#" + country).node().getBBox();
+              var translate = mapSvg.select("path#" + country).node().getCTM();
+              var labelx = bbox.x + bbox.width / 2 + translate.e;
+              var labely = bbox.y + bbox.height / 2 + translate.f;
+              d3.select("#map").append("text")
+                  .attr("x", labelx)
+                  .attr("y", (labely + 4))
+                  .attr("class", "map-label")
+                  .text(country);
+          }
+      }, 2000);
     }
-    if(!this.checked){
+    if(selvalue == "geo"){
       mapSvg.selectAll("path.country")
         .transition().duration(2000)
         .attrTween("d", function(d){
@@ -253,9 +328,24 @@ function init() {
           splitPathString(geoPath(geodata.features.filter((el) => el.properties.ADM0_A3 == cntr)[0])),
           {"single": true}
           )
-          //return interpolate(d3.select(this).attr("d"),path(d.geometry));
         });
+      d3.selectAll(".map-label").remove();
     }
+  })
+
+  d3.select("#countrylist").on("change", function(){
+    filtervalues.country = d3.select(this).node().value;
+    colorMap(filtervalues);
+  })
+
+  d3.selectAll("input.fromtoswitch").on("change", function(){
+    filtervalues.fromto = d3.select(this).node().value;
+    colorMap(filtervalues);
+  })
+
+  d3.selectAll("input.searchteleswitch").on("change", function(){
+    filtervalues.searchtele = d3.select(this).node().value;
+    colorMap(filtervalues);
   })
 
   /*SCATTER TOTAL*/
