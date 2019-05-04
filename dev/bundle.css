@@ -1156,11 +1156,18 @@ svg#ranking text {
 .country {
   stroke-width: 1;
   stroke: #868a97;
+  -webkit-transition: stroke 5s linear;
+  transition: stroke 5s linear;
+}
+.country.highlight {
+  stroke-width: 2;
+  stroke: #fff;
+  -webkit-transition: stroke 5s linear;
+  transition: stroke 5s linear;
 }
 .map-label {
   font-size: 0.7em;
   fill: #fff;
-  text-anchor: middle;
 }
 #scatter-container svg {
   display: block;

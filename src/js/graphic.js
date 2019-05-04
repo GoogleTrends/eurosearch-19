@@ -42,8 +42,78 @@ function init() {
     })
   ])
   .then(([rankingdata, geodata, points, votingdata, patterns]) => {
-    /**RANKING **/
-    console.log(patterns);
+    const grid = {
+      ALB: {"coords": { x: 5, y: 8 }, "name": "Albania"},
+      ARM: {"coords": { x: 9, y: 6 }, "name": "Armenia"},
+      AUS: {"coords": { x: 9, y: 9 }, "name": "Australia"},
+      AUT: {"coords": { x: 4, y: 5 }, "name": "Austria"},
+      AZE: {"coords": { x: 9, y: 5 }, "name": "Azerbaijan"},
+      BEL: {"coords": { x: 2, y: 3 }, "name": "Belgium"},
+      BGR: {"coords": { x: 7, y: 6 }, "name": "Bulgaria"},
+      BIH: {"coords": { x: 5, y: 6 }, "name": "Bosnia and Herzegovina"},
+      BLR: {"coords": { x: 6, y: 3 }, "name": "Belarus"},
+      CHE: {"coords": { x: 3, y: 4 }, "name": "Switzerland"},
+      CYP: {"coords": { x: 8, y: 7 }, "name": "Cyprus"},
+      CZE: {"coords": { x: 4, y: 4 }, "name": "Czechia"},
+      DEU: {"coords": { x: 4, y: 3 }, "name": "Germany"},
+      DNK: {"coords": { x: 4, y: 2 }, "name": "Denmark"},
+      ESP: {"coords": { x: 1, y: 5 }, "name": "Spain"},
+      EST: {"coords": { x: 6, y: 1 }, "name": "Estonia"},
+      FIN: {"coords": { x: 6, y: 0 }, "name": "Finland"},
+      FRA: {"coords": { x: 1, y: 4 }, "name": "France"},
+      GBR: {"coords": { x: 1, y: 2 }, "name": "United Kingdom"},
+      GEO: {"coords": { x: 8, y: 5 }, "name": "Georgia"},
+      GRC: {"coords": { x: 6, y: 8 }, "name": "Greece"},
+      HUN: {"coords": { x: 5, y: 5 }, "name": "Hungaria"},
+      HRV: {"coords": { x: 4, y: 6 }, "name": "Croatia"},
+      IRL: {"coords": { x: 0, y: 2 }, "name": "Ireland"},
+      ISL: {"coords": { x: 0, y: 0 }, "name": "Iceland"},
+      ISR: {"coords": { x: 8, y: 8 }, "name": "Israel"},
+      ITA: {"coords": { x: 3, y: 5 }, "name": "Italia"},
+      KOS: {"coords": { x: 6, y: 7 }, "name": "Kosovo"},
+      LTU: {"coords": { x: 6, y: 2 }, "name": "Lithuania"},
+      LUX: {"coords": { x: 2, y: 4 }, "name": "Luxembourg"},
+      LVA: {"coords": { x: 7, y: 2 }, "name": "Latvia"},
+      MDA: {"coords": { x: 7, y: 5 }, "name": "Moldova"},
+      MKD: {"coords": { x: 7, y: 7 }, "name": "North Macedonia"},
+      MLT: {"coords": { x: 1, y: 7 }, "name": "Malta"},
+      MNE: {"coords": { x: 5, y: 7 }, "name": "Montenegro"},
+      NLD: {"coords": { x: 3, y: 3 }, "name": "Netherlands"},
+      NOR: {"coords": { x: 4, y: 0 }, "name": "Norway"},
+      POL: {"coords": { x: 5, y: 3 }, "name": "Poland"},
+      PRT: {"coords": { x: 0, y: 5 }, "name": "Portugal"},
+      ROU: {"coords": { x: 6, y: 5 }, "name": "Roumania"},
+      RUS: {"coords": { x: 7, y: 3 }, "name": "Russia"},
+      SMR: {"coords": { x: 2, y: 6 }, "name": "San Marino"},
+      SRB: {"coords": { x: 6, y: 6 }, "name": "Serbia"},
+      SVK: {"coords": { x: 5, y: 4 }, "name": "Slovakia"},
+      SVN: {"coords": { x: 3, y: 6 }, "name": "Slovenia"},
+      SWE: {"coords": { x: 5, y: 0 }, "name": "Sweden"},
+      UKR: {"coords": { x: 6, y: 4 }, "name": "Ukraine"},
+      TUR: {"coords": { x: 8, y: 6 }, "name": "Turkey"}
+    }
+    
+    let filtervalues = {
+      "country": "BEL",
+      "fromto": "from",
+      "searchtele": "search"
+    }
+    /** SELECT LIST **/
+    let froms = [...new Set(votingdata.map(el => el.from))];
+    let tos  = [...new Set(votingdata.map(el => el.to))];
+
+    let tofromCountries ={
+      "to": tos,
+      "from": froms
+    }
+    
+    d3.select("#countrylist").selectAll("option")
+      .data(tofromCountries[filtervalues.fromto])
+      .enter().append("option")
+      .attr("value", (d) => d)
+      .text((d) => grid[d].name);
+    
+    /** RANKING **/
     const rankingHeight = 800;
     const rankingWidth = document.querySelector("#ranking-container").clientWidth;
     const rankingMargin = {top: 40, left: 80, right: 80};
@@ -202,64 +272,7 @@ function init() {
     .style("fill", "#0D1730")
     .style("filter", "url(#glow)");
 
-  const grid = {
-    ALB: { x: 5, y: 8 },
-    ARM: { x: 9, y: 6 },
-    AUS: { x: 9, y: 9 },
-    AUT: { x: 4, y: 5 },
-    AZE: { x: 9, y: 5 },
-    BEL: { x: 2, y: 3 },
-    BGR: { x: 7, y: 6 },
-    BIH: { x: 5, y: 6 },
-    BLR: { x: 6, y: 3 },
-    CHE: { x: 3, y: 4 },
-    CYP: { x: 8, y: 7 },
-    CZE: { x: 4, y: 4 },
-    DEU: { x: 4, y: 3 },
-    DNK: { x: 4, y: 2 },
-    ESP: { x: 1, y: 5 },
-    EST: { x: 6, y: 1 },
-    FIN: { x: 6, y: 0 },
-    FRA: { x: 1, y: 4 },
-    GBR: { x: 1, y: 2 },
-    GEO: { x: 8, y: 5 },
-    GRC: { x: 6, y: 8 },
-    HUN: { x: 5, y: 5 },
-    HRV: { x: 4, y: 6 },
-    IRL: { x: 0, y: 2 },
-    ISL: { x: 0, y: 0 },
-    ISR: { x: 8, y: 8 },
-    ITA: { x: 3, y: 5 },
-    KOS: { x: 6, y: 7 },
-    LTU: { x: 6, y: 2 },
-    LUX: { x: 2, y: 4 },
-    LVA: { x: 7, y: 2 },
-    MDA: { x: 7, y: 5 },
-    MKD: { x: 7, y: 7 },
-    MLT: { x: 1, y: 7 },
-    MNE: { x: 5, y: 7 },
-    NLD: { x: 3, y: 3 },
-    NOR: { x: 4, y: 0 },
-    POL: { x: 5, y: 3 },
-    PRT: { x: 0, y: 5 },
-    ROU: { x: 6, y: 5 },
-    RUS: { x: 7, y: 3 },
-    SMR: { x: 2, y: 6 },
-    SRB: { x: 6, y: 6 },
-    SVK: { x: 5, y: 4 },
-    SVN: { x: 3, y: 6 },
-    SWE: { x: 5, y: 0 },
-    UKR: { x: 6, y: 4 },
-    TUR: { x: 8, y: 6 }
-  }
-
   /*COLOR MAP*/
-  let filtervalues = {
-    "country": "BEL",
-    "fromto": "from",
-    "searchtele": "search"
-  }
-
   const cols = d3.scaleSequential(d3.interpolatePlasma)
     .domain([1,12]);
 
@@ -311,7 +324,7 @@ function init() {
         .transition().duration(2000)
         .attrTween("d", function(){
           return combine(splitPathString(d3.select(this).attr("d")),
-            rectToPath(grid[d3.select(this).attr("id")].x, grid[d3.select(this).attr("id")].y, rectDim),
+            rectToPath(grid[d3.select(this).attr("id")].coords.x, grid[d3.select(this).attr("id")].coords.y, rectDim),
             {"single": true}
           )
         });
@@ -346,11 +359,19 @@ function init() {
 
   d3.select("#countrylist").on("change", function(){
     filtervalues.country = d3.select(this).node().value;
+    countries.classed("highlight", false);
+    d3.select(".country#" + filtervalues.country).raise().classed("highlight", true);
     colorMap(filtervalues);
   })
 
   d3.selectAll("input.fromtoswitch").on("change", function(){
     filtervalues.fromto = d3.select(this).node().value;
+    d3.selectAll("#countrylist option").remove();
+    d3.select("#countrylist").selectAll("option")
+      .data(tofromCountries[filtervalues.fromto])
+      .enter().append("option")
+      .attr("value", (d) => d)
+      .text((d) => grid[d].name);
     colorMap(filtervalues);
   })
 

@@ -81,11 +81,16 @@ svg#ranking text
 .country
     stroke-width 1
     stroke #868A97
+    transition stroke 5s linear
+    
+.country.highlight
+    stroke-width 2
+    stroke #ffffff
+    transition stroke 5s linear
 
 .map-label
     font-size 0.7em
     fill white
-    text-anchor middle
 
 /* SCATTERPLOT*/
 #scatter-container svg
