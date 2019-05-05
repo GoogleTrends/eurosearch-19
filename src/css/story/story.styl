@@ -50,19 +50,10 @@ svg#ranking text
 
 /* RANKING BEFORE FINAL*/
 .label-tele, .label-overall, .connection
-    opacity 0.2
+    opacity 1
 
 /*MAP*/
 /*BUTTONS*/
-/*html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}*/
 
 .stv-radio-buttons-wrapper {
   clear: both;
@@ -94,6 +85,36 @@ svg#ranking text
   
   &:checked + label {
     background-color: #3277b3;
+  }
+}
+
+/*Legend*/
+#map-legend {
+  display: table;
+  margin: 0 auto;
+}
+
+.legend-item {
+  font-family: "Roboto", serif;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  float: left;
+  width: 36px;
+  border: 1px white solid;
+  border-right-style: none;
+  text-align: center;
+}
+.legend-item.twelve {
+    color: #555555;
+  }
+
+@media (max-width: 768px){
+  .legend-item {
+    width: 26px;
+    border: 1px white solid;
+  }
+  .legend-item.twelve {
+    border-right: 2px white solid;
   }
 }
 

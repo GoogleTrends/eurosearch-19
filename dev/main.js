@@ -2842,7 +2842,7 @@ var define;
     };
 });
 
-},{}],"TAPd":[function(require,module,exports) {
+},{}],"graphic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3043,7 +3043,7 @@ function init() {
           x: 1,
           y: 2
         },
-        "name": "United Kingdom"
+        "name": "UK"
       },
       GEO: {
         "coords": {
@@ -3280,8 +3280,8 @@ function init() {
     var rankingWidth = document.querySelector("#ranking-container").clientWidth;
     var rankingMargin = {
       top: 40,
-      left: 80,
-      right: 80
+      left: 120,
+      right: 120
     };
     var rankingSvg = d3.select("#ranking").attr("width", rankingWidth).attr("height", rankingHeight);
     var flagfilter = rankingSvg.append("filter").attr("id", "flagglow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
@@ -3293,48 +3293,47 @@ function init() {
       return d.country;
     })).range([rankingMargin.top, rankingHeight]);
     var voteScale = d3.scalePoint().domain(["search", "tele", "overall"]).range([rankingMargin.left, rankingWidth - rankingMargin.right]).padding(0);
+    var headers = {
+      "search": "Search",
+      "tele": "Televoting",
+      "overall": "Overall"
+    };
     rankingSvg.selectAll('text.header').data(["search", "tele", "overall"]).enter().append("text").attr('x', function (d) {
       return voteScale(d);
     }).attr('y', 20).text(function (d) {
-      return d;
+      return headers[d];
     }).attr("class", function (d) {
       return "label-".concat(d);
     }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik');
     var countryheight = 24; //Connecting lines
 
-    var line = d3.line().x(function (d) {
-      return voteScale(d.key);
-    }).y(function (d) {
-      return d.value * countryScale.bandwidth() + countryheight / 2;
-    }).curve(d3.curveMonotoneX); //.curve(d3.curveCatmullRom.alpha(1));
-
-    var linedata = [];
-    rankingdata.forEach(function (el) {
-      var obj = {};
+    /*let line = d3.line()
+      .x((d) => voteScale(d.key))
+      .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
+      .curve(d3.curveMonotoneX);
+     let linedata = [];
+    rankingdata.forEach(function(el){
+      let obj = {};
       obj.country = el.country;
       obj.values = [];
-      obj.values.push({
-        "key": "search",
-        "value": el.search
-      });
-      obj.values.push({
-        "key": "tele",
-        "value": el.tele
-      });
-      obj.values.push({
-        "key": "overall",
-        "value": el.overall
-      });
-      linedata.push(obj);
+      obj.values.push({"key": "search", "value": el.search});
+      obj.values.push({"key": "tele", "value": el.tele});
+      obj.values.push({"key": "overall", "value": el.overall});
+      linedata.push(obj)
     });
-    rankingSvg.selectAll("line.connection").data(linedata).enter().append("path").attr("d", function (d) {
-      return line(d.values);
-    }).style("stroke-width", 1).style("stroke", "white").style("fill", "none").style("filter", "url(#flagglow)"); //Left part, search results
+     rankingSvg.selectAll("line.connection")
+      .data(linedata)
+      .enter().append("path")
+      .attr("d", (d) => line(d.values))
+      .style("stroke-width", 1)
+      .style("stroke", "white")
+      .style("fill", "none")
+      .style("filter", "url(#flagglow)");*/
+    //Left part, search results
 
     rankingSvg.selectAll('image.flag').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
       return 'assets/images/flags/' + d.country + '.svg';
-    }).attr('x', voteScale("search") - countryheight / 2) //.attr('y', function (d, i) { return 30 + countryheight * i; })
-    .attr("y", function (d) {
+    }).attr('x', voteScale("search") - countryheight / 2).attr("y", function (d) {
       return countryScale(d.country) - countryheight / 2;
     }).attr('class', function (d) {
       return 'id-' + d.Country;
@@ -3356,7 +3355,7 @@ function init() {
     }).attr('id', function (d) {
       return d.key;
     }).html(function (d, i) {
-      return i + 1 + '. ' + d.country;
+      return i + 1 + '. ' + grid[d.country].name;
     });
     rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth).attr('y', function (d) {
       return countryScale(d.country);
@@ -3390,7 +3389,11 @@ function init() {
     }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730").style("filter", "url(#glow)");
     /*COLOR MAP*/
 
-    var cols = d3.scaleSequential(d3.interpolatePlasma).domain([1, 12]);
+    var cols = d3.scaleSequential(d3.interpolatePlasma).domain([1, 12]); //legend
+
+    d3.selectAll('.legend-item').style('background-color', function (d) {
+      return cols(d3.select(this).text());
+    });
 
     function getCountryVotingData(filterparams) {
       var countryVotingData = votingdata.filter(function (el) {
@@ -3823,5 +3826,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd","./footer":"v9Q8"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js","./footer":"v9Q8"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map

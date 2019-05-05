@@ -61,7 +61,7 @@ function init() {
       EST: {"coords": { x: 6, y: 1 }, "name": "Estonia"},
       FIN: {"coords": { x: 6, y: 0 }, "name": "Finland"},
       FRA: {"coords": { x: 1, y: 4 }, "name": "France"},
-      GBR: {"coords": { x: 1, y: 2 }, "name": "United Kingdom"},
+      GBR: {"coords": { x: 1, y: 2 }, "name": "UK"},
       GEO: {"coords": { x: 8, y: 5 }, "name": "Georgia"},
       GRC: {"coords": { x: 6, y: 8 }, "name": "Greece"},
       HUN: {"coords": { x: 5, y: 5 }, "name": "Hungaria"},
@@ -116,7 +116,7 @@ function init() {
     /** RANKING **/
     const rankingHeight = 800;
     const rankingWidth = document.querySelector("#ranking-container").clientWidth;
-    const rankingMargin = {top: 40, left: 80, right: 80};
+    const rankingMargin = {top: 40, left: 120, right: 120};
 
     let rankingSvg = d3.select("#ranking")
       .attr("width", rankingWidth) 
@@ -145,12 +145,18 @@ function init() {
       .range([rankingMargin.left, rankingWidth - rankingMargin.right])
       .padding(0);
 
+    const headers = {
+      "search": "Search",
+      "tele": "Televoting",
+      "overall": "Overall"
+    }
+
     rankingSvg.selectAll('text.header')
       .data(["search", "tele", "overall"])
       .enter().append("text")
       .attr('x', (d) => voteScale(d))
       .attr('y', 20)
-      .text((d) => d)
+      .text((d) => headers[d])
       .attr("class", (d) => `label-${d}`)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
@@ -159,11 +165,10 @@ function init() {
     const countryheight = 24;
 
     //Connecting lines
-    let line = d3.line()
+    /*let line = d3.line()
       .x((d) => voteScale(d.key))
       .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
       .curve(d3.curveMonotoneX);
-      //.curve(d3.curveCatmullRom.alpha(1));
 
     let linedata = [];
     rankingdata.forEach(function(el){
@@ -183,7 +188,7 @@ function init() {
       .style("stroke-width", 1)
       .style("stroke", "white")
       .style("fill", "none")
-      .style("filter", "url(#flagglow)");
+      .style("filter", "url(#flagglow)");*/
 
   //Left part, search results
   rankingSvg.selectAll('image.flag')
@@ -191,7 +196,6 @@ function init() {
       .enter().append('image')
       .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
       .attr('x', voteScale("search") - countryheight/2)
-      //.attr('y', function (d, i) { return 30 + countryheight * i; })
       .attr("y", (d) => countryScale(d.country) - countryheight/2)
       .attr('class', function (d) { return 'id-' + d.Country; })
       .attr('width', countryheight - 2)
@@ -225,7 +229,7 @@ function init() {
       .style('font-size', '14px')
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
-      .html(function (d, i) { return (i + 1) + '. ' + d.country; });
+      .html(function (d, i) { return (i + 1) + '. ' + grid[d.country].name; });
     rankingSvg.selectAll('text.countrylabel-right')
       .data(rankingdata)
       .enter().append('text')
@@ -275,6 +279,12 @@ function init() {
   /*COLOR MAP*/
   const cols = d3.scaleSequential(d3.interpolatePlasma)
     .domain([1,12]);
+
+  //legend
+  d3.selectAll('.legend-item')
+    .style('background-color', function (d) {
+        return cols(d3.select(this).text());
+    });
 
   function getCountryVotingData(filterparams) {
     let countryVotingData = votingdata.filter((el) => el[filterparams.fromto] == filterparams.country)

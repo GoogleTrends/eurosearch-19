@@ -1143,7 +1143,7 @@ svg#ranking text {
 .label-tele,
 .label-overall,
 .connection {
-  opacity: 0.2;
+  opacity: 1;
 }
 .stv-radio-buttons-wrapper {
   clear: both;
@@ -1171,6 +1171,32 @@ svg#ranking text {
 }
 .stv-radio-button:checked + label {
   background-color: #3277b3;
+}
+#map-legend {
+  display: table;
+  margin: 0 auto;
+}
+.legend-item {
+  font-family: "Roboto", serif;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  float: left;
+  width: 36px;
+  border: 1px #fff solid;
+  border-right-style: none;
+  text-align: center;
+}
+.legend-item.twelve {
+  color: #555;
+}
+@media (max-width: 768px) {
+  .legend-item {
+    width: 26px;
+    border: 1px #fff solid;
+  }
+  .legend-item.twelve {
+    border-right: 2px #fff solid;
+  }
 }
 #map-container svg,
 #scatteryearly-container svg,
