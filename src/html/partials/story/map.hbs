@@ -1,30 +1,38 @@
 <section>
     <p>{{doc.mapintro}}</p>
     <h2>Search and televoting mapped</h2>
-    <div class="stv-radio-buttons-wrapper">
-	    <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="geo" id="button1" checked />
-	    <label for="button1">Geo</label>
-	    <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="rects" id="button2" />
-	    <label for="button2">Rects</label>
-    </div>
-    <div class="stv-radio-buttons-wrapper">
-	    <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="search" id="button5" checked />
-	    <label for="button5">Search</label>
-	    <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="tele" id="button6"/>
-	    <label for="button6">Televoting</label>
-    </div>
-    <div class="stv-radio-buttons-wrapper">
-        points
-    </div>
-    <div class="stv-radio-buttons-wrapper">
-	    <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="from" id="button3" checked />
-	    <label for="button3">from</label>
-	    <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="to" id="button4" />
-	    <label for="button4">to</label>
-    </div>
-    <div class="stv-radio-buttons-wrapper">
-        <select id="countrylist">
-        </select>
+    <div id="map-controls">
+        <div class="map-control-text">
+            Show
+        </div>
+        <div class="stv-radio-buttons-wrapper">
+	        <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="search" id="button5" checked />
+	        <label for="button5">search</label>
+	        <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="tele" id="button6"/>
+	        <label for="button6">televoting</label>
+        </div>
+        <div class="map-control-text">
+            points
+        </div>
+        <div class="stv-radio-buttons-wrapper">
+	        <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="from" id="button3" checked />
+	        <label for="button3">from</label>
+	        <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="to" id="button4" />
+	        <label for="button4">to</label>
+        </div>
+        <div class="stv-radio-buttons-wrapper">
+            <select id="countrylist">
+            </select>
+        </div>
+        <div class="map-control-text">
+            as a
+        </div>
+        <div class="stv-radio-buttons-wrapper mapswitch-wrapper">
+	        <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="geo" id="button1" checked />
+	        <label for="button1">geographic map</label>
+	        <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="rects" id="button2" />
+	        <label for="button2">grid map</label>
+        </div>
     </div>
     <div id="map-legend">
         <div class="legend-item">1</div>

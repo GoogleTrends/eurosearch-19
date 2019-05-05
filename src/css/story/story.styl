@@ -55,36 +55,52 @@ svg#ranking text
 /*MAP*/
 /*BUTTONS*/
 
+#map-controls
+    display table
+    margin-top 2em
+    margin-bottom 2em
+
 .stv-radio-buttons-wrapper {
-  clear: both;
-  display: inline-block;
+    clear: both;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left 6px
+    padding-right 6px
 }
+
+.map-control-text
+    display inline-block
+    vertical-align middle
+    display table-cell
+    vertical-align middle
 
 .stv-radio-button {
     position: absolute;
     visibility: hidden;
   
   & + label {
-    font-size: 0.7em;
-    float: left;
+    font-size: 0.8em;
+    /*float: left;*/
+    display: block;
     padding: .3em 0.5em;
     cursor: pointer;
-    border: 1px solid #28608f;
+    border: 1px solid #B29A81;
     margin-right: -1px;
     color: #fff;
-    background-color: #428bca;
+    background-color: #B29A81;
+    text-align: center;
     
     &:first-of-type {
-      border-radius: .2em 0 0 .2em;
+      border-radius: .1em 0 0 .1em;
     }
     
     &:last-of-type {
-      border-radius: 0 .2em .2em 0;
+      border-radius: 0 .1em .1em 0;
     }
   }
   
   &:checked + label {
-    background-color: #3277b3;
+    background-color: transparent;
   }
 }
 
