@@ -1173,17 +1173,19 @@ svg#ranking text {
   display: block;
   padding: 0.3em 0.5em;
   cursor: pointer;
-  border: 1px solid #b29a81;
+  border: 1px solid #fff;
   margin-right: -1px;
   color: #fff;
   background-color: #b29a81;
   text-align: center;
+  -webkit-box-shadow: 2px 4px 6px rgba(255,255,255,0.5);
+          box-shadow: 2px 4px 6px rgba(255,255,255,0.5);
 }
 .stv-radio-button + label:first-of-type {
-  border-radius: 0.1em 0 0 0.1em;
+  border-radius: 0.2em 0.2em 0 0;
 }
 .stv-radio-button + label:last-of-type {
-  border-radius: 0 0.1em 0.1em 0;
+  border-radius: 0 0 0.2em 0.2em;
 }
 .stv-radio-button:checked + label {
   background-color: transparent;
