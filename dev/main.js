@@ -2842,7 +2842,7 @@ var define;
     };
 });
 
-},{}],"graphic.js":[function(require,module,exports) {
+},{}],"TAPd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3823,5 +3823,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js","./footer":"v9Q8"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd","./footer":"v9Q8"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map

@@ -1101,13 +1101,38 @@ time {
 }
 h1 {
   font-size: 4em;
+  text-shadow: 0px 0px 10px #000;
+}
+.intro {
+  background-image: url("assets/images/star2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .intro__dek {
   max-width: 50rem;
-  font-size: 1.3em;
+  font-size: 1.5em;
+  text-shadow: 0px 0px 2px #000;
+}
+.intro__byline,
+.intro__time {
+  color: #fff;
+  font-family: Roboto;
+  font-weight: 100;
+}
+.intro__time {
+  margin-top: 0;
+  margin-bottom: 3rem;
 }
 .intro__byline a {
-  color: #b18f6d;
+  color: #fff;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #fff;
+          text-decoration-color: #fff;
+}
+.intro__logo {
+  margin: auto;
+  text-align: center;
 }
 #ranking-container {
   width: 100%;
