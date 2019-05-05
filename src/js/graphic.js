@@ -410,7 +410,7 @@ function init() {
   //const scatterWidth = 800;
   //const scatterHeight = 600;
 
-  const scatterMargins = {top: 20, right: 40, bottom: 40, left: 40};
+  const scatterMargins = {top: 30, right: 40, bottom: 60, left: 40};
 
   let scatterOverallSvg = d3.select("svg#scatter")
     .attr("width", scatterWidth)
@@ -436,7 +436,8 @@ function init() {
     .attr("in","SourceGraphic");
   
   let scatterScaleX = d3.scaleLinear()
-    .domain([0,maxPoints])
+    //.domain([0,maxPoints])
+    .domain([0,210])
     .range([0,scatterWidth - scatterMargins.right]);
   
   let scatterScaleY = d3.scaleLinear()
@@ -457,13 +458,13 @@ function init() {
     .call(xAxis);
   scatterOverallSvg.append("text")
     .text("Search activity points")
-    .attr("x", scatterWidth - 50)
-    .attr("y", scatterHeight - 30)
+    .attr("x", scatterWidth/2)
+    .attr("y", scatterHeight - 36)
     .attr("class", "x axis-title")
   scatterOverallSvg.append("text")
     .text("Televoting points")
     .attr("x", -20)
-    .attr("y", 10)
+    .attr("y", -12)
     .attr("class", "y axis-title")
 
   scatterOverallSvg.append("g")
@@ -471,12 +472,40 @@ function init() {
     .attr("transform", `translate(0,0)`)
     .call(yAxis);
 
-  scatterOverallSvg.append("line")
+  /*scatterOverallSvg.append("line")
     .attr("x1", scatterScaleX(0))
     .attr("x2", scatterScaleX(200))
     .attr("y1", scatterScaleY(0))
     .attr("y2", scatterScaleY(200))
-    .attr("class", "fourtyfive")
+    .attr("class", "fourtyfive")*/
+
+  scatterOverallSvg.append("path")
+    .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(190)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
+    .style("fill", "none")
+    .style("stroke", "#ffffff")
+    .style("stroke-width", 2)
+    .style("filter", "url(#glow)")
+
+  scatterOverallSvg.append("path")
+    .attr("d", `M${scatterScaleX(0)},${scatterScaleY(10)} L${scatterScaleX(190)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(10)}`)
+    .style("fill", "none")
+    .style("stroke", "#ffffff")
+    .style("stroke-width", 2)
+    .style("filter", "url(#glow)")
+
+  scatterOverallSvg.append("text")
+    .attr("x", scatterScaleX(150))
+    .attr("y", scatterScaleY(30))
+    .text("More search activity than televoting")
+    .style("fill", "#ffffff")
+    .style("text-anchor", "middle");
+
+  scatterOverallSvg.append("text")
+    .attr("x", scatterScaleX(5))
+    .attr("y", scatterScaleY(180))
+    .text("More televoting than search activity")
+    .style("fill", "#ffffff")
+    .style("text-anchor", "start");
 
   scatterOverallSvg.selectAll("circle")
     .data(pointsMean)
@@ -505,7 +534,7 @@ function init() {
     .enter().append("text")
     .attr("x", (d) => scatterScaleX(d.value.searchpoints))
     .attr("y", (d) => scatterScaleY(d.value.votepoints))
-    .text((d) => d.key)
+    .text((d) => grid[d.key].name)
     .attr("class", "scatter-label")
     .attr("dy", -10);
 

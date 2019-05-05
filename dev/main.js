@@ -3527,9 +3527,9 @@ function init() {
     //const scatterHeight = 600;
 
     var scatterMargins = {
-      top: 20,
+      top: 30,
       right: 40,
-      bottom: 40,
+      bottom: 60,
       left: 40
     };
     var scatterOverallSvg = d3.select("svg#scatter").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
@@ -3539,15 +3539,26 @@ function init() {
     var feMerge = filter.append("feMerge");
     feMerge.append("feMergeNode").attr("in", "coloredBlur");
     feMerge.append("feMergeNode").attr("in", "SourceGraphic");
-    var scatterScaleX = d3.scaleLinear().domain([0, maxPoints]).range([0, scatterWidth - scatterMargins.right]);
+    var scatterScaleX = d3.scaleLinear() //.domain([0,maxPoints])
+    .domain([0, 210]).range([0, scatterWidth - scatterMargins.right]);
     var scatterScaleY = d3.scaleLinear().domain([0, maxPoints]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
     var xAxis = d3.axisBottom(scatterScaleX).tickValues([50, 100, 150]).tickSize(-scatterHeight);
     var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150, 200]).ticks(5).tickSize(-scatterWidth);
     scatterOverallSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xAxis);
-    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
-    scatterOverallSvg.append("text").text("Televoting points").attr("x", -20).attr("y", 10).attr("class", "y axis-title");
+    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterWidth / 2).attr("y", scatterHeight - 36).attr("class", "x axis-title");
+    scatterOverallSvg.append("text").text("Televoting points").attr("x", -20).attr("y", -12).attr("class", "y axis-title");
     scatterOverallSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yAxis);
-    scatterOverallSvg.append("line").attr("x1", scatterScaleX(0)).attr("x2", scatterScaleX(200)).attr("y1", scatterScaleY(0)).attr("y2", scatterScaleY(200)).attr("class", "fourtyfive");
+    /*scatterOverallSvg.append("line")
+      .attr("x1", scatterScaleX(0))
+      .attr("x2", scatterScaleX(200))
+      .attr("y1", scatterScaleY(0))
+      .attr("y2", scatterScaleY(200))
+      .attr("class", "fourtyfive")*/
+
+    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(10), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(200), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(200), ",").concat(scatterScaleY(190), " L").concat(scatterScaleX(10), ",").concat(scatterScaleY(0))).style("fill", "none").style("stroke", "#ffffff").style("stroke-width", 2).style("filter", "url(#glow)");
+    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(0), ",").concat(scatterScaleY(10), " L").concat(scatterScaleX(190), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(10))).style("fill", "none").style("stroke", "#ffffff").style("stroke-width", 2).style("filter", "url(#glow)");
+    scatterOverallSvg.append("text").attr("x", scatterScaleX(150)).attr("y", scatterScaleY(30)).text("More search activity than televoting").style("fill", "#ffffff").style("text-anchor", "middle");
+    scatterOverallSvg.append("text").attr("x", scatterScaleX(5)).attr("y", scatterScaleY(180)).text("More televoting than search activity").style("fill", "#ffffff").style("text-anchor", "start");
     scatterOverallSvg.selectAll("circle").data(pointsMean).enter().append("circle").attr("cx", function (d) {
       return scatterScaleX(d.value.searchpoints);
     }).attr("cy", function (d) {
@@ -3574,7 +3585,7 @@ function init() {
     }).attr("y", function (d) {
       return scatterScaleY(d.value.votepoints);
     }).text(function (d) {
-      return d.key;
+      return grid[d.key].name;
     }).attr("class", "scatter-label").attr("dy", -10);
     /*YEARLY SCATTER*/
 
