@@ -8,6 +8,8 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
+    "@d3fc/d3fc-label-layout": "^6.0.7",
+    "d3fc-label-layout": "^5.1.0",
     "flubber": "^0.4.2",
     "lodash.debounce": "^4.0.8",
     "nouislider": "^12.1.0",

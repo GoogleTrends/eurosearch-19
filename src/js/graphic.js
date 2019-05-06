@@ -1,6 +1,7 @@
 /* global d3 */
 import { separate, combine, splitPathString} from "flubber";
 import noUiSlider from 'nouislider';
+import { layoutTextLabel, layoutGreedy, layoutAnnealing, layoutLabel, layoutRemoveOverlaps } from 'd3fc-label-layout';
 
 function resize() {}
 
@@ -486,6 +487,7 @@ function init() {
     .style("stroke", "#ffffff")
     .style("stroke-width", 2)
     .style("filter", "url(#glow)")
+    .style("opacity", 0.5);
 
   scatterOverallSvg.append("path")
     .attr("d", `M${scatterScaleX(0)},${scatterScaleY(10)} L${scatterScaleX(190)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(10)}`)
@@ -493,6 +495,7 @@ function init() {
     .style("stroke", "#ffffff")
     .style("stroke-width", 2)
     .style("filter", "url(#glow)")
+    .style("opacity", 0.5);
 
   scatterOverallSvg.append("text")
     .attr("x", scatterScaleX(150))
@@ -530,14 +533,43 @@ function init() {
     return d.key == "RUS" || d.key == "BGR" || d.key == "SRB" || d.key == "SWE" || d.key == "CZE"  || d.key == "ITA" || d.key == "TRK" || d.key == "UKR"
   })
 
-  scatterOverallSvg.selectAll("text.label")
+  /*scatterOverallSvg.selectAll("text.label")
     .data(labeldata)
     .enter().append("text")
     .attr("x", (d) => scatterScaleX(d.value.searchpoints))
     .attr("y", (d) => scatterScaleY(d.value.votepoints))
     .text((d) => grid[d.key].name)
     .attr("class", "scatter-label")
-    .attr("dy", -10);
+    .attr("dy", -10);*/
+
+    const labelPadding = 8;
+
+    // the component used to render each label
+    const textLabel = layoutTextLabel()
+      .padding(labelPadding)
+      .value(d => grid[d.key].name);
+    
+    // a strategy that combines simulated annealing with removal
+    // of overlapping labels
+    //const strategy = layoutRemoveOverlaps(layoutGreedy());
+    const strategy = layoutAnnealing();
+    
+    // create the layout that positions the labels
+    const labels = layoutLabel(strategy)
+        .size((d, i, g) => {
+            // measure the label and add the required padding
+            const textSize = g[i].getElementsByTagName('text')[0].getBBox();
+            return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
+        })
+        .xScale(scatterScaleX)
+        .yScale(scatterScaleY)
+        .position(d => {return [d.value.searchpoints, d.value.votepoints]})
+        .component(textLabel);
+    
+    // render!
+    scatterOverallSvg.datum(pointsMean)
+         .call(labels);
+    //d3.selectAll("g.label text").attr("dy", "-0.9em")
 
   /*YEARLY SCATTER*/
   const maxSearchYearlyPoints = d3.max(points, (d) => d.searchpoints);
