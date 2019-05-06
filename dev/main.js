@@ -3250,8 +3250,8 @@ function init() {
       }
     };
     var filtervalues = {
-      "country": "BEL",
-      "fromto": "from",
+      "country": "ISR",
+      "fromto": "to",
       "searchtele": "search"
       /** SELECT LIST **/
 
@@ -3274,6 +3274,7 @@ function init() {
     }).text(function (d) {
       return grid[d].name;
     });
+    d3.select("option[value='ISR']").property("selected", true);
     /** RANKING **/
 
     var rankingHeight = 800;

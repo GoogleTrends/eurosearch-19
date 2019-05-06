@@ -94,8 +94,8 @@ function init() {
     }
     
     let filtervalues = {
-      "country": "BEL",
-      "fromto": "from",
+      "country": "ISR",
+      "fromto": "to",
       "searchtele": "search"
     }
     /** SELECT LIST **/
@@ -112,6 +112,7 @@ function init() {
       .enter().append("option")
       .attr("value", (d) => d)
       .text((d) => grid[d].name);
+    d3.select("option[value='ISR']").property("selected", true);
     
     /** RANKING **/
     const rankingHeight = 800;
