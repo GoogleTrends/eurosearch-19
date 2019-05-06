@@ -10587,9 +10587,10 @@ function init() {
     feMerge.append("feMergeNode").attr("in", "SourceGraphic");
     var scatterScaleX = d3.scaleLinear() //.domain([0,maxPoints])
     .domain([0, 210]).range([0, scatterWidth - scatterMargins.right]);
-    var scatterScaleY = d3.scaleLinear().domain([0, maxPoints]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    var scatterScaleY = d3.scaleLinear() //.domain([0,maxPoints])
+    .domain([0, 190]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
     var xAxis = d3.axisBottom(scatterScaleX).tickValues([50, 100, 150]).tickSize(-scatterHeight);
-    var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150, 200]).ticks(5).tickSize(-scatterWidth);
+    var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150]).ticks(5).tickSize(-scatterWidth + scatterMargins.left + scatterMargins.right);
     scatterOverallSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xAxis);
     scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterWidth / 2).attr("y", scatterHeight - 36).attr("class", "x axis-title");
     scatterOverallSvg.append("text").text("Televoting points").attr("x", -20).attr("y", -12).attr("class", "y axis-title");
@@ -10651,7 +10652,7 @@ function init() {
     }).component(textLabel); // render!
 
     scatterOverallSvg.datum(pointsMean).call(labels);
-    d3.selectAll("g.label text").attr("dx", function (d) {
+    scatterOverallSvg.selectAll("g.label text").attr("dx", function (d) {
       return -d3.select(this.parentNode).attr("layout-width") / 2;
     }).attr("dy", function (d) {
       return -d3.select(this.parentNode).attr("layout-height") / 2 - 3;
@@ -10684,11 +10685,31 @@ function init() {
     }).attr("id", function (d) {
       return d.key;
     });
-    var yearTitle = scatterYearlySvg.append("text").attr("x", scatterWidth / 2).attr("y", 16).text("2018").attr("class", "yearly-title");
+    var yearTitle = scatterYearlySvg.append("text").attr("x", scatterWidth / 2).attr("y", 16).text("2018").attr("class", "yearly-title"); // the component used to render each label
+
+    var textLabelYearly = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
+      return grid[d.to].name;
+    }); // create the layout that positions the labels
+
+    var labelsYearly = (0, _d3fcLabelLayout.layoutLabel)(strategy).size(function (d, i, g) {
+      // measure the label and add the required padding
+      var textSize = g[i].getElementsByTagName('text')[0].getBBox();
+      return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
+    }).xScale(scatterYearlyScaleX).yScale(scatterYearlyScaleY).position(function (d) {
+      return [d.searchpoints, d.votepoints];
+    }).component(textLabelYearly);
 
     function highlightYear(yr) {
       yearlyCircles.style("filter", "none").transition().duration(1000).attr("r", 4).style("opacity", 0.1);
       d3.selectAll(".circle-" + yr).transition().duration(1000).attr("r", 10).style("opacity", 0.8).style("filter", "url(#glow)");
+      scatterYearlySvg.datum(points.filter(function (el) {
+        return el.year == yr;
+      })).call(labelsYearly);
+      scatterYearlySvg.selectAll("g.label text").attr("dx", function (d) {
+        return -d3.select(this.parentNode).attr("layout-width") / 2;
+      }).attr("dy", function (d) {
+        return -d3.select(this.parentNode).attr("layout-height") / 2 - 5;
+      });
       yearTitle.text(yr);
     }
 

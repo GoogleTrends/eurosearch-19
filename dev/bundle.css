@@ -1064,7 +1064,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
 }
 .yearly-title {
-  font-size: 3em;
+  font-size: 2.5em;
   fill: #ae9a84;
   text-anchor: middle;
   stroke: #fff;

@@ -442,16 +442,17 @@ function init() {
     .range([0,scatterWidth - scatterMargins.right]);
   
   let scatterScaleY = d3.scaleLinear()
-    .domain([0,maxPoints])
+    //.domain([0,maxPoints])
+    .domain([0,190])
     .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
 
   let xAxis = d3.axisBottom(scatterScaleX)
     .tickValues([50,100,150])
     .tickSize(-scatterHeight);
   let yAxis = d3.axisLeft(scatterScaleY)
-    .tickValues([50,100,150,200])
+    .tickValues([50,100,150])
     .ticks(5)
-    .tickSize(-scatterWidth);
+    .tickSize(-scatterWidth + scatterMargins.left + scatterMargins.right);
 
   scatterOverallSvg.append("g")
     .attr("class", "axis x-axis")
@@ -572,7 +573,7 @@ function init() {
     scatterOverallSvg.datum(pointsMean)
          .call(labels);
 
-    d3.selectAll("g.label text")
+    scatterOverallSvg.selectAll("g.label text")
       .attr("dx", function(d) {
         return -d3.select(this.parentNode).attr("layout-width")/2;
       })
@@ -648,6 +649,23 @@ function init() {
       .attr("y", 16)
       .text("2018")
       .attr("class", "yearly-title");
+  
+      // the component used to render each label
+    const textLabelYearly = layoutTextLabel()
+      .padding(labelPadding)
+      .value(d => grid[d.to].name);
+    
+    // create the layout that positions the labels
+    const labelsYearly = layoutLabel(strategy)
+        .size((d, i, g) => {
+            // measure the label and add the required padding
+            const textSize = g[i].getElementsByTagName('text')[0].getBBox();
+            return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
+        })
+        .xScale(scatterYearlyScaleX)
+        .yScale(scatterYearlyScaleY)
+        .position(d => {return [d.searchpoints, d.votepoints]})
+        .component(textLabelYearly);
 
   function highlightYear(yr){
     yearlyCircles.style("filter", "none").transition().duration(1000)
@@ -657,6 +675,17 @@ function init() {
       .attr("r", 10)
       .style("opacity", 0.8)
       .style("filter", "url(#glow)");
+    
+    scatterYearlySvg.datum(points.filter((el) => el.year == yr))
+      .call(labelsYearly);
+
+    scatterYearlySvg.selectAll("g.label text")
+      .attr("dx", function(d) {
+        return -d3.select(this.parentNode).attr("layout-width")/2;
+      })
+      .attr("dy", function(d) {
+        return -d3.select(this.parentNode).attr("layout-height")/2 - 5;
+      });
     yearTitle.text(yr);
   }
 
