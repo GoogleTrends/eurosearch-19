@@ -1,6 +1,5 @@
 /* global d3 */
 import { separate, combine, splitPathString} from "flubber";
-import noUiSlider from 'nouislider';
 import { layoutTextLabel, layoutGreedy, layoutAnnealing, layoutLabel, layoutRemoveOverlaps } from 'd3fc-label-layout';
 
 function resize() {}
@@ -406,7 +405,7 @@ function init() {
   const maxVotePoints = d3.max(pointsMean, (d) => d.value.votepoints);
   const maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
 
-  const scatterWidth = document.querySelector("#scatter-container").clientWidth * 0.8;
+  const scatterWidth = document.querySelector("#scatter-container").clientWidth;
   let scatterRatio = 2/3;
   const scatterHeight = scatterWidth * scatterRatio;
   //const scatterWidth = 800;
@@ -483,33 +482,35 @@ function init() {
 
   scatterOverallSvg.append("path")
     .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(190)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
-    .style("fill", "none")
+    .style("fill", "#ffffff")
     .style("stroke", "#ffffff")
-    .style("stroke-width", 2)
+    .style("stroke-width", 4)
     .style("filter", "url(#glow)")
-    .style("opacity", 0.5);
+    .style("opacity", 0.2);
 
   scatterOverallSvg.append("path")
     .attr("d", `M${scatterScaleX(0)},${scatterScaleY(10)} L${scatterScaleX(190)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(10)}`)
-    .style("fill", "none")
+    .style("fill", "#ffffff")
     .style("stroke", "#ffffff")
-    .style("stroke-width", 2)
+    .style("stroke-width", 4)
     .style("filter", "url(#glow)")
-    .style("opacity", 0.5);
+    .style("opacity", 0.2);
 
   scatterOverallSvg.append("text")
     .attr("x", scatterScaleX(150))
     .attr("y", scatterScaleY(30))
     .text("More search activity than televoting")
     .style("fill", "#ffffff")
-    .style("text-anchor", "middle");
+    .style("text-anchor", "middle")
+    .attr("class", "annotation");
 
   scatterOverallSvg.append("text")
     .attr("x", scatterScaleX(5))
     .attr("y", scatterScaleY(180))
     .text("More televoting than search activity")
     .style("fill", "#ffffff")
-    .style("text-anchor", "start");
+    .style("text-anchor", "start")
+    .attr("class", "annotation");
 
   scatterOverallSvg.selectAll("circle")
     .data(pointsMean)
@@ -521,7 +522,7 @@ function init() {
     .style("filter", "url(#glow)")
     .attr("id", (d) => d.key);
 
-  let scatterLabels = [
+  /*let scatterLabels = [
     {"RUS": "end"},
     {"BGR": "middle"},
     {"SRB": "middle"},
@@ -533,7 +534,7 @@ function init() {
     return d.key == "RUS" || d.key == "BGR" || d.key == "SRB" || d.key == "SWE" || d.key == "CZE"  || d.key == "ITA" || d.key == "TRK" || d.key == "UKR"
   })
 
-  /*scatterOverallSvg.selectAll("text.label")
+  scatterOverallSvg.selectAll("text.label")
     .data(labeldata)
     .enter().append("text")
     .attr("x", (d) => scatterScaleX(d.value.searchpoints))
@@ -542,7 +543,7 @@ function init() {
     .attr("class", "scatter-label")
     .attr("dy", -10);*/
 
-    const labelPadding = 8;
+    const labelPadding = 2;
 
     // the component used to render each label
     const textLabel = layoutTextLabel()
@@ -552,7 +553,8 @@ function init() {
     // a strategy that combines simulated annealing with removal
     // of overlapping labels
     //const strategy = layoutRemoveOverlaps(layoutGreedy());
-    const strategy = layoutAnnealing();
+    //const strategy = layoutAnnealing();
+    const strategy = layoutRemoveOverlaps();
     
     // create the layout that positions the labels
     const labels = layoutLabel(strategy)
@@ -565,11 +567,18 @@ function init() {
         .yScale(scatterScaleY)
         .position(d => {return [d.value.searchpoints, d.value.votepoints]})
         .component(textLabel);
-    
+
     // render!
     scatterOverallSvg.datum(pointsMean)
          .call(labels);
-    //d3.selectAll("g.label text").attr("dy", "-0.9em")
+
+    d3.selectAll("g.label text")
+      .attr("dx", function(d) {
+        return -d3.select(this.parentNode).attr("layout-width")/2;
+      })
+      .attr("dy", function(d) {
+        return -d3.select(this.parentNode).attr("layout-height")/2 - 3;
+      });
 
   /*YEARLY SCATTER*/
   const maxSearchYearlyPoints = d3.max(points, (d) => d.searchpoints);
@@ -632,37 +641,30 @@ function init() {
     .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
     .attr("r", 2)
     .attr("class", (d) => "circle-year circle-" + d.year)
-    .style("filter", "url(#glow)")
     .attr("id", (d) => d.key);
 
+  let yearTitle = scatterYearlySvg.append("text")
+      .attr("x", scatterWidth/2)
+      .attr("y", 16)
+      .text("2018")
+      .attr("class", "yearly-title");
+
   function highlightYear(yr){
-    yearlyCircles.classed("highlight", false);
-    let highlighted = d3.selectAll(".circle-" + yr).classed("highlight", true);
+    yearlyCircles.style("filter", "none").transition().duration(1000)
+      .attr("r", 4)
+      .style("opacity", 0.1);
+    d3.selectAll(".circle-" +yr).transition().duration(1000)
+      .attr("r", 10)
+      .style("opacity", 0.8)
+      .style("filter", "url(#glow)");
+    yearTitle.text(yr);
   }
 
-  var slider = document.getElementById('slider');
+  highlightYear(2018);
 
-  noUiSlider.create(slider, {
-      start: 2018,
-      connect: true,
-      tooltips: true,
-      format: {
-        to: function(value){
-          return d3.format("(.0f")(value);
-        },
-        from: function(value){
-          return value;
-        }
-      },
-      step: 1,
-      range: {
-          'min': 2004,
-          'max': 2018
-      }
-  });
-  slider.noUiSlider.on("change", function(){
-    highlightYear(+slider.noUiSlider.get());
-  });
+  d3.select("input#slider").on("change", function(){
+    highlightYear(this.value);
+  })
 
   /*SCATTER PATTERNS*/
   const maxSearchPatternPoints = d3.max(patterns, (d) => d.search);
