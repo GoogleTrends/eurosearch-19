@@ -10724,6 +10724,17 @@ function init() {
     });
     /*SCATTER PATTERNS*/
 
+    var patternscatterMargins = {
+      top: 70,
+      right: 80,
+      bottom: 60,
+      left: 60
+    };
+    var patternscatterWidth = document.querySelector("#votingpattern-container").clientWidth;
+    var patternscatterRatio = 3;
+    var patternscatterHeight = patternscatterWidth * patternscatterRatio;
+    var patternscatterInnerWidth = patternscatterWidth - patternscatterMargins.left - patternscatterMargins.right;
+    var patternscatterInnerHeight = patternscatterHeight - patternscatterMargins.top - patternscatterMargins.bottom;
     var maxSearchPatternPoints = d3.max(patterns, function (d) {
       return d.search;
     });
@@ -10731,47 +10742,43 @@ function init() {
       return d.tele;
     });
     var maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
-    var patternscatterHeight = scatterHeight;
-    var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", scatterWidth).attr("height", patternscatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
-    var scatterPatternScaleX = d3.scaleLinear().domain([30, maxPatternPoints]).range([0, scatterWidth - scatterMargins.right]);
-    var scatterPatternScaleY = d3.scaleLinear().domain([30, maxPatternPoints]).range([patternscatterHeight - scatterMargins.bottom, scatterMargins.top]);
-    var xPatternAxis = d3.axisBottom(scatterPatternScaleX).tickValues([100, 200, 300]).tickSize(-patternscatterHeight);
-    var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([100, 200, 300]).ticks(5).tickSize(-scatterWidth);
-    scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(patternscatterHeight - scatterMargins.bottom, ")")).call(xPatternAxis);
+    var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", patternscatterWidth).attr("height", patternscatterHeight).append("g").attr("transform", "translate(".concat(patternscatterMargins.left, ",").concat(patternscatterMargins.top, ")"));
+    var scatterPatternScaleX = d3.scaleLinear().domain([30, maxPatternPoints]).range([0, patternscatterInnerWidth]);
+    var scatterPatternScaleY = d3.scaleLinear().domain([30, maxPatternPoints]).range([patternscatterInnerHeight, 0]);
+    var xPatternAxis = d3.axisTop(scatterPatternScaleX).tickValues([50, 100]).tickSize(-patternscatterInnerHeight);
+    var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([50, 100, 150]).ticks(5).tickSize(-patternscatterInnerWidth);
+    scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,10)").call(xPatternAxis);
     scatterPatternSvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
-    scatterPatternSvg.append("text").text("Televoting points").attr("x", -20).attr("y", 10).attr("class", "y axis-title");
+    scatterPatternSvg.append("text").text("More televoting points").attr("x", 20).attr("y", 30).style("text-anchor", "end").attr("transform", "rotate(-90)").attr("class", "y axis-title");
     scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
     scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
     var patternMarkers = scatterPatternSvg.selectAll("g").data(patterns).enter().append("g").attr("transform", function (d) {
       return "translate(".concat(scatterPatternScaleX(d.search), ",").concat(scatterPatternScaleY(d.tele), ")");
-    });
+    }).style("opacity", 1).style("filter", "url(#glow)");
     patternMarkers.append('path').attr("d", d3.symbol().type(d3.symbolTriangle)).attr("transform", "translate(26,12) rotate(90)").style("fill", "white");
     patternMarkers.append("image").attr("xlink:href", function (d) {
       return "assets/images/flags/" + d.from + ".svg";
     }).attr('width', countryheight).attr('height', countryheight);
     patternMarkers.append("image").attr("xlink:href", function (d) {
       return "assets/images/flags/" + d.to + ".svg";
-    }).attr("x", 32).attr('width', countryheight).attr('height', countryheight);
-    /*rankingSvg.selectAll('image.flag')
-    .data(rankingdata)
-    .enter().append('image')
-    .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
-    .attr('x', voteScale("search") - countryheight/2)
-    .attr("y", (d) => countryScale(d.country) - countryheight/2)
-    .attr('class', function (d) { return 'id-' + d.Country; })
-    .attr('width', countryheight - 2)
-    .attr('height', countryheight - 2)
-    .style("filter", "url(#flagglow)");
-      
-    let patternCircles = scatterPatternSvg.selectAll("circle")
-      .data(patterns)
-      .enter().append("circle")
-      .attr("cx", (d) => scatterPatternScaleX(d.search))
-      .attr("cy", (d) => scatterPatternScaleY(d.tele))
-      .attr("r", (d) => Math.sqrt(d.tele))
-      .attr("class", (d) => "circle-pattern circle-" + d.from + "-" + d.to)
-      .style("filter", "url(#glow)");*/
-    //.attr("id", (d) => d.key);
+    }).attr("x", 30).attr('width', countryheight).attr('height', countryheight);
+    var type = d3.annotationCalloutCircle;
+    var annotations = [{
+      note: {
+        label: "Longer text to show text wrapping",
+        title: "Annotations :)"
+      },
+      x: 100,
+      y: 100,
+      dy: 137,
+      dx: 162,
+      subject: {
+        radius: 50,
+        radiusPadding: 5
+      }
+    }];
+    var makeAnnotations = d3.annotation().notePadding(15).type(type).annotations(annotations);
+    scatterPatternSvg.append("g").attr("class", "annotation-group").call(makeAnnotations);
   });
 }
 
@@ -10780,7 +10787,7 @@ var _default = {
   resize: resize
 };
 exports.default = _default;
-},{"flubber":"yVOz","d3fc-label-layout":"LUlz"}],"main.js":[function(require,module,exports) {
+},{"flubber":"yVOz","d3fc-label-layout":"LUlz"}],"epB2":[function(require,module,exports) {
 "use strict";
 
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
@@ -10835,5 +10842,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js"}]},{},["main.js"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map
