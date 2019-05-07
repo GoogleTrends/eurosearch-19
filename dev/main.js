@@ -10684,6 +10684,7 @@ function init() {
     });
     var labelsYearly = (0, _d3fcLabelLayout.layoutLabel)(strategy).size(function (d, i, g) {
       var textSize = g[i].getElementsByTagName('text')[0].getBBox();
+      console.log(g[i].getElementsByTagName('text')[0]);
       return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
     }).xScale(scatterYearlyScaleX).yScale(scatterYearlyScaleY).position(function (d) {
       return [d.searchpoints, d.votepoints];

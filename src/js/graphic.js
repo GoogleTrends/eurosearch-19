@@ -663,6 +663,7 @@ function init() {
   const labelsYearly = layoutLabel(strategy)
       .size((d, i, g) => {
           const textSize = g[i].getElementsByTagName('text')[0].getBBox();
+          console.log(g[i].getElementsByTagName('text')[0]);
           return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
       })
       .xScale(scatterYearlyScaleX)
