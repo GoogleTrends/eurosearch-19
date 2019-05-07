@@ -108,6 +108,9 @@ svg#ranking text
   }
 }
 
+#countrylist
+    width 120px
+
 /*Legend*/
 #map-legend {
   display: table;
@@ -144,17 +147,17 @@ svg#ranking text
 
 .country
     stroke-width 1
-    stroke #868A97
-    transition stroke 5s linear
+    /*stroke #868A97*/
+    stroke #ffffff
     
 .country.highlight
     stroke-width 2
     stroke #ffffff
-    transition stroke 5s linear
 
 .map-label
     font-size 0.7em
     fill white
+    text-anchor middle
 
 /* SCATTERPLOT*/
 #scatter-container
@@ -204,6 +207,8 @@ svg#ranking text
     fill #ffffff
     font-size 14px
     font-family Rubik
+.y.axis-title 
+    text-anchor middle
 .x.axis-title 
     text-anchor end
 

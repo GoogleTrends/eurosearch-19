@@ -10235,7 +10235,7 @@ function init() {
           x: 6,
           y: 5
         },
-        "name": "Roumania"
+        "name": "Romania"
       },
       RUS: {
         "coords": {
@@ -10411,7 +10411,7 @@ function init() {
       return d.key;
     }) //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
     .html(function (d, i) {
-      return i + 1 + '. ???';
+      return i + 1 + '. ?';
     });
     /** MAP **/
     //const mapWidth = 900;
@@ -10432,7 +10432,8 @@ function init() {
     var geoPath = d3.geoPath().projection(projection);
     var countries = mapSvg.selectAll('path').data(geodata.features).enter().append('path').attr("id", function (d) {
       return d.properties.ADM0_A3;
-    }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730").style("filter", "url(#glow)");
+    }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730"); //.style("filter", "url(#glow)");
+
     /*COLOR MAP*/
 
     var cols = d3.scaleSequential(d3.interpolatePlasma).domain([1, 12]); //legend
@@ -10482,12 +10483,13 @@ function init() {
     colorMap(filtervalues);
     /*MAP UPDATES*/
 
-    var rectDim = 48;
-    var gridMargin = 120 / rectDim;
+    var rectDim = 64;
+    var gridMarginX = (mapWidth / 2 - 5 * rectDim) / rectDim;
+    var gridMarginY = 120 / rectDim;
 
     function rectToPath(x, y, dim) {
-      x = x + gridMargin;
-      y = y + gridMargin;
+      x = x + gridMarginX;
+      y = y + gridMarginY;
       return "M".concat(x * rectDim, ",").concat(y * rectDim, " L").concat(x * rectDim + dim, ",").concat(y * rectDim, " L").concat(x * rectDim + dim, ",").concat(y * rectDim + dim, " L").concat(x * rectDim, ",").concat(y * rectDim + dim, " L").concat(x * rectDim, ",").concat(y * rectDim);
     }
 
@@ -10499,7 +10501,8 @@ function init() {
           return (0, _flubber.combine)((0, _flubber.splitPathString)(d3.select(this).attr("d")), rectToPath(grid[d3.select(this).attr("id")].coords.x, grid[d3.select(this).attr("id")].coords.y, rectDim), {
             "single": true
           });
-        });
+        }); //.style("filter", "url(#glow)");
+
         setTimeout(function () {
           var country;
 
@@ -10567,17 +10570,17 @@ function init() {
       return d.value.votepoints;
     });
     var maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
-    var scatterWidth = document.querySelector("#scatter-container").clientWidth;
-    var scatterRatio = 2 / 3;
-    var scatterHeight = scatterWidth * scatterRatio; //const scatterWidth = 800;
-    //const scatterHeight = 600;
-
     var scatterMargins = {
-      top: 30,
+      top: 70,
       right: 40,
       bottom: 60,
-      left: 40
+      left: 60
     };
+    var scatterWidth = document.querySelector("#scatter-container").clientWidth;
+    var scatterRatio = 2 / 3;
+    var scatterHeight = scatterWidth * scatterRatio;
+    var scatterInnerWidth = scatterWidth - scatterMargins.left - scatterMargins.right;
+    var scatterInnerHeight = scatterHeight - scatterMargins.top - scatterMargins.bottom;
     var scatterOverallSvg = d3.select("svg#scatter").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
     var defs = scatterOverallSvg.append("defs");
     var filter = defs.append("filter").attr("id", "glow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
@@ -10586,23 +10589,17 @@ function init() {
     feMerge.append("feMergeNode").attr("in", "coloredBlur");
     feMerge.append("feMergeNode").attr("in", "SourceGraphic");
     var scatterScaleX = d3.scaleLinear() //.domain([0,maxPoints])
-    .domain([0, 210]).range([0, scatterWidth - scatterMargins.right]);
+    .domain([0, 210]).range([0, scatterInnerWidth]);
     var scatterScaleY = d3.scaleLinear() //.domain([0,maxPoints])
-    .domain([0, 190]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
-    var xAxis = d3.axisBottom(scatterScaleX).tickValues([50, 100, 150]).tickSize(-scatterHeight);
-    var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150]).ticks(5).tickSize(-scatterWidth + scatterMargins.left + scatterMargins.right);
-    scatterOverallSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xAxis);
-    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterWidth / 2).attr("y", scatterHeight - 36).attr("class", "x axis-title");
-    scatterOverallSvg.append("text").text("Televoting points").attr("x", -20).attr("y", -12).attr("class", "y axis-title");
+    .domain([0, 190]).range([scatterInnerHeight, 0]);
+    var tickPadding = 10;
+    var xAxis = d3.axisBottom(scatterScaleX).tickValues([50, 100, 150]).tickPadding(tickPadding).tickSize(-scatterInnerHeight);
+    var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150]).ticks(5).tickPadding(tickPadding).tickSize(-scatterInnerWidth);
+    scatterOverallSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterInnerHeight, ")")).call(xAxis);
+    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
+    scatterOverallSvg.append("text").text("Televoting points").attr("x", 0).attr("y", -40).attr("class", "y axis-title");
     scatterOverallSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yAxis);
-    /*scatterOverallSvg.append("line")
-      .attr("x1", scatterScaleX(0))
-      .attr("x2", scatterScaleX(200))
-      .attr("y1", scatterScaleY(0))
-      .attr("y2", scatterScaleY(200))
-      .attr("class", "fourtyfive")*/
-
-    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(10), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(200), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(200), ",").concat(scatterScaleY(190), " L").concat(scatterScaleX(10), ",").concat(scatterScaleY(0))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
+    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(10), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(210), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(210), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(10), ",").concat(scatterScaleY(0))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
     scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(0), ",").concat(scatterScaleY(10), " L").concat(scatterScaleX(190), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(10))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
     scatterOverallSvg.append("text").attr("x", scatterScaleX(150)).attr("y", scatterScaleY(30)).text("More search activity than televoting").style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
     scatterOverallSvg.append("text").attr("x", scatterScaleX(5)).attr("y", scatterScaleY(180)).text("More televoting than search activity").style("fill", "#ffffff").style("text-anchor", "start").attr("class", "annotation");
@@ -10613,45 +10610,22 @@ function init() {
     }).attr("r", 5).attr("class", "circle-mean").style("filter", "url(#glow)").attr("id", function (d) {
       return d.key;
     });
-    /*let scatterLabels = [
-      {"RUS": "end"},
-      {"BGR": "middle"},
-      {"SRB": "middle"},
-      {"SWE": "start"},
-      {"CZE": "start"}
-    ]
-     let labeldata = pointsMean.filter((d) => {
-      return d.key == "RUS" || d.key == "BGR" || d.key == "SRB" || d.key == "SWE" || d.key == "CZE"  || d.key == "ITA" || d.key == "TRK" || d.key == "UKR"
-    })
-     scatterOverallSvg.selectAll("text.label")
-      .data(labeldata)
-      .enter().append("text")
-      .attr("x", (d) => scatterScaleX(d.value.searchpoints))
-      .attr("y", (d) => scatterScaleY(d.value.votepoints))
-      .text((d) => grid[d.key].name)
-      .attr("class", "scatter-label")
-      .attr("dy", -10);*/
-
-    var labelPadding = 2; // the component used to render each label
+    var labelPadding = 2; //Component used to render labels
 
     var textLabel = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
       return grid[d.key].name;
-    }); // a strategy that combines simulated annealing with removal
-    // of overlapping labels
-    //const strategy = layoutRemoveOverlaps(layoutGreedy());
-    //const strategy = layoutAnnealing();
-
-    var strategy = (0, _d3fcLabelLayout.layoutRemoveOverlaps)(); // create the layout that positions the labels
+    });
+    var strategy = (0, _d3fcLabelLayout.layoutRemoveOverlaps)(); //Create the layout that positions the labels
 
     var labels = (0, _d3fcLabelLayout.layoutLabel)(strategy).size(function (d, i, g) {
-      // measure the label and add the required padding
       var textSize = g[i].getElementsByTagName('text')[0].getBBox();
       return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
     }).xScale(scatterScaleX).yScale(scatterScaleY).position(function (d) {
       return [d.value.searchpoints, d.value.votepoints];
-    }).component(textLabel); // render!
+    }).component(textLabel); //Render labels
 
-    scatterOverallSvg.datum(pointsMean).call(labels);
+    scatterOverallSvg.datum(pointsMean).call(labels); //Reposition labels to top
+
     scatterOverallSvg.selectAll("g.label text").attr("dx", function (d) {
       return -d3.select(this.parentNode).attr("layout-width") / 2;
     }).attr("dy", function (d) {
@@ -10667,15 +10641,16 @@ function init() {
     });
     var maxYearlyPoints = d3.max([maxSearchYearlyPoints, maxVoteYearlyPoints]);
     var scatterYearlySvg = d3.select("svg#scatteryearly").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
-    var scatterYearlyScaleX = d3.scaleLinear().domain([0, maxYearlyPoints]).range([0, scatterWidth - scatterMargins.right]);
-    var scatterYearlyScaleY = d3.scaleLinear().domain([0, maxYearlyPoints]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
-    var xYearlyAxis = d3.axisBottom(scatterYearlyScaleX).tickValues([100, 200, 300]).tickSize(-scatterHeight);
-    var yYearlyAxis = d3.axisLeft(scatterYearlyScaleY).tickValues([100, 200, 300]).ticks(5).tickSize(-scatterWidth);
-    scatterYearlySvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xYearlyAxis);
-    scatterYearlySvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
-    scatterYearlySvg.append("text").text("Televoting points").attr("x", -20).attr("y", 10).attr("class", "y axis-title");
+    var scatterYearlyScaleX = d3.scaleLinear().domain([0, maxYearlyPoints]).range([0, scatterInnerWidth]);
+    var scatterYearlyScaleY = d3.scaleLinear().domain([0, maxYearlyPoints]).range([scatterInnerHeight, 0]);
+    var xYearlyAxis = d3.axisBottom(scatterYearlyScaleX).tickValues([100, 200, 300]).tickPadding(tickPadding).tickSize(-scatterInnerHeight);
+    var yYearlyAxis = d3.axisLeft(scatterYearlyScaleY).tickValues([100, 200, 300]).ticks(5).tickPadding(tickPadding).tickSize(-scatterInnerWidth);
+    scatterYearlySvg.append("path").attr("d", "M".concat(scatterYearlyScaleX(10), ",").concat(scatterYearlyScaleY(0), " L").concat(scatterYearlyScaleX(maxYearlyPoints), ",").concat(scatterYearlyScaleY(0), " L").concat(scatterYearlyScaleX(maxYearlyPoints), ",").concat(scatterYearlyScaleY(maxYearlyPoints - 10), " L").concat(scatterYearlyScaleX(10), ",").concat(scatterYearlyScaleY(0))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
+    scatterYearlySvg.append("path").attr("d", "M".concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(10), " L").concat(scatterYearlyScaleX(maxYearlyPoints - 10), ",").concat(scatterYearlyScaleY(maxYearlyPoints), " L").concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(maxYearlyPoints), " L").concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(10))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
+    scatterYearlySvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterInnerHeight, ")")).call(xYearlyAxis);
+    scatterYearlySvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
+    scatterYearlySvg.append("text").text("Televoting points").attr("x", 0).attr("y", -20).attr("class", "y axis-title");
     scatterYearlySvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yYearlyAxis);
-    scatterYearlySvg.append("line").attr("x1", scatterScaleX(0)).attr("x2", scatterScaleX(200)).attr("y1", scatterScaleY(0)).attr("y2", scatterScaleY(200)).attr("class", "fourtyfive");
     var yearlyCircles = scatterYearlySvg.selectAll("circle").data(points).enter().append("circle").attr("cx", function (d) {
       return scatterYearlyScaleX(d.searchpoints);
     }).attr("cy", function (d) {
@@ -10685,14 +10660,11 @@ function init() {
     }).attr("id", function (d) {
       return d.key;
     });
-    var yearTitle = scatterYearlySvg.append("text").attr("x", scatterWidth / 2).attr("y", 16).text("2018").attr("class", "yearly-title"); // the component used to render each label
-
+    var yearTitle = scatterYearlySvg.append("text").attr("x", scatterInnerWidth / 2).attr("y", -16).text("2018").attr("class", "yearly-title");
     var textLabelYearly = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
       return grid[d.to].name;
-    }); // create the layout that positions the labels
-
+    });
     var labelsYearly = (0, _d3fcLabelLayout.layoutLabel)(strategy).size(function (d, i, g) {
-      // measure the label and add the required padding
       var textSize = g[i].getElementsByTagName('text')[0].getBBox();
       return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
     }).xScale(scatterYearlyScaleX).yScale(scatterYearlyScaleY).position(function (d) {
@@ -10700,11 +10672,13 @@ function init() {
     }).component(textLabelYearly);
 
     function highlightYear(yr) {
+      //TODO: ADD WINNER OF EACH YEAR
       yearlyCircles.style("filter", "none").transition().duration(1000).attr("r", 4).style("opacity", 0.1);
-      d3.selectAll(".circle-" + yr).transition().duration(1000).attr("r", 10).style("opacity", 0.8).style("filter", "url(#glow)");
-      scatterYearlySvg.datum(points.filter(function (el) {
-        return el.year == yr;
-      })).call(labelsYearly);
+      scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000).attr("r", 10).style("opacity", 0.8).style("filter", "url(#glow)").on("end", function () {
+        scatterYearlySvg.datum(points.filter(function (el) {
+          return el.year == yr;
+        })).call(labelsYearly);
+      });
       scatterYearlySvg.selectAll("g.label text").attr("dx", function (d) {
         return -d3.select(this.parentNode).attr("layout-width") / 2;
       }).attr("dy", function (d) {

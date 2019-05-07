@@ -82,7 +82,7 @@ function init() {
       NOR: {"coords": { x: 4, y: 0 }, "name": "Norway"},
       POL: {"coords": { x: 5, y: 3 }, "name": "Poland"},
       PRT: {"coords": { x: 0, y: 5 }, "name": "Portugal"},
-      ROU: {"coords": { x: 6, y: 5 }, "name": "Roumania"},
+      ROU: {"coords": { x: 6, y: 5 }, "name": "Romania"},
       RUS: {"coords": { x: 7, y: 3 }, "name": "Russia"},
       SMR: {"coords": { x: 2, y: 6 }, "name": "San Marino"},
       SRB: {"coords": { x: 6, y: 6 }, "name": "Serbia"},
@@ -243,7 +243,7 @@ function init() {
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
       //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
-      .html(function (d, i) { return (i + 1) + '. ???'; });
+      .html(function (d, i) { return (i + 1) + '. ?'; });
 
   /** MAP **/
   //const mapWidth = 900;
@@ -274,8 +274,8 @@ function init() {
     .attr("id", (d) => d.properties.ADM0_A3)
     .attr("class", "country")
     .attr("d", geoPath)
-    .style("fill", "#0D1730")
-    .style("filter", "url(#glow)");
+    .style("fill", "#0D1730");
+    //.style("filter", "url(#glow)");
 
   /*COLOR MAP*/
   const cols = d3.scaleSequential(d3.interpolatePlasma)
@@ -320,11 +320,12 @@ function init() {
   colorMap(filtervalues);
 
   /*MAP UPDATES*/
-  const rectDim = 48;
-  const gridMargin = 120/rectDim;
+  const rectDim = 64;
+  const gridMarginX = (mapWidth/2 - 5*rectDim)/rectDim;
+  const gridMarginY = 120/rectDim;
   function rectToPath(x, y, dim){
-    x = x + gridMargin;
-    y = y + gridMargin;
+    x = x + gridMarginX;
+    y = y + gridMarginY;
     return `M${x*rectDim},${y*rectDim} L${x*rectDim + dim},${y*rectDim} L${x*rectDim + dim},${y*rectDim + dim} L${x*rectDim},${y*rectDim + dim} L${x*rectDim},${y*rectDim}`
   }
 
@@ -339,6 +340,7 @@ function init() {
             {"single": true}
           )
         });
+        //.style("filter", "url(#glow)");
         setTimeout(function () {
           let country;
           for (country in grid) {
@@ -405,13 +407,13 @@ function init() {
   const maxVotePoints = d3.max(pointsMean, (d) => d.value.votepoints);
   const maxPoints = d3.max([maxSearchPoints, maxVotePoints]);
 
+  const scatterMargins = {top: 70, right: 40, bottom: 60, left: 60};
   const scatterWidth = document.querySelector("#scatter-container").clientWidth;
   let scatterRatio = 2/3;
   const scatterHeight = scatterWidth * scatterRatio;
-  //const scatterWidth = 800;
-  //const scatterHeight = 600;
 
-  const scatterMargins = {top: 30, right: 40, bottom: 60, left: 40};
+  const scatterInnerWidth = scatterWidth - scatterMargins.left - scatterMargins.right;
+  const scatterInnerHeight = scatterHeight - scatterMargins.top - scatterMargins.bottom;
 
   let scatterOverallSvg = d3.select("svg#scatter")
     .attr("width", scatterWidth)
@@ -439,34 +441,37 @@ function init() {
   let scatterScaleX = d3.scaleLinear()
     //.domain([0,maxPoints])
     .domain([0,210])
-    .range([0,scatterWidth - scatterMargins.right]);
+    .range([0,scatterInnerWidth]);
   
   let scatterScaleY = d3.scaleLinear()
     //.domain([0,maxPoints])
     .domain([0,190])
-    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    .range([scatterInnerHeight, 0]);
 
+  const tickPadding = 10;
   let xAxis = d3.axisBottom(scatterScaleX)
     .tickValues([50,100,150])
-    .tickSize(-scatterHeight);
+    .tickPadding(tickPadding)
+    .tickSize(-scatterInnerHeight);
   let yAxis = d3.axisLeft(scatterScaleY)
     .tickValues([50,100,150])
     .ticks(5)
-    .tickSize(-scatterWidth + scatterMargins.left + scatterMargins.right);
+    .tickPadding(tickPadding)
+    .tickSize(-scatterInnerWidth);
 
   scatterOverallSvg.append("g")
     .attr("class", "axis x-axis")
-    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .attr("transform", `translate(0,${scatterInnerHeight})`)
     .call(xAxis);
   scatterOverallSvg.append("text")
     .text("Search activity points")
-    .attr("x", scatterWidth/2)
-    .attr("y", scatterHeight - 36)
+    .attr("x", scatterInnerWidth)
+    .attr("y", scatterInnerHeight + 20)
     .attr("class", "x axis-title")
   scatterOverallSvg.append("text")
     .text("Televoting points")
-    .attr("x", -20)
-    .attr("y", -12)
+    .attr("x", 0)
+    .attr("y", -40)
     .attr("class", "y axis-title")
 
   scatterOverallSvg.append("g")
@@ -474,15 +479,8 @@ function init() {
     .attr("transform", `translate(0,0)`)
     .call(yAxis);
 
-  /*scatterOverallSvg.append("line")
-    .attr("x1", scatterScaleX(0))
-    .attr("x2", scatterScaleX(200))
-    .attr("y1", scatterScaleY(0))
-    .attr("y2", scatterScaleY(200))
-    .attr("class", "fourtyfive")*/
-
   scatterOverallSvg.append("path")
-    .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(0)} L${scatterScaleX(200)},${scatterScaleY(190)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
+    .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(200)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
     .style("fill", "#ffffff")
     .style("stroke", "#ffffff")
     .style("stroke-width", 4)
@@ -523,44 +521,18 @@ function init() {
     .style("filter", "url(#glow)")
     .attr("id", (d) => d.key);
 
-  /*let scatterLabels = [
-    {"RUS": "end"},
-    {"BGR": "middle"},
-    {"SRB": "middle"},
-    {"SWE": "start"},
-    {"CZE": "start"}
-  ]
-
-  let labeldata = pointsMean.filter((d) => {
-    return d.key == "RUS" || d.key == "BGR" || d.key == "SRB" || d.key == "SWE" || d.key == "CZE"  || d.key == "ITA" || d.key == "TRK" || d.key == "UKR"
-  })
-
-  scatterOverallSvg.selectAll("text.label")
-    .data(labeldata)
-    .enter().append("text")
-    .attr("x", (d) => scatterScaleX(d.value.searchpoints))
-    .attr("y", (d) => scatterScaleY(d.value.votepoints))
-    .text((d) => grid[d.key].name)
-    .attr("class", "scatter-label")
-    .attr("dy", -10);*/
-
     const labelPadding = 2;
 
-    // the component used to render each label
+    //Component used to render labels
     const textLabel = layoutTextLabel()
       .padding(labelPadding)
       .value(d => grid[d.key].name);
-    
-    // a strategy that combines simulated annealing with removal
-    // of overlapping labels
-    //const strategy = layoutRemoveOverlaps(layoutGreedy());
-    //const strategy = layoutAnnealing();
+
     const strategy = layoutRemoveOverlaps();
     
-    // create the layout that positions the labels
+    //Create the layout that positions the labels
     const labels = layoutLabel(strategy)
         .size((d, i, g) => {
-            // measure the label and add the required padding
             const textSize = g[i].getElementsByTagName('text')[0].getBBox();
             return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
         })
@@ -569,10 +541,10 @@ function init() {
         .position(d => {return [d.value.searchpoints, d.value.votepoints]})
         .component(textLabel);
 
-    // render!
+    //Render labels
     scatterOverallSvg.datum(pointsMean)
          .call(labels);
-
+    //Reposition labels to top
     scatterOverallSvg.selectAll("g.label text")
       .attr("dx", function(d) {
         return -d3.select(this.parentNode).attr("layout-width")/2;
@@ -594,46 +566,57 @@ function init() {
       
   let scatterYearlyScaleX = d3.scaleLinear()
     .domain([0,maxYearlyPoints])
-    .range([0,scatterWidth - scatterMargins.right]);
+    .range([0,scatterInnerWidth]);
       
   let scatterYearlyScaleY = d3.scaleLinear()
     .domain([0,maxYearlyPoints])
-    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    .range([scatterInnerHeight, 0]);
  
   let xYearlyAxis = d3.axisBottom(scatterYearlyScaleX)
     .tickValues([100,200,300])
-    .tickSize(-scatterHeight);
+    .tickPadding(tickPadding)
+    .tickSize(-scatterInnerHeight);
   let yYearlyAxis = d3.axisLeft(scatterYearlyScaleY)
     .tickValues([100,200,300])
     .ticks(5)
-    .tickSize(-scatterWidth);
+    .tickPadding(tickPadding)
+    .tickSize(-scatterInnerWidth);
+
+  scatterYearlySvg.append("path")
+    .attr("d", `M${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(maxYearlyPoints - 10)} L${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)}`)
+    .style("fill", "#ffffff")
+    .style("stroke", "#ffffff")
+    .style("stroke-width", 4)
+    .style("filter", "url(#glow)")
+    .style("opacity", 0.2);
+
+  scatterYearlySvg.append("path")
+    .attr("d", `M${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)} L${scatterYearlyScaleX(maxYearlyPoints - 10)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)}`)
+    .style("fill", "#ffffff")
+    .style("stroke", "#ffffff")
+    .style("stroke-width", 4)
+    .style("filter", "url(#glow)")
+    .style("opacity", 0.2);
     
   scatterYearlySvg.append("g")
     .attr("class", "axis x-axis")
-    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .attr("transform", `translate(0,${scatterInnerHeight})`)
     .call(xYearlyAxis);
   scatterYearlySvg.append("text")
     .text("Search activity points")
-    .attr("x", scatterWidth - 50)
-    .attr("y", scatterHeight - 30)
+    .attr("x", scatterInnerWidth)
+    .attr("y", scatterInnerHeight + 20)
     .attr("class", "x axis-title")
   scatterYearlySvg.append("text")
     .text("Televoting points")
-    .attr("x", -20)
-    .attr("y", 10)
+    .attr("x", 0)
+    .attr("y", -20)
     .attr("class", "y axis-title")
     
   scatterYearlySvg.append("g")
     .attr("class", "axis y-axis")
     .attr("transform", `translate(0,0)`)
     .call(yYearlyAxis);
-    
-  scatterYearlySvg.append("line")
-    .attr("x1", scatterScaleX(0))
-    .attr("x2", scatterScaleX(200))
-    .attr("y1", scatterScaleY(0))
-    .attr("y2", scatterScaleY(200))
-    .attr("class", "fourtyfive")
     
   let yearlyCircles = scatterYearlySvg.selectAll("circle")
     .data(points)
@@ -645,20 +628,17 @@ function init() {
     .attr("id", (d) => d.key);
 
   let yearTitle = scatterYearlySvg.append("text")
-      .attr("x", scatterWidth/2)
-      .attr("y", 16)
+      .attr("x", scatterInnerWidth/2)
+      .attr("y", -16)
       .text("2018")
       .attr("class", "yearly-title");
   
-      // the component used to render each label
     const textLabelYearly = layoutTextLabel()
       .padding(labelPadding)
       .value(d => grid[d.to].name);
     
-    // create the layout that positions the labels
     const labelsYearly = layoutLabel(strategy)
         .size((d, i, g) => {
-            // measure the label and add the required padding
             const textSize = g[i].getElementsByTagName('text')[0].getBBox();
             return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
         })
@@ -668,16 +648,15 @@ function init() {
         .component(textLabelYearly);
 
   function highlightYear(yr){
+    //TODO: ADD WINNER OF EACH YEAR
     yearlyCircles.style("filter", "none").transition().duration(1000)
       .attr("r", 4)
       .style("opacity", 0.1);
-    d3.selectAll(".circle-" +yr).transition().duration(1000)
+    scatterYearlySvg.selectAll(".circle-" +yr).transition().duration(1000)
       .attr("r", 10)
       .style("opacity", 0.8)
-      .style("filter", "url(#glow)");
-    
-    scatterYearlySvg.datum(points.filter((el) => el.year == yr))
-      .call(labelsYearly);
+      .style("filter", "url(#glow)").on("end", function() {scatterYearlySvg.datum(points.filter((el) => el.year == yr))
+        .call(labelsYearly)});
 
     scatterYearlySvg.selectAll("g.label text")
       .attr("dx", function(d) {

@@ -869,6 +869,9 @@ svg#ranking text {
           box-shadow: inset 0px 0px 4px #000;
   cursor: default;
 }
+#countrylist {
+  width: 120px;
+}
 #map-legend {
   display: table;
   margin: 0 auto;
@@ -903,19 +906,17 @@ svg#ranking text {
 }
 .country {
   stroke-width: 1;
-  stroke: #868a97;
-  -webkit-transition: stroke 5s linear;
-  transition: stroke 5s linear;
+/*stroke #868A97*/
+  stroke: #fff;
 }
 .country.highlight {
   stroke-width: 2;
   stroke: #fff;
-  -webkit-transition: stroke 5s linear;
-  transition: stroke 5s linear;
 }
 .map-label {
   font-size: 0.7em;
   fill: #fff;
+  text-anchor: middle;
 }
 #scatter-container {
   max-width: 60rem;
@@ -950,6 +951,9 @@ svg#ranking text {
   fill: #fff;
   font-size: 14px;
   font-family: Rubik;
+}
+.y.axis-title {
+  text-anchor: middle;
 }
 .x.axis-title {
   text-anchor: end;
