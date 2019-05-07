@@ -16064,11 +16064,23 @@ function init() {
       return el.to;
     })));
 
+    function compare(arr1, arr2) {
+      var losers = [];
+      arr1.forEach(function (e1) {
+        if (!arr2.includes(e1)) {
+          losers.push(e1);
+        }
+      });
+      return losers;
+    }
+
+    var losers = compare(froms, tos);
     var tofromCountries = {
       "to": tos,
       "from": froms
     };
-    d3.select("#countrylist").selectAll("option").data(tofromCountries[filtervalues.fromto]).enter().append("option").attr("value", function (d) {
+    d3.select("#countrylist").selectAll("option") //.data(tofromCountries[filtervalues.fromto])
+    .data(froms).enter().append("option").attr("value", function (d) {
       return d;
     }).text(function (d) {
       return grid[d].name;
@@ -16219,6 +16231,16 @@ function init() {
         reversefromto = "to";
       }
 
+      if (filterparams.fromto == "to") {
+        losers.forEach(function (el) {
+          d3.select("option[value=".concat(el, "]")).property("disabled", true);
+        });
+      }
+
+      if (filterparams.fromto == "from") {
+        d3.selectAll("option").property("disabled", false);
+      }
+
       countries.transition().duration(1000).style("fill", function (d) {
         var countrypoints = countrydata.filter(function (el) {
           return el[reversefromto] == d.properties.ADM0_A3;
@@ -16290,12 +16312,6 @@ function init() {
     });
     d3.selectAll("input.fromtoswitch").on("change", function () {
       filtervalues.fromto = d3.select(this).node().value;
-      d3.selectAll("#countrylist option").remove();
-      d3.select("#countrylist").selectAll("option").data(tofromCountries[filtervalues.fromto]).enter().append("option").attr("value", function (d) {
-        return d;
-      }).text(function (d) {
-        return grid[d].name;
-      });
       colorMap(filtervalues);
     });
     d3.selectAll("input.searchteleswitch").on("change", function () {
@@ -16485,29 +16501,11 @@ function init() {
     var xPatternAxis = d3.axisTop(scatterPatternScaleX).tickValues([50, 100]).tickSize(-patternscatterInnerHeight);
     var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([50, 75, 100, 125]).ticks(5).tickPadding(10).tickSize(-patternscatterInnerWidth);
     scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,10)").call(xPatternAxis);
-    /*scatterPatternSvg.append("text")
-      .text("MORE SEARCH ACTIVITY")
-      .attr("x", scatterPatternScaleX(30))
-      .attr("y", scatterPatternScaleY(maxPatternPoints) - 140)
-      .style("text-anchor", "start")
-      .attr("class", "x axis-title")*/
-
     scatterPatternSvg.append("text").text("MORE TELEVOTING POINTS").attr("x", scatterPatternScaleX(30) + 75).attr("y", 0).style("text-anchor", "end").attr("transform", "rotate(-90)").style("font-size", "0.7em").attr("class", "y axis-title");
     scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
     scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
     var type = _d3SvgAnnotation.annotationCallout;
-    var annotations = [
-    /*{
-      note: {
-        label: "MORE TELEVOTING POINTS"
-      },
-      data: { search: 33.5, tele: maxPatternPoints + 0.8},
-      dy: 183,
-      dx: 0,
-      connector: { end: "arrow" },
-      color: "#ffffff"
-    },*/
-    {
+    var annotations = [{
       note: {
         label: "",
         padding: 0,

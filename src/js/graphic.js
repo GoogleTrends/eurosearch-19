@@ -118,6 +118,19 @@ function init() {
     /** SELECT LIST **/
     let froms = [...new Set(votingdata.map(el => el.from))];
     let tos  = [...new Set(votingdata.map(el => el.to))];
+    
+    function compare(arr1, arr2){
+      let losers = [];
+      arr1.forEach(
+        (e1) => {
+        if(!arr2.includes(e1)){
+          losers.push(e1)
+        }
+      }
+    )
+    return losers;
+    }
+    const losers = compare(froms, tos);
 
     let tofromCountries ={
       "to": tos,
@@ -125,7 +138,8 @@ function init() {
     }
     
     d3.select("#countrylist").selectAll("option")
-      .data(tofromCountries[filtervalues.fromto])
+      //.data(tofromCountries[filtervalues.fromto])
+      .data(froms)
       .enter().append("option")
       .attr("value", (d) => d)
       .text((d) => grid[d].name);
@@ -323,6 +337,14 @@ function init() {
     if(filterparams.fromto == "from"){
       reversefromto = "to"
     }
+    if(filterparams.fromto == "to"){
+      losers.forEach((el) => {
+        d3.select(`option[value=${el}]`).property("disabled", true);
+      })
+    }
+    if(filterparams.fromto == "from"){
+      d3.selectAll("option").property("disabled", false)
+    }
     countries.transition().duration(1000).style("fill", (d) => {
       let countrypoints = countrydata.filter((el) => el[reversefromto] == d.properties.ADM0_A3);
       if(countrypoints.length == 1 && countrypoints[0].points > 0){
@@ -396,12 +418,6 @@ function init() {
 
   d3.selectAll("input.fromtoswitch").on("change", function(){
     filtervalues.fromto = d3.select(this).node().value;
-    d3.selectAll("#countrylist option").remove();
-    d3.select("#countrylist").selectAll("option")
-      .data(tofromCountries[filtervalues.fromto])
-      .enter().append("option")
-      .attr("value", (d) => d)
-      .text((d) => grid[d].name);
     colorMap(filtervalues);
   })
 
@@ -752,12 +768,6 @@ function init() {
     .attr("class", "axis x-axis")
     .attr("transform", `translate(0,10)`)
     .call(xPatternAxis);
-  /*scatterPatternSvg.append("text")
-    .text("MORE SEARCH ACTIVITY")
-    .attr("x", scatterPatternScaleX(30))
-    .attr("y", scatterPatternScaleY(maxPatternPoints) - 140)
-    .style("text-anchor", "start")
-    .attr("class", "x axis-title")*/
   scatterPatternSvg.append("text")
     .text("MORE TELEVOTING POINTS")
     .attr("x", scatterPatternScaleX(30) + 75)
@@ -782,16 +792,6 @@ function init() {
   const type = annotationCallout;
 
   const annotations = [
-    /*{
-      note: {
-        label: "MORE TELEVOTING POINTS"
-      },
-      data: { search: 33.5, tele: maxPatternPoints + 0.8},
-      dy: 183,
-      dx: 0,
-      connector: { end: "arrow" },
-      color: "#ffffff"
-    },*/
     {
       note: {
         label: "",
