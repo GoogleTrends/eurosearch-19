@@ -2,7 +2,7 @@
 import debounce from 'lodash.debounce';
 import isMobile from './utils/is-mobile';
 import graphic from './graphic';
-import footer from './footer';
+//import footer from './footer';
 
 const $body = d3.select('body');
 let previousWidth = 0;
@@ -39,7 +39,7 @@ function init() {
   setupStickyHeader();
   // kick off graphic code
   graphic.init();
-  footer.init();
+  //footer.init();
 }
 
 init();

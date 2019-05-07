@@ -9889,7 +9889,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":"Rpnd","d3-selection":"4Gs4","d3-scale":"K4pn","d3fc-data-join":"r4k7","d3fc-rebind":"DdIz"}],"graphic.js":[function(require,module,exports) {
+},{"d3-array":"Rpnd","d3-selection":"4Gs4","d3-scale":"K4pn","d3fc-data-join":"r4k7","d3fc-rebind":"DdIz"}],"TAPd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10759,106 +10759,7 @@ var _default = {
   resize: resize
 };
 exports.default = _default;
-},{"flubber":"yVOz","d3fc-label-layout":"LUlz"}],"v9Q8":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var fallbackData = [{
-  image: '2018_02_stand-up',
-  url: '2018/02/stand-up',
-  hed: 'The Structure of Stand-Up Comedy'
-}, {
-  image: '2018_04_birthday-paradox',
-  url: '2018/04/birthday-paradox',
-  hed: 'The Birthday Paradox Experiment'
-}, {
-  image: '2018_11_boy-bands',
-  url: '2018/11/boy-bands',
-  hed: 'Internet Boy Band Database'
-}, {
-  image: '2018_08_pockets',
-  url: '2018/08/pockets',
-  hed: 'Women’s Pockets are Inferior'
-}];
-var storyData = null;
-
-function loadJS(src, cb) {
-  var ref = document.getElementsByTagName('script')[0];
-  var script = document.createElement('script');
-  script.src = src;
-  script.async = true;
-  ref.parentNode.insertBefore(script, ref);
-
-  if (cb && typeof cb === 'function') {
-    script.onload = cb;
-  }
-
-  return script;
-}
-
-function loadStories(cb) {
-  var request = new XMLHttpRequest();
-  var v = Date.now();
-  var url = "https://pudding.cool/assets/data/stories.json?v=".concat(v);
-  request.open('GET', url, true);
-
-  request.onload = function () {
-    if (request.status >= 200 && request.status < 400) {
-      var data = JSON.parse(request.responseText);
-      cb(data);
-    } else cb(fallbackData);
-  };
-
-  request.onerror = function () {
-    return cb(fallbackData);
-  };
-
-  request.send();
-}
-
-function createLink(d) {
-  return "\n\t<a class='footer-recirc__article' href='https://pudding.cool/".concat(d.url, "' target='_blank'>\n\t\t<img class='article__img' src='https://pudding.cool/common/assets/thumbnails/640/").concat(d.image, ".jpg' alt='").concat(d.hed, "'>\n\t\t<p class='article__headline'>").concat(d.hed, "</p>\n\t</a>\n\t");
-}
-
-function recircHTML() {
-  var url = window.location.href;
-  var html = storyData.filter(function (d) {
-    return !url.includes(d.url);
-  }).slice(0, 4).map(createLink).join('');
-  d3.select('.pudding-footer .footer-recirc__articles').html(html);
-}
-
-function setupSocialJS() {
-  // facebook
-  (function (d, s, id) {
-    var js;
-    var fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7';
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, 'script', 'facebook-jssdk');
-
-  loadJS('https://platform.twitter.com/widgets.js');
-}
-
-function init() {
-  loadStories(function (data) {
-    storyData = data;
-    recircHTML();
-    setupSocialJS();
-  });
-}
-
-var _default = {
-  init: init
-};
-exports.default = _default;
-},{}],"epB2":[function(require,module,exports) {
+},{"flubber":"yVOz","d3fc-label-layout":"LUlz"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _lodash = _interopRequireDefault(require("lodash.debounce"));
@@ -10867,11 +10768,10 @@ var _isMobile = _interopRequireDefault(require("./utils/is-mobile"));
 
 var _graphic = _interopRequireDefault(require("./graphic"));
 
-var _footer = _interopRequireDefault(require("./footer"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global d3 */
+//import footer from './footer';
 var $body = d3.select('body');
 var previousWidth = 0;
 
@@ -10909,11 +10809,10 @@ function init() {
 
   setupStickyHeader(); // kick off graphic code
 
-  _graphic.default.init();
+  _graphic.default.init(); //footer.init();
 
-  _footer.default.init();
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js","./footer":"v9Q8"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd"}]},{},["main.js"], null)
 //# sourceMappingURL=/main.js.map
