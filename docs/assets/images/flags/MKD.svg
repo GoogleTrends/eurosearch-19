@@ -15,34 +15,5 @@
 	<circle style="fill:#D80027;" cx="256" cy="256" r="89.043"/>
 </g>
 <circle style="fill:#FFDA44;" cx="256" cy="256" r="66.783"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<circle style="fill: none; stroke: #ffffff; stroke-width: 40" cx="256" cy="256" r="236"/>
 </svg>

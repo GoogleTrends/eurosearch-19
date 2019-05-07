@@ -19,34 +19,5 @@
 <polygon style="fill:#6DA544;" points="256,272.696 219.826,289.391 219.826,322.783 256,345.043 292.174,322.783 292.174,289.391 
 	"/>
 <rect x="219.826" y="256" style="fill:#0052B4;" width="72.348" height="44.522"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<circle style="fill: none; stroke: #ffffff; stroke-width: 40" cx="256" cy="256" r="236"/>
 </svg>
