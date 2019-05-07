@@ -92,6 +92,23 @@ function init() {
       UKR: {"coords": { x: 6, y: 4 }, "name": "Ukraine"},
       TUR: {"coords": { x: 8, y: 6 }, "name": "Turkey"}
     }
+    const winners = {
+      "2004": "UKR",    
+      "2005": "GRC",
+      "2006": "FIN",
+      "2007": "SRB",
+      "2008": "RUS",
+      "2009": "NOR",
+      "2010": "DEU",
+      "2011": "AZE",
+      "2012": "SWE",
+      "2013": "DNK",
+      "2014": "AUT",
+      "2015": "SWE",
+      "2016": "UKR",
+      "2017": "PRT",
+      "2018": "ISR"
+    }
     
     let filtervalues = {
       "country": "ISR",
@@ -624,7 +641,7 @@ function init() {
     .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
     .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
     .attr("r", 2)
-    .attr("class", (d) => "circle-year circle-" + d.year)
+    .attr("class", (d) => `circle-year circle-${d.year} circle-${d.to}`)
     .attr("id", (d) => d.key);
 
   let yearTitle = scatterYearlySvg.append("text")
@@ -633,38 +650,59 @@ function init() {
       .text("2018")
       .attr("class", "yearly-title");
   
-    const textLabelYearly = layoutTextLabel()
-      .padding(labelPadding)
-      .value(d => grid[d.to].name);
-    
-    const labelsYearly = layoutLabel(strategy)
-        .size((d, i, g) => {
-            const textSize = g[i].getElementsByTagName('text')[0].getBBox();
-            return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
-        })
-        .xScale(scatterYearlyScaleX)
-        .yScale(scatterYearlyScaleY)
-        .position(d => {return [d.searchpoints, d.votepoints]})
-        .component(textLabelYearly);
+  let winnerText = scatterYearlySvg.append("text")
+      .attr("x", scatterInnerWidth * 9/10)
+      .attr("y", 30)
+      .attr("class", "winner-highlight")
+      .text("Winner");
+  
+  const textLabelYearly = layoutTextLabel()
+    .padding(labelPadding)
+    .value(d => grid[d.to].name);
+  
+  const labelsYearly = layoutLabel(strategy)
+      .size((d, i, g) => {
+          const textSize = g[i].getElementsByTagName('text')[0].getBBox();
+          return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
+      })
+      .xScale(scatterYearlyScaleX)
+      .yScale(scatterYearlyScaleY)
+      .position(d => {return [d.searchpoints, d.votepoints]})
+      .component(textLabelYearly);
 
   function highlightYear(yr){
-    //TODO: ADD WINNER OF EACH YEAR
-    yearlyCircles.style("filter", "none").transition().duration(1000)
+    scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
+    winnerText.classed("winner-highlight", false);
+    yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
       .attr("r", 4)
       .style("opacity", 0.1);
-    scatterYearlySvg.selectAll(".circle-" +yr).transition().duration(1000)
+    let winner = winners[yr];
+    
+    //Sync winner animation
+    requestAnimationFrame(() => { startAnimation() })
+    let startAnimation = function(){
+      scatterYearlySvg.select(`.circle-${yr}.circle-${winner}`).classed("winner-highlight", true);
+      winnerText.classed("winner-highlight", true);
+    }
+
+    scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
       .attr("r", 10)
       .style("opacity", 0.8)
-      .style("filter", "url(#glow)").on("end", function() {scatterYearlySvg.datum(points.filter((el) => el.year == yr))
-        .call(labelsYearly)});
-
-    scatterYearlySvg.selectAll("g.label text")
-      .attr("dx", function(d) {
-        return -d3.select(this.parentNode).attr("layout-width")/2;
-      })
-      .attr("dy", function(d) {
-        return -d3.select(this.parentNode).attr("layout-height")/2 - 5;
-      });
+      .style("filter", "url(#glow)")
+      .on("end", function() {
+        scatterYearlySvg.datum(points.filter((el) => el.year == yr))
+          .call(labelsYearly)
+        
+        scatterYearlySvg.selectAll("g.label text")
+          .attr("dx", function(d) {
+            return -d3.select(this.parentNode).attr("layout-width")/2;
+          })
+          .attr("dy", function(d) {
+            return -d3.select(this.parentNode).attr("layout-height")/2 - 5;
+          });
+          scatterYearlySvg.selectAll("g.label text").transition().duration(500).style("opacity", 1);
+        }
+      );
     yearTitle.text(yr);
   }
 

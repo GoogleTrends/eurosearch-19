@@ -10294,6 +10294,23 @@ function init() {
         "name": "Turkey"
       }
     };
+    var winners = {
+      "2004": "UKR",
+      "2005": "GRC",
+      "2006": "FIN",
+      "2007": "SRB",
+      "2008": "RUS",
+      "2009": "NOR",
+      "2010": "DEU",
+      "2011": "AZE",
+      "2012": "SWE",
+      "2013": "DNK",
+      "2014": "AUT",
+      "2015": "SWE",
+      "2016": "UKR",
+      "2017": "PRT",
+      "2018": "ISR"
+    };
     var filtervalues = {
       "country": "ISR",
       "fromto": "to",
@@ -10656,11 +10673,12 @@ function init() {
     }).attr("cy", function (d) {
       return scatterYearlyScaleY(d.votepoints);
     }).attr("r", 2).attr("class", function (d) {
-      return "circle-year circle-" + d.year;
+      return "circle-year circle-".concat(d.year, " circle-").concat(d.to);
     }).attr("id", function (d) {
       return d.key;
     });
     var yearTitle = scatterYearlySvg.append("text").attr("x", scatterInnerWidth / 2).attr("y", -16).text("2018").attr("class", "yearly-title");
+    var winnerText = scatterYearlySvg.append("text").attr("x", scatterInnerWidth * 9 / 10).attr("y", 30).attr("class", "winner-highlight").text("Winner");
     var textLabelYearly = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
       return grid[d.to].name;
     });
@@ -10672,17 +10690,30 @@ function init() {
     }).component(textLabelYearly);
 
     function highlightYear(yr) {
-      //TODO: ADD WINNER OF EACH YEAR
-      yearlyCircles.style("filter", "none").transition().duration(1000).attr("r", 4).style("opacity", 0.1);
+      scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
+      winnerText.classed("winner-highlight", false);
+      yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000).attr("r", 4).style("opacity", 0.1);
+      var winner = winners[yr]; //Sync winner animation
+
+      requestAnimationFrame(function () {
+        startAnimation();
+      });
+
+      var startAnimation = function startAnimation() {
+        scatterYearlySvg.select(".circle-".concat(yr, ".circle-").concat(winner)).classed("winner-highlight", true);
+        winnerText.classed("winner-highlight", true);
+      };
+
       scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000).attr("r", 10).style("opacity", 0.8).style("filter", "url(#glow)").on("end", function () {
         scatterYearlySvg.datum(points.filter(function (el) {
           return el.year == yr;
         })).call(labelsYearly);
-      });
-      scatterYearlySvg.selectAll("g.label text").attr("dx", function (d) {
-        return -d3.select(this.parentNode).attr("layout-width") / 2;
-      }).attr("dy", function (d) {
-        return -d3.select(this.parentNode).attr("layout-height") / 2 - 5;
+        scatterYearlySvg.selectAll("g.label text").attr("dx", function (d) {
+          return -d3.select(this.parentNode).attr("layout-width") / 2;
+        }).attr("dy", function (d) {
+          return -d3.select(this.parentNode).attr("layout-height") / 2 - 5;
+        });
+        scatterYearlySvg.selectAll("g.label text").transition().duration(500).style("opacity", 1);
       });
       yearTitle.text(yr);
     }

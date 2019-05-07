@@ -934,6 +934,17 @@ svg#ranking text {
   fill: #fff;
   opacity: 0.5;
 }
+.winner-highlight {
+  -webkit-animation: pulse 2.5s infinite;
+          animation: pulse 2.5s infinite;
+  stroke: #fff;
+  stroke-width: 1;
+}
+text.winner-highlight {
+  font-size: 1.2em;
+  stroke-width: 0;
+  text-anchor: end;
+}
 .circle-pattern {
   fill: #fff;
   opacity: 0.7;
@@ -964,18 +975,16 @@ svg#ranking text {
   opacity: 0.5;
 }
 .label text {
-/*text-anchor middle*/
   fill: #fff;
   font-size: 11px;
   opacity: 0.8;
-  dy: -12px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 .label circle,
 .label rect {
   display: none;
 }
 .annotation {
-/*text-shadow:  0px 0px 100px #000000*/
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 #slider-container {
@@ -1073,5 +1082,27 @@ input[type=range]:focus::-ms-fill-upper {
   text-anchor: middle;
   stroke: #fff;
   stroke-width: 1;
+}
+@-webkit-keyframes pulse {
+  0% {
+    fill: #c65d6f;
+  }
+  50% {
+    fill: #f2b04e;
+  }
+  100% {
+    fill: #c65d6f;
+  }
+}
+@keyframes pulse {
+  0% {
+    fill: #c65d6f;
+  }
+  50% {
+    fill: #f2b04e;
+  }
+  100% {
+    fill: #c65d6f;
+  }
 }
 /*# sourceMappingURL=bundle.css.map */
