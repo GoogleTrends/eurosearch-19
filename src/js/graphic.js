@@ -1,5 +1,6 @@
 import { separate, combine, splitPathString} from "flubber";
 import { layoutTextLabel, layoutGreedy, layoutAnnealing, layoutLabel, layoutRemoveOverlaps } from 'd3fc-label-layout';
+import { annotation, annotationCalloutRect, annotationCallout } from 'd3-svg-annotation';
 
 function resize() {}
 
@@ -795,27 +796,31 @@ function init() {
     .attr('width', countryheight)
     .attr('height', countryheight);
 
-  const type = d3.annotationCalloutCircle;
+  const type = annotationCallout;
 
   const annotations = [{
     note: {
-      label: "Longer text to show text wrapping",
-      title: "Annotations :)"
+      label: "The most consistent voting pattern",
+      title: "Belarus => Russia"
     },
-    x: 100,
-    y: 100,
-    dy: 137,
-    dx: 162,
+    data: { search: 118, tele: 140.5},
+    dy: 0,
+    dx: -200,
     subject: {
-      radius: 50,
-      radiusPadding: 5
-    }
+    },
+    color: "#ffffff"
   }]
 
-  const makeAnnotations = d3.annotation()
+  window.makeAnnotations = annotation()
     .notePadding(15)
     .type(type)
-    .annotations(annotations);
+    .annotations(annotations)
+    .editMode(true)
+    .textWrap(500)
+    .accessors({
+      x: d => scatterPatternScaleX(d.search),
+      y: d => scatterPatternScaleY(d.tele)
+    });
 
   scatterPatternSvg.append("g")
     .attr("class", "annotation-group")
