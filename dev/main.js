@@ -16462,7 +16462,7 @@ function init() {
     /*SCATTER PATTERNS*/
 
     var patternscatterMargins = {
-      top: 70,
+      top: 200,
       right: 80,
       bottom: 60,
       left: 60
@@ -16483,38 +16483,198 @@ function init() {
     var scatterPatternScaleX = d3.scaleLinear().domain([30, maxPatternPoints]).range([0, patternscatterInnerWidth]);
     var scatterPatternScaleY = d3.scaleLinear().domain([30, maxPatternPoints]).range([patternscatterInnerHeight, 0]);
     var xPatternAxis = d3.axisTop(scatterPatternScaleX).tickValues([50, 100]).tickSize(-patternscatterInnerHeight);
-    var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([50, 100, 150]).ticks(5).tickSize(-patternscatterInnerWidth);
+    var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([50, 75, 100, 125]).ticks(5).tickPadding(10).tickSize(-patternscatterInnerWidth);
     scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,10)").call(xPatternAxis);
-    scatterPatternSvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
-    scatterPatternSvg.append("text").text("More televoting points").attr("x", 20).attr("y", 30).style("text-anchor", "end").attr("transform", "rotate(-90)").attr("class", "y axis-title");
+    /*scatterPatternSvg.append("text")
+      .text("MORE SEARCH ACTIVITY")
+      .attr("x", scatterPatternScaleX(30))
+      .attr("y", scatterPatternScaleY(maxPatternPoints) - 140)
+      .style("text-anchor", "start")
+      .attr("class", "x axis-title")*/
+
+    scatterPatternSvg.append("text").text("MORE TELEVOTING POINTS").attr("x", scatterPatternScaleX(30) + 75).attr("y", 0).style("text-anchor", "end").attr("transform", "rotate(-90)").style("font-size", "0.7em").attr("class", "y axis-title");
     scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
     scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
-    var patternMarkers = scatterPatternSvg.selectAll("g").data(patterns).enter().append("g").attr("transform", function (d) {
-      return "translate(".concat(scatterPatternScaleX(d.search), ",").concat(scatterPatternScaleY(d.tele), ")");
-    }).style("opacity", 1).style("filter", "url(#glow)");
-    patternMarkers.append('path').attr("d", d3.symbol().type(d3.symbolTriangle)).attr("transform", "translate(26,12) rotate(90)").style("fill", "white");
-    patternMarkers.append("image").attr("xlink:href", function (d) {
-      return "assets/images/flags/" + d.from + ".svg";
-    }).attr('width', countryheight).attr('height', countryheight);
-    patternMarkers.append("image").attr("xlink:href", function (d) {
-      return "assets/images/flags/" + d.to + ".svg";
-    }).attr("x", 30).attr('width', countryheight).attr('height', countryheight);
     var type = _d3SvgAnnotation.annotationCallout;
-    var annotations = [{
+    var annotations = [
+    /*{
       note: {
-        label: "The most consistent voting pattern",
-        title: "Belarus => Russia"
+        label: "MORE TELEVOTING POINTS"
+      },
+      data: { search: 33.5, tele: maxPatternPoints + 0.8},
+      dy: 183,
+      dx: 0,
+      connector: { end: "arrow" },
+      color: "#ffffff"
+    },*/
+    {
+      note: {
+        label: "",
+        padding: 0,
+        wrap: 200
       },
       data: {
-        search: 118,
-        tele: 140.5
+        search: 30.5,
+        tele: maxPatternPoints + 3
+      },
+      dy: -1,
+      dx: -190,
+      connector: {
+        end: "arrow"
+      },
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "LINE OF EQUAL SEARCH AND TELEVOTING POINTS",
+        padding: 0
+      },
+      data: {
+        search: maxPatternPoints + 3,
+        tele: maxPatternPoints + 3
+      },
+      dy: -1,
+      dx: -100,
+      connector: {
+        end: "arrow"
+      },
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "MORE SEARCH ACTIVITY",
+        padding: 0
+      },
+      data: {
+        search: 50,
+        tele: maxPatternPoints + 3
+      },
+      dy: -1,
+      dx: -50,
+      connector: {
+        end: "arrow"
+      },
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "The most consistent voting pattern, 141 points awarded over xx Contests",
+        title: "Belarus to Russia"
+      },
+      data: {
+        search: 119,
+        tele: 141
+      },
+      dy: -1,
+      dx: -180,
+      connector: {
+        end: "arrow"
+      },
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "The most consistent search activity",
+        title: "Cyprus to Greece"
+      },
+      data: {
+        search: 142,
+        tele: 140
+      },
+      dy: 200,
+      dx: -1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "Moldova doesn't search much for Romanian candidates, but votes a lot for them",
+        title: "Moldova to Romania"
+      },
+      data: {
+        search: 66,
+        tele: 137
+      },
+      dy: 100,
+      dx: -1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "Romania returns the favour to Moldova, with slightly more search and a little less televoting",
+        title: "Romania to Moldova"
+      },
+      data: {
+        search: 88,
+        tele: 118
+      },
+      dy: 50,
+      dx: -1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "Sweden is often at the receiving end of televoting points awarded from other Nordic countries",
+        title: "Finland to Sweden"
+      },
+      data: {
+        search: 129,
+        tele: 105
+      },
+      dy: 50,
+      dx: 1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "A big Turkish diaspora drives searches and televoting from Germany and other countries like Belgium and France",
+        title: "Germany to Turkey"
+      },
+      data: {
+        search: 64,
+        tele: 84
       },
       dy: 0,
-      dx: -200,
+      dx: 300,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
+        title: "Turkey to Greece"
+      },
+      data: {
+        search: 91,
+        tele: 43
+      },
+      dy: -200,
+      dx: 1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
+        title: "Turkey to Greece"
+      },
+      data: {
+        search: 91,
+        tele: 43
+      },
+      dy: -200,
+      dx: 1,
+      subject: {},
+      color: "#ffffff"
+    }, {
+      note: {
+        label: "The lowest televoting to search activity ratio is recorded by the Belgians, awarding points to France",
+        title: "Belgium to France"
+      },
+      data: {
+        search: 110,
+        tele: 42
+      },
+      dy: 100,
+      dx: 1,
       subject: {},
       color: "#ffffff"
     }];
-    window.makeAnnotations = (0, _d3SvgAnnotation.annotation)().notePadding(15).type(type).annotations(annotations).editMode(true).textWrap(500).accessors({
+    var makeAnnotations = (0, _d3SvgAnnotation.annotation)().notePadding(15).type(type).annotations(annotations).textWrap(150).accessors({
       x: function x(d) {
         return scatterPatternScaleX(d.search);
       },
@@ -16523,6 +16683,17 @@ function init() {
       }
     });
     scatterPatternSvg.append("g").attr("class", "annotation-group").call(makeAnnotations);
+    d3.select(".annotations .annotation .annotation-connector").attr("transform", "rotate(-90)");
+    var patternMarkers = scatterPatternSvg.selectAll("g.vote-icon").data(patterns).enter().append("g").attr("transform", function (d) {
+      return "translate(".concat(scatterPatternScaleX(d.search) - (30 + countryheight) / 2, ",").concat(scatterPatternScaleY(d.tele) - countryheight / 2, ")");
+    }).style("opacity", 1).style("filter", "url(#glow)");
+    patternMarkers.append('path').attr("d", d3.symbol().type(d3.symbolTriangle)).attr("transform", "translate(26,12) rotate(90)").style("fill", "white");
+    patternMarkers.append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.from + ".svg";
+    }).attr('width', countryheight).attr('height', countryheight);
+    patternMarkers.append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.to + ".svg";
+    }).attr("x", 30).attr('width', countryheight).attr('height', countryheight);
   });
 }
 

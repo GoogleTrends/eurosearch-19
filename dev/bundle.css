@@ -1097,6 +1097,10 @@ input[type=range]:focus::-ms-fill-upper {
   stroke: #fff;
   stroke-width: 1;
 }
+.annotation-note-label {
+  font-size: 0.7em;
+  text-shadow: none;
+}
 @-webkit-keyframes pulse {
   0% {
     fill: #c65d6f;

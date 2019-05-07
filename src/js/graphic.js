@@ -713,7 +713,7 @@ function init() {
   })
 
   /*SCATTER PATTERNS*/
-  const patternscatterMargins = {top: 70, right: 80, bottom: 60, left: 60};
+  const patternscatterMargins = {top: 200, right: 80, bottom: 60, left: 60};
   const patternscatterWidth = document.querySelector("#votingpattern-container").clientWidth;
   const patternscatterRatio = 3;
   const patternscatterHeight = patternscatterWidth * patternscatterRatio;
@@ -743,26 +743,29 @@ function init() {
     .tickValues([50,100])
     .tickSize(-patternscatterInnerHeight);
   let yPatternAxis = d3.axisLeft(scatterPatternScaleY)
-    .tickValues([50,100,150])
+    .tickValues([50,75,100,125])
     .ticks(5)
+    .tickPadding(10)
     .tickSize(-patternscatterInnerWidth);
     
   scatterPatternSvg.append("g")
     .attr("class", "axis x-axis")
     .attr("transform", `translate(0,10)`)
     .call(xPatternAxis);
+  /*scatterPatternSvg.append("text")
+    .text("MORE SEARCH ACTIVITY")
+    .attr("x", scatterPatternScaleX(30))
+    .attr("y", scatterPatternScaleY(maxPatternPoints) - 140)
+    .style("text-anchor", "start")
+    .attr("class", "x axis-title")*/
   scatterPatternSvg.append("text")
-    .text("Search activity points")
-    .attr("x", scatterWidth - 50)
-    .attr("y", scatterHeight - 30)
-    .attr("class", "x axis-title")
-  scatterPatternSvg.append("text")
-    .text("More televoting points")
-    .attr("x", 20)
-    .attr("y", 30)
+    .text("MORE TELEVOTING POINTS")
+    .attr("x", scatterPatternScaleX(30) + 75)
+    .attr("y", 0)
     .style("text-anchor", "end")
     .attr("transform", "rotate(-90)")
-    .attr("class", "y axis-title")
+    .style("font-size", "0.7em")
+    .attr("class", "y axis-title");
     
   scatterPatternSvg.append("g")
     .attr("class", "axis y-axis")
@@ -776,10 +779,182 @@ function init() {
     .attr("y2", scatterPatternScaleY(200))
     .attr("class", "fourtyfive");
 
-  let patternMarkers = scatterPatternSvg.selectAll("g")
+  const type = annotationCallout;
+
+  const annotations = [
+    /*{
+      note: {
+        label: "MORE TELEVOTING POINTS"
+      },
+      data: { search: 33.5, tele: maxPatternPoints + 0.8},
+      dy: 183,
+      dx: 0,
+      connector: { end: "arrow" },
+      color: "#ffffff"
+    },*/
+    {
+      note: {
+        label: "",
+        padding: 0,
+        wrap: 200
+      },
+      data: { search: 30.5, tele: maxPatternPoints + 3},
+      dy: -1,
+      dx: -190,
+      connector: { end: "arrow" },
+      color: "#ffffff"
+    },
+    {
+      note: {
+        label: "LINE OF EQUAL SEARCH AND TELEVOTING POINTS",
+        padding: 0
+      },
+      data: { search: maxPatternPoints + 3, tele: maxPatternPoints + 3},
+      dy: -1,
+      dx: -100,
+      connector: { end: "arrow" },
+      color: "#ffffff"
+    },
+    {
+      note: {
+        label: "MORE SEARCH ACTIVITY",
+        padding: 0
+      },
+      data: { search: 50, tele: maxPatternPoints + 3},
+      dy: -1,
+      dx: -50,
+      connector: { end: "arrow" },
+      color: "#ffffff"
+    },
+    {
+    note: {
+      label: "The most consistent voting pattern, 141 points awarded over xx Contests",
+      title: "Belarus to Russia"
+    },
+    data: { search: 119, tele: 141},
+    dy: -1,
+    dx: -180,
+    connector: { end: "arrow" },
+    subject: {
+    },
+    color: "#ffffff"
+  },{
+    note: {
+      label: "The most consistent search activity",
+      title: "Cyprus to Greece"
+    },
+    data: { search: 142, tele: 140},
+    dy: 200,
+    dx: -1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "Moldova doesn't search much for Romanian candidates, but votes a lot for them",
+      title: "Moldova to Romania"
+    },
+    data: { search: 66, tele: 137},
+    dy: 100,
+    dx: -1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "Romania returns the favour to Moldova, with slightly more search and a little less televoting",
+      title: "Romania to Moldova"
+    },
+    data: { search: 88, tele: 118},
+    dy: 50,
+    dx: -1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "Sweden is often at the receiving end of televoting points awarded from other Nordic countries",
+      title: "Finland to Sweden"
+    },
+    data: { search: 129, tele: 105},
+    dy: 50,
+    dx: 1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "A big Turkish diaspora drives searches and televoting from Germany and other countries like Belgium and France",
+      title: "Germany to Turkey"
+    },
+    data: { search: 64, tele: 84},
+    dy: 0,
+    dx: 300,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
+      title: "Turkey to Greece"
+    },
+    data: { search: 91, tele: 43},
+    dy: -200,
+    dx: 1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
+      title: "Turkey to Greece"
+    },
+    data: { search: 91, tele: 43},
+    dy: -200,
+    dx: 1,
+    subject: {
+    },
+    color: "#ffffff"
+  },
+  {
+    note: {
+      label: "The lowest televoting to search activity ratio is recorded by the Belgians, awarding points to France",
+      title: "Belgium to France"
+    },
+    data: { search: 110, tele: 42},
+    dy: 100,
+    dx: 1,
+    subject: {
+    },
+    color: "#ffffff"
+  }
+]
+  const makeAnnotations = annotation()
+    .notePadding(15)
+    .type(type)
+    .annotations(annotations)
+    .textWrap(150)
+    .accessors({
+      x: d => scatterPatternScaleX(d.search),
+      y: d => scatterPatternScaleY(d.tele)
+    });
+
+  scatterPatternSvg.append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
+  
+  d3.select(".annotations .annotation .annotation-connector").attr("transform", "rotate(-90)");
+
+  let patternMarkers = scatterPatternSvg.selectAll("g.vote-icon")
     .data(patterns)
     .enter().append("g")
-    .attr("transform", (d) => `translate(${scatterPatternScaleX(d.search)},${scatterPatternScaleY(d.tele)})`)
+    .attr("transform", (d) => `translate(${scatterPatternScaleX(d.search)  - (30 + countryheight)/2},${scatterPatternScaleY(d.tele) - countryheight/2})`)
     .style("opacity", 1)
     .style("filter", "url(#glow)");
   patternMarkers.append('path')
@@ -795,36 +970,6 @@ function init() {
     .attr("x", 30)
     .attr('width', countryheight)
     .attr('height', countryheight);
-
-  const type = annotationCallout;
-
-  const annotations = [{
-    note: {
-      label: "The most consistent voting pattern",
-      title: "Belarus => Russia"
-    },
-    data: { search: 118, tele: 140.5},
-    dy: 0,
-    dx: -200,
-    subject: {
-    },
-    color: "#ffffff"
-  }]
-
-  window.makeAnnotations = annotation()
-    .notePadding(15)
-    .type(type)
-    .annotations(annotations)
-    .editMode(true)
-    .textWrap(500)
-    .accessors({
-      x: d => scatterPatternScaleX(d.search),
-      y: d => scatterPatternScaleY(d.tele)
-    });
-
-  scatterPatternSvg.append("g")
-    .attr("class", "annotation-group")
-    .call(makeAnnotations)
   
   });
 
