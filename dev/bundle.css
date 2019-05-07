@@ -919,7 +919,7 @@ svg#ranking text {
   text-anchor: middle;
 }
 #scatter-container {
-  max-width: 60rem;
+/*max-width 60rem*/
   margin: auto;
 }
 #scatter-container svg {

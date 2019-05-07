@@ -663,7 +663,6 @@ function init() {
   const labelsYearly = layoutLabel(strategy)
       .size((d, i, g) => {
           const textSize = g[i].getElementsByTagName('text')[0].getBBox();
-          console.log(g[i].getElementsByTagName('text')[0]);
           return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
       })
       .xScale(scatterYearlyScaleX)
@@ -718,23 +717,24 @@ function init() {
   const maxVotePatternPoints = d3.max(patterns, (d) => d.tele);
   const maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
 
+  let patternscatterHeight = scatterHeight;
   let scatterPatternSvg = d3.select("svg#votingpattern")
     .attr("width", scatterWidth)
-    .attr("height", scatterHeight)
+    .attr("height", patternscatterHeight)
     .append("g")
     .attr("transform", `translate(${scatterMargins.left},${scatterMargins.top})`);
       
   let scatterPatternScaleX = d3.scaleLinear()
-    .domain([0,maxPatternPoints])
+    .domain([30,maxPatternPoints])
     .range([0,scatterWidth - scatterMargins.right]);
       
   let scatterPatternScaleY = d3.scaleLinear()
-    .domain([0,maxPatternPoints])
-    .range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    .domain([30,maxPatternPoints])
+    .range([patternscatterHeight - scatterMargins.bottom, scatterMargins.top]);
  
   let xPatternAxis = d3.axisBottom(scatterPatternScaleX)
     .tickValues([100,200,300])
-    .tickSize(-scatterHeight);
+    .tickSize(-patternscatterHeight);
   let yPatternAxis = d3.axisLeft(scatterPatternScaleY)
     .tickValues([100,200,300])
     .ticks(5)
@@ -742,7 +742,7 @@ function init() {
     
   scatterPatternSvg.append("g")
     .attr("class", "axis x-axis")
-    .attr("transform", `translate(0,${scatterHeight - scatterMargins.bottom})`)
+    .attr("transform", `translate(0,${patternscatterHeight - scatterMargins.bottom})`)
     .call(xPatternAxis);
   scatterPatternSvg.append("text")
     .text("Search activity points")
@@ -765,7 +765,36 @@ function init() {
     .attr("x2", scatterPatternScaleX(200))
     .attr("y1", scatterPatternScaleY(0))
     .attr("y2", scatterPatternScaleY(200))
-    .attr("class", "fourtyfive")
+    .attr("class", "fourtyfive");
+
+  let patternMarkers = scatterPatternSvg.selectAll("g")
+    .data(patterns)
+    .enter().append("g")
+    .attr("transform", (d) => `translate(${scatterPatternScaleX(d.search)},${scatterPatternScaleY(d.tele)})`)
+  patternMarkers.append('path')
+    .attr("d", d3.symbol().type(d3.symbolTriangle))
+    .attr("transform", "translate(26,12) rotate(90)")
+    .style("fill", "white");
+  patternMarkers.append("image")
+    .attr("xlink:href", function (d) { return "assets/images/flags/" + d.from + ".svg" })
+    .attr('width', countryheight)
+    .attr('height', countryheight);
+  patternMarkers.append("image")
+    .attr("xlink:href", function (d) { return "assets/images/flags/" + d.to + ".svg" })
+    .attr("x", 32)
+    .attr('width', countryheight)
+    .attr('height', countryheight);
+
+  /*rankingSvg.selectAll('image.flag')
+  .data(rankingdata)
+  .enter().append('image')
+  .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+  .attr('x', voteScale("search") - countryheight/2)
+  .attr("y", (d) => countryScale(d.country) - countryheight/2)
+  .attr('class', function (d) { return 'id-' + d.Country; })
+  .attr('width', countryheight - 2)
+  .attr('height', countryheight - 2)
+  .style("filter", "url(#flagglow)");
     
   let patternCircles = scatterPatternSvg.selectAll("circle")
     .data(patterns)
@@ -774,7 +803,7 @@ function init() {
     .attr("cy", (d) => scatterPatternScaleY(d.tele))
     .attr("r", (d) => Math.sqrt(d.tele))
     .attr("class", (d) => "circle-pattern circle-" + d.from + "-" + d.to)
-    .style("filter", "url(#glow)");
+    .style("filter", "url(#glow)");*/
     //.attr("id", (d) => d.key);
 
   });

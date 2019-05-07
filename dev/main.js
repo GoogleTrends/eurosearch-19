@@ -9889,7 +9889,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 
-},{"d3-array":"Rpnd","d3-selection":"4Gs4","d3-scale":"K4pn","d3fc-data-join":"r4k7","d3fc-rebind":"DdIz"}],"TAPd":[function(require,module,exports) {
+},{"d3-array":"Rpnd","d3-selection":"4Gs4","d3-scale":"K4pn","d3fc-data-join":"r4k7","d3fc-rebind":"DdIz"}],"graphic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10684,7 +10684,6 @@ function init() {
     });
     var labelsYearly = (0, _d3fcLabelLayout.layoutLabel)(strategy).size(function (d, i, g) {
       var textSize = g[i].getElementsByTagName('text')[0].getBBox();
-      console.log(g[i].getElementsByTagName('text')[0]);
       return [textSize.width + labelPadding * 2, textSize.height + labelPadding * 2];
     }).xScale(scatterYearlyScaleX).yScale(scatterYearlyScaleY).position(function (d) {
       return [d.searchpoints, d.votepoints];
@@ -10732,25 +10731,47 @@ function init() {
       return d.tele;
     });
     var maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
-    var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
-    var scatterPatternScaleX = d3.scaleLinear().domain([0, maxPatternPoints]).range([0, scatterWidth - scatterMargins.right]);
-    var scatterPatternScaleY = d3.scaleLinear().domain([0, maxPatternPoints]).range([scatterHeight - scatterMargins.bottom, scatterMargins.top]);
-    var xPatternAxis = d3.axisBottom(scatterPatternScaleX).tickValues([100, 200, 300]).tickSize(-scatterHeight);
+    var patternscatterHeight = scatterHeight;
+    var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", scatterWidth).attr("height", patternscatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));
+    var scatterPatternScaleX = d3.scaleLinear().domain([30, maxPatternPoints]).range([0, scatterWidth - scatterMargins.right]);
+    var scatterPatternScaleY = d3.scaleLinear().domain([30, maxPatternPoints]).range([patternscatterHeight - scatterMargins.bottom, scatterMargins.top]);
+    var xPatternAxis = d3.axisBottom(scatterPatternScaleX).tickValues([100, 200, 300]).tickSize(-patternscatterHeight);
     var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([100, 200, 300]).ticks(5).tickSize(-scatterWidth);
-    scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterHeight - scatterMargins.bottom, ")")).call(xPatternAxis);
+    scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(patternscatterHeight - scatterMargins.bottom, ")")).call(xPatternAxis);
     scatterPatternSvg.append("text").text("Search activity points").attr("x", scatterWidth - 50).attr("y", scatterHeight - 30).attr("class", "x axis-title");
     scatterPatternSvg.append("text").text("Televoting points").attr("x", -20).attr("y", 10).attr("class", "y axis-title");
     scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
     scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
-    var patternCircles = scatterPatternSvg.selectAll("circle").data(patterns).enter().append("circle").attr("cx", function (d) {
-      return scatterPatternScaleX(d.search);
-    }).attr("cy", function (d) {
-      return scatterPatternScaleY(d.tele);
-    }).attr("r", function (d) {
-      return Math.sqrt(d.tele);
-    }).attr("class", function (d) {
-      return "circle-pattern circle-" + d.from + "-" + d.to;
-    }).style("filter", "url(#glow)"); //.attr("id", (d) => d.key);
+    var patternMarkers = scatterPatternSvg.selectAll("g").data(patterns).enter().append("g").attr("transform", function (d) {
+      return "translate(".concat(scatterPatternScaleX(d.search), ",").concat(scatterPatternScaleY(d.tele), ")");
+    });
+    patternMarkers.append('path').attr("d", d3.symbol().type(d3.symbolTriangle)).attr("transform", "translate(26,12) rotate(90)").style("fill", "white");
+    patternMarkers.append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.from + ".svg";
+    }).attr('width', countryheight).attr('height', countryheight);
+    patternMarkers.append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.to + ".svg";
+    }).attr("x", 32).attr('width', countryheight).attr('height', countryheight);
+    /*rankingSvg.selectAll('image.flag')
+    .data(rankingdata)
+    .enter().append('image')
+    .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+    .attr('x', voteScale("search") - countryheight/2)
+    .attr("y", (d) => countryScale(d.country) - countryheight/2)
+    .attr('class', function (d) { return 'id-' + d.Country; })
+    .attr('width', countryheight - 2)
+    .attr('height', countryheight - 2)
+    .style("filter", "url(#flagglow)");
+      
+    let patternCircles = scatterPatternSvg.selectAll("circle")
+      .data(patterns)
+      .enter().append("circle")
+      .attr("cx", (d) => scatterPatternScaleX(d.search))
+      .attr("cy", (d) => scatterPatternScaleY(d.tele))
+      .attr("r", (d) => Math.sqrt(d.tele))
+      .attr("class", (d) => "circle-pattern circle-" + d.from + "-" + d.to)
+      .style("filter", "url(#glow)");*/
+    //.attr("id", (d) => d.key);
   });
 }
 
@@ -10814,5 +10835,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd"}]},{},["main.js"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js"}]},{},["main.js"], null)
 //# sourceMappingURL=/main.js.map
