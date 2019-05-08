@@ -182,32 +182,11 @@ svg#ranking text
     animation-fill-mode forwards
     animation-timing-function ease-out*/
 
-.winner-highlight
-    animation pulse 2.5s infinite
-    stroke #ffffff
-    stroke-width 1
-
-@keyframes pulse {
-  0%   { fill: #C65D6F }
-  50%  { fill: #F2B04E }
-  100% { fill: #C65D6F }
-}
-
-text.winner-highlight
-    font-size 1.2em
-    stroke-width 0
-    text-anchor end
-
-/*@keyframes pop {
-  from {
-    opacity: 0.5
-    r: 2
-  }
-  to {
-    opacity: 1
-    r: 8
-  }
-}*/
+.winner-legend
+  fill #ffffff
+  font-size 0.6em
+  text-anchor middle
+  text-transform uppercase
 
 .circle-pattern
     fill #ffffff
@@ -221,8 +200,9 @@ text.winner-highlight
     font-family Rubik
 .axis-title
     fill #ffffff
-    font-size 14px
+    font-size 0.7em
     font-family Rubik
+    text-transform uppercase
 .y.axis-title 
     text-anchor middle
 .x.axis-title 
@@ -376,3 +356,20 @@ input[type=range]:focus::-ms-fill-upper {
     stroke-dashoffset: 0;
   }
 }
+
+circle.winner, .circle-winner-legend
+  fill none
+  stroke-dasharray 4
+  stroke-dashoffset 8
+  stroke #ffffff
+  stroke-width 1
+  animation: stroke 1.5s linear infinite;
+
+div.tooltip 	
+  position absolute							
+  padding 2px				
+  font-size 0.7em;		
+  background #0D1730	
+  border 1px #ffffff solid			
+  pointer-events none
+  box-shadow: 0px 0px 4px #ffffff

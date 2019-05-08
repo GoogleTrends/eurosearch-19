@@ -109,6 +109,11 @@ function init() {
       "2017": "PRT",
       "2018": "ISR"
     }
+
+    /*TOOLTIP*/
+    let tooltip = d3.select("body").append("div")	
+      .attr("class", "tooltip")				
+      .style("opacity", 0);
     
     let filtervalues = {
       "country": "ISR",
@@ -131,11 +136,6 @@ function init() {
     return losers;
     }
     const losers = compare(froms, tos);
-
-    let tofromCountries ={
-      "to": tos,
-      "from": froms
-    }
     
     d3.select("#countrylist").selectAll("option")
       //.data(tofromCountries[filtervalues.fromto])
@@ -277,7 +277,6 @@ function init() {
       .html(function (d, i) { return (i + 1) + '. ?'; });
 
   /** MAP **/
-  //const mapWidth = 900;
   const mapWidth = document.querySelector("#map-container").clientWidth;
   const mapHeight = 800;
   const mapPadding = 20;
@@ -305,7 +304,25 @@ function init() {
     .attr("id", (d) => d.properties.ADM0_A3)
     .attr("class", "country")
     .attr("d", geoPath)
-    .style("fill", "#0D1730");
+    .style("fill", "#0D1730")
+    .on("mouseover", function(d) {	
+      tooltip.transition()		
+          .duration(200)		
+          .style("opacity", .9);		
+      tooltip.html(`${grid[d.properties.ADM0_A3].name} <br/>`)	
+          .style("left", (d3.event.pageX + 28) + "px")		
+          .style("top", (d3.event.pageY - 28) + "px");	
+      })
+    .on("mousemove", function(){
+      tooltip
+        .style("left", (d3.event.pageX + 28) + "px")		
+        .style("top", (d3.event.pageY - 28) + "px");
+    })					
+    .on("mouseout", function(d) {		
+      tooltip.transition()		
+          .duration(500)		
+          .style("opacity", 0);	
+    })
     //.style("filter", "url(#glow)");
 
   /*COLOR MAP*/
@@ -569,7 +586,27 @@ function init() {
     .attr('height', countryheight)
     .attr("x", (d) => scatterScaleX(d.value.searchpoints) - countryheight/2)
     .attr("y", (d) => scatterScaleY(d.value.votepoints) - countryheight/2)
-    .style("filter", "url(#glow)");
+    .style("filter", "url(#glow)")
+    .on("mouseover", function(d) {	
+      tooltip.transition()		
+          .duration(200)		
+          .style("opacity", .9);		
+      tooltip.html(`<strong>${grid[d.key].name}</strong> <br/>
+                    Search: ${Math.round(d.value.searchpoints)} points<br/>
+                    Televoting: ${Math.round(d.value.votepoints)} points`)	
+          .style("left", (d3.event.pageX + 28) + "px")		
+          .style("top", (d3.event.pageY - 28) + "px");	
+      })
+    .on("mousemove", function(){
+      tooltip
+        .style("left", (d3.event.pageX + 28) + "px")		
+        .style("top", (d3.event.pageY - 28) + "px");
+    })					
+    .on("mouseout", function(d) {		
+      tooltip.transition()		
+          .duration(500)		
+          .style("opacity", 0);	
+    });
 
     const labelPadding = 2;
 
@@ -695,7 +732,27 @@ function init() {
     .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - dimSmall/2)
     .attr("class", (d) => `flag-year flag-${d.year} flag-${d.to}`)
     .style("filter", "url(#glow)")
-    .style("opacity", 0.3);
+    .style("opacity", 0.3)
+    .on("mouseover", function(d) {	
+      tooltip.transition()		
+          .duration(200)		
+          .style("opacity", .9);		
+      tooltip.html(`<strong>${grid[d.to].name} in ${d.year}</strong> <br/>
+                    Search: ${Math.round(d.searchpoints)} points<br/>
+                    Televoting: ${Math.round(d.votepoints)} points`)	
+          .style("left", (d3.event.pageX + 28) + "px")		
+          .style("top", (d3.event.pageY - 28) + "px");	
+      })
+    .on("mousemove", function(){
+      tooltip
+        .style("left", (d3.event.pageX + 28) + "px")		
+        .style("top", (d3.event.pageY - 28) + "px");
+    })					
+    .on("mouseout", function(d) {		
+      tooltip.transition()		
+          .duration(500)		
+          .style("opacity", 0);	
+    });
 
   let yearTitle = scatterYearlySvg.append("text")
       .attr("x", scatterInnerWidth/2)
@@ -703,11 +760,17 @@ function init() {
       .text("2018")
       .attr("class", "yearly-title");
   
-  let winnerText = scatterYearlySvg.append("text")
-      .attr("x", scatterInnerWidth * 9/10)
+  scatterYearlySvg.append("text")
+      .attr("x", 40)
       .attr("y", 30)
-      .attr("class", "winner-highlight")
-      .text("Winner");
+      .attr("class", "winner-legend")
+      .text("Winner")
+      .attr("dy", "0.3em");
+  scatterYearlySvg.append("circle")
+      .attr("cx", 40)
+      .attr("cy", 30)
+      .attr("r", 24)
+      .attr("class", "circle-winner-legend");
   
   const textLabelYearly = layoutTextLabel()
     .padding(labelPadding)
@@ -725,32 +788,36 @@ function init() {
 
   function highlightYear(yr){
     scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
-    winnerText.classed("winner-highlight", false);
-    /*yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
-      .attr("r", 4)
-      .style("opacity", 0.1);*/
-    yearlyFlags.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
-      .attr('width', dimSmall)
-      .attr('height', dimSmall)
+    yearlyFlags.style("filter", "none").transition().duration(1000)
+      .attr("width", dimSmall)
+      .attr("height", dimSmall)
       .attr("x", (d) => scatterYearlyScaleX(d.searchpoints) - dimSmall/2)
       .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - dimSmall/2)
       .style("opacity", 0.1);
     let winner = winners[yr];
+    let winnerData = points.filter((el) => el.year == yr && el.to == winner);
     
-    //Sync winner animation
-    /*requestAnimationFrame(() => { startAnimation() })
-    let startAnimation = function(){
-      scatterYearlySvg.select(`.circle-${yr}.circle-${winner}`).classed("winner-highlight", true);
-      winnerText.classed("winner-highlight", true);
-    }*/
+    if(scatterYearlySvg.selectAll("circle.winner").empty()){
+      scatterYearlySvg.selectAll("circle.winner")
+        .data(winnerData)
+        .enter().append("circle")
+        .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
+        .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
+        .attr("r", 30)
+        .attr("class", "winner");
+    }
+    else{
+      scatterYearlySvg.selectAll("circle.winner")
+        .data(winnerData)
+        .transition().duration(1000)
+        .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
+        .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
+        .style("opacity", 1);   
+    }
 
-    /*scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
-      .attr("r", 10)
-      .style("opacity", 0.8)
-      .style("filter", "url(#glow)")*/
     scatterYearlySvg.selectAll(".flag-" + yr).transition().duration(1000)
-      .attr('width', countryheight)
-      .attr('height', countryheight)
+      .attr("width", countryheight)
+      .attr("height", countryheight)
       .attr("x", (d) => scatterYearlyScaleX(d.searchpoints) - countryheight/2)
       .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - countryheight/2)
       .style("opacity", 1)
@@ -1006,7 +1073,27 @@ function init() {
     .enter().append("g")
     .attr("transform", (d) => `translate(${scatterPatternScaleX(d.search)  - (30 + countryheight)/2},${scatterPatternScaleY(d.tele) - countryheight/2})`)
     .style("opacity", 1)
-    .style("filter", "url(#glow)");
+    .style("filter", "url(#glow)")
+    .on("mouseover", function(d) {	
+      tooltip.transition()		
+          .duration(200)		
+          .style("opacity", .9);		
+      tooltip.html(`<strong>${grid[d.from].name} to ${grid[d.to].name}</strong> <br/>
+                    Search: ${Math.round(d.search)} points<br/>
+                    Televoting: ${Math.round(d.tele)} points`)	
+          .style("left", (d3.event.pageX + 28) + "px")		
+          .style("top", (d3.event.pageY - 28) + "px");	
+      })
+    .on("mousemove", function(){
+      tooltip
+        .style("left", (d3.event.pageX + 28) + "px")		
+        .style("top", (d3.event.pageY - 28) + "px");
+    })					
+    .on("mouseout", function(d) {		
+      tooltip.transition()		
+          .duration(500)		
+          .style("opacity", 0);	
+    });
   patternMarkers.append('path')
     .attr("d", d3.symbol().type(d3.symbolTriangle))
     .attr("transform", "translate(26,12) rotate(90)")

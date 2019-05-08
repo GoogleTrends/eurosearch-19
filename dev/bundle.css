@@ -934,16 +934,11 @@ svg#ranking text {
   fill: #fff;
   opacity: 0.5;
 }
-.winner-highlight {
-  -webkit-animation: pulse 2.5s infinite;
-          animation: pulse 2.5s infinite;
-  stroke: #fff;
-  stroke-width: 1;
-}
-text.winner-highlight {
-  font-size: 1.2em;
-  stroke-width: 0;
-  text-anchor: end;
+.winner-legend {
+  fill: #fff;
+  font-size: 0.6em;
+  text-anchor: middle;
+  text-transform: uppercase;
 }
 .circle-pattern {
   fill: #fff;
@@ -960,8 +955,9 @@ text.winner-highlight {
 }
 .axis-title {
   fill: #fff;
-  font-size: 14px;
+  font-size: 0.7em;
   font-family: Rubik;
+  text-transform: uppercase;
 }
 .y.axis-title {
   text-anchor: middle;
@@ -1105,27 +1101,25 @@ input[type=range]:focus::-ms-fill-upper {
   -webkit-animation: stroke 1s linear infinite;
           animation: stroke 1s linear infinite;
 }
-@-webkit-keyframes pulse {
-  0% {
-    fill: #c65d6f;
-  }
-  50% {
-    fill: #f2b04e;
-  }
-  100% {
-    fill: #c65d6f;
-  }
+circle.winner,
+.circle-winner-legend {
+  fill: none;
+  stroke-dasharray: 4;
+  stroke-dashoffset: 8;
+  stroke: #fff;
+  stroke-width: 1;
+  -webkit-animation: stroke 1.5s linear infinite;
+          animation: stroke 1.5s linear infinite;
 }
-@keyframes pulse {
-  0% {
-    fill: #c65d6f;
-  }
-  50% {
-    fill: #f2b04e;
-  }
-  100% {
-    fill: #c65d6f;
-  }
+div.tooltip {
+  position: absolute;
+  padding: 2px;
+  font-size: 0.7em;
+  background: #0d1730;
+  border: 1px #fff solid;
+  pointer-events: none;
+  -webkit-box-shadow: 0px 0px 4px #fff;
+          box-shadow: 0px 0px 4px #fff;
 }
 @-webkit-keyframes stroke {
   to {

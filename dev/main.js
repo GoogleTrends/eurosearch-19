@@ -16047,7 +16047,10 @@ function init() {
       "2016": "UKR",
       "2017": "PRT",
       "2018": "ISR"
+      /*TOOLTIP*/
+
     };
+    var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
     var filtervalues = {
       "country": "ISR",
       "fromto": "to",
@@ -16075,10 +16078,6 @@ function init() {
     }
 
     var losers = compare(froms, tos);
-    var tofromCountries = {
-      "to": tos,
-      "from": froms
-    };
     d3.select("#countrylist").selectAll("option") //.data(tofromCountries[filtervalues.fromto])
     .data(froms).enter().append("option").attr("value", function (d) {
       return d;
@@ -16180,7 +16179,6 @@ function init() {
       return i + 1 + '. ?';
     });
     /** MAP **/
-    //const mapWidth = 900;
 
     var mapWidth = document.querySelector("#map-container").clientWidth;
     var mapHeight = 800;
@@ -16198,7 +16196,14 @@ function init() {
     var geoPath = d3.geoPath().projection(projection);
     var countries = mapSvg.selectAll('path').data(geodata.features).enter().append('path').attr("id", function (d) {
       return d.properties.ADM0_A3;
-    }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730"); //.style("filter", "url(#glow)");
+    }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730").on("mouseover", function (d) {
+      tooltip.transition().duration(200).style("opacity", .9);
+      tooltip.html("".concat(grid[d.properties.ADM0_A3].name, " <br/>")).style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mousemove", function () {
+      tooltip.style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mouseout", function (d) {
+      tooltip.transition().duration(500).style("opacity", 0);
+    }); //.style("filter", "url(#glow)");
 
     /*COLOR MAP*/
 
@@ -16396,7 +16401,14 @@ function init() {
       return scatterScaleX(d.value.searchpoints) - countryheight / 2;
     }).attr("y", function (d) {
       return scatterScaleY(d.value.votepoints) - countryheight / 2;
-    }).style("filter", "url(#glow)");
+    }).style("filter", "url(#glow)").on("mouseover", function (d) {
+      tooltip.transition().duration(200).style("opacity", .9);
+      tooltip.html("<strong>".concat(grid[d.key].name, "</strong> <br/>\n                    Search: ").concat(Math.round(d.value.searchpoints), " points<br/>\n                    Televoting: ").concat(Math.round(d.value.votepoints), " points")).style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mousemove", function () {
+      tooltip.style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mouseout", function (d) {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
     var labelPadding = 2; //Component used to render labels
 
     var textLabel = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
@@ -16470,9 +16482,17 @@ function init() {
       return scatterYearlyScaleY(d.votepoints) - dimSmall / 2;
     }).attr("class", function (d) {
       return "flag-year flag-".concat(d.year, " flag-").concat(d.to);
-    }).style("filter", "url(#glow)").style("opacity", 0.3);
+    }).style("filter", "url(#glow)").style("opacity", 0.3).on("mouseover", function (d) {
+      tooltip.transition().duration(200).style("opacity", .9);
+      tooltip.html("<strong>".concat(grid[d.to].name, " in ").concat(d.year, "</strong> <br/>\n                    Search: ").concat(Math.round(d.searchpoints), " points<br/>\n                    Televoting: ").concat(Math.round(d.votepoints), " points")).style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mousemove", function () {
+      tooltip.style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mouseout", function (d) {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
     var yearTitle = scatterYearlySvg.append("text").attr("x", scatterInnerWidth / 2).attr("y", -16).text("2018").attr("class", "yearly-title");
-    var winnerText = scatterYearlySvg.append("text").attr("x", scatterInnerWidth * 9 / 10).attr("y", 30).attr("class", "winner-highlight").text("Winner");
+    scatterYearlySvg.append("text").attr("x", 40).attr("y", 30).attr("class", "winner-legend").text("Winner").attr("dy", "0.3em");
+    scatterYearlySvg.append("circle").attr("cx", 40).attr("cy", 30).attr("r", 24).attr("class", "circle-winner-legend");
     var textLabelYearly = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
       return grid[d.to].name;
     });
@@ -16485,30 +16505,31 @@ function init() {
 
     function highlightYear(yr) {
       scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
-      winnerText.classed("winner-highlight", false);
-      /*yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
-        .attr("r", 4)
-        .style("opacity", 0.1);*/
-
-      yearlyFlags.classed("winner-highlight", false).style("filter", "none").transition().duration(1000).attr('width', dimSmall).attr('height', dimSmall).attr("x", function (d) {
+      yearlyFlags.style("filter", "none").transition().duration(1000).attr("width", dimSmall).attr("height", dimSmall).attr("x", function (d) {
         return scatterYearlyScaleX(d.searchpoints) - dimSmall / 2;
       }).attr("y", function (d) {
         return scatterYearlyScaleY(d.votepoints) - dimSmall / 2;
       }).style("opacity", 0.1);
-      var winner = winners[yr]; //Sync winner animation
+      var winner = winners[yr];
+      var winnerData = points.filter(function (el) {
+        return el.year == yr && el.to == winner;
+      });
 
-      /*requestAnimationFrame(() => { startAnimation() })
-      let startAnimation = function(){
-        scatterYearlySvg.select(`.circle-${yr}.circle-${winner}`).classed("winner-highlight", true);
-        winnerText.classed("winner-highlight", true);
-      }*/
+      if (scatterYearlySvg.selectAll("circle.winner").empty()) {
+        scatterYearlySvg.selectAll("circle.winner").data(winnerData).enter().append("circle").attr("cx", function (d) {
+          return scatterYearlyScaleX(d.searchpoints);
+        }).attr("cy", function (d) {
+          return scatterYearlyScaleY(d.votepoints);
+        }).attr("r", 30).attr("class", "winner");
+      } else {
+        scatterYearlySvg.selectAll("circle.winner").data(winnerData).transition().duration(1000).attr("cx", function (d) {
+          return scatterYearlyScaleX(d.searchpoints);
+        }).attr("cy", function (d) {
+          return scatterYearlyScaleY(d.votepoints);
+        }).style("opacity", 1);
+      }
 
-      /*scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
-        .attr("r", 10)
-        .style("opacity", 0.8)
-        .style("filter", "url(#glow)")*/
-
-      scatterYearlySvg.selectAll(".flag-" + yr).transition().duration(1000).attr('width', countryheight).attr('height', countryheight).attr("x", function (d) {
+      scatterYearlySvg.selectAll(".flag-" + yr).transition().duration(1000).attr("width", countryheight).attr("height", countryheight).attr("x", function (d) {
         return scatterYearlyScaleX(d.searchpoints) - countryheight / 2;
       }).attr("y", function (d) {
         return scatterYearlyScaleY(d.votepoints) - countryheight / 2;
@@ -16739,7 +16760,14 @@ function init() {
     d3.select(".annotations .annotation .annotation-connector").attr("transform", "rotate(-90)");
     var patternMarkers = scatterPatternSvg.selectAll("g.vote-icon").data(patterns).enter().append("g").attr("transform", function (d) {
       return "translate(".concat(scatterPatternScaleX(d.search) - (30 + countryheight) / 2, ",").concat(scatterPatternScaleY(d.tele) - countryheight / 2, ")");
-    }).style("opacity", 1).style("filter", "url(#glow)");
+    }).style("opacity", 1).style("filter", "url(#glow)").on("mouseover", function (d) {
+      tooltip.transition().duration(200).style("opacity", .9);
+      tooltip.html("<strong>".concat(grid[d.from].name, " to ").concat(grid[d.to].name, "</strong> <br/>\n                    Search: ").concat(Math.round(d.search), " points<br/>\n                    Televoting: ").concat(Math.round(d.tele), " points")).style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mousemove", function () {
+      tooltip.style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+    }).on("mouseout", function (d) {
+      tooltip.transition().duration(500).style("opacity", 0);
+    });
     patternMarkers.append('path').attr("d", d3.symbol().type(d3.symbolTriangle)).attr("transform", "translate(26,12) rotate(90)").style("fill", "white");
     patternMarkers.append("image").attr("xlink:href", function (d) {
       return "assets/images/flags/" + d.from + ".svg";
