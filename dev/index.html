@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1557263725341'>
+<html lang='en' data-version='1557316542416'>
 
 <head>
 
@@ -271,7 +271,7 @@
 			<time class='intro__time'>May 13 2019</time>
 		</section>
 		<section>
-		    <p>If countries would award points to each other based on search activity for other countries’ contestants and using the famous 12 point voting system of the Eurovision Song Contest, this would be the result:</p>
+		    <p>If countries awarded points based on search activity for other countries’ contestants, using Eurovision’s famous 12-point voting system, this would be the result:</p>
 		    <div id="ranking-container">
 		        <svg id="ranking"></svg>
 		    </div>
@@ -280,7 +280,7 @@
 		    <p>*This prediction is based on the search activity during the period 6/05-12/05 and will be updated on Friday 17/05, after the semi-finals.</p>
 		    <p>COMMENT ON THE RANKING (UPDATED AFTER THE FINAL)</p>
 		</section>		<section>
-		    <p>On the map below, you can see which countries searched the most for the contestant of your country, and for which contestants your country searched the most. Switch from the geographic  map to the grid map to better represent smaller countries.</p>
+		    <p>On the map below, you can see &lt;strong&gt;which countries searched the most for the contestant of your country, and for which contestants your country searched the most&lt;/strong&gt;. Switch from the geographic  map to the grid map to better represent smaller countries.</p>
 		    <h2>Search and televoting mapped</h2>
 		    <div id="map-controls">
 		        <div class="map-control-text">
@@ -332,16 +332,16 @@
 		    <svg id="map"></svg>
 		</div>		<section>
 		    <h2>A look back</h2>
-		    <p>Search activity has proved to be a good predictor for the Contest results in 2017 and 2018 [2017, 2018 and also this year]. But was this always the case, and can we confidently say that searches can reliably predict the Eurovision Song Contest? Or were the good predictions based on coincidence?</p>
-		    <p>To check this, we gathered the data from the past 15 editions of the Contest. Because the rules of the voting changed quite considerably during this period, we focus on the televoting data. The winner from the televoting was by definition the Contest winner for the years between 2004 and 2008, since 2009 the professional jury also has its say in the Contests outcome. But usually the televoting results are in line with the overall results: only once (2016) the televoting winner was not the overall winner.</p>
-		    <p>As can be seen in the chart below showing the average televoting and search scores for all countries over the 2004-2018 period, there is strong positive correlation between search activity and televoting results:</p>
+		    <p>Search activity has proved to be a good predictor for the Contest results from 2017-19. But was this always the case, and <strong>can we confidently say that searches can reliably predict the Eurovision Song Contest</strong>? Or were the good predictions based on coincidence?</p>
+		    <p>To check this, <strong>we gathered the data from the past 15 editions of the Contest</strong>. Because voting rules changed quite considerably during this period, we focused on the televoting data. The televote winner was the Contest winner by definition from 2004-08. Since 2009, scores from a professional jury have also contributed to the outcome of the Contest.  But usually the televoting results are in line with the overall results: only once, in 2016, the televoting winner was not the overall winner.</p>
+		    <p>The chart below shows a <strong>strong correlation between the average points for search activity and televoting results</strong> between 2004-18.</p>
 		    <h2>Average televoting search activity points, 2004-2018</h2>
 		</section>
 		<div id="scatter-container">
 		    <svg id="scatter"></svg>
 		</div>
 		    		<section>
-		    <p>But of course we need to take a look at the data for each year separately to see if predictions based on search result can be reliable.</p>
+		    <p>But not all countries have participated in all finals of the Contest: after all, only 26 countries take part in the final every year. Countries that have participated in many finals will have scored more points and will have had more exposure to drive searches. <strong>We need to look at the data for each year separately</strong> to see if predictions based on search result can be reliable.</p>
 		    <h2>Searching vs voting by year</h2>
 		    <div id="slider-container">
 		        <input id="slider" type="range" min="2004" max="2018" step="1" value="2018">
@@ -351,106 +351,42 @@
 		    <svg id="scatteryearly"></svg>
 		</div>
 		<section>
-		    <p>For some years the correlation between search and televotes was pretty strong, in others it was a bit weaker. But in 9 of the 15 years, the candidate that was searched the most was also the one receiving the most televoting points. In 8 of these 9 years, the televoting winner was also the overall winner, so a prediction based on search activity would have been correct in more than half of the years.</p>
+		    <p>For some years the correlation between search and televotes was pretty strong (see 2007, 2008 and 2014-2017, in others it was a bit weaker. In 9 of the 15 years, the top-searched candidate also received the most points from televoting. In 8 of these 9 years, the televoting winner was also the overall winner, <strong>so a prediction based on search activity would have been correct more than half of the time</strong>.</p>
 		</section>		<section>
-		    <h2>So who votes for who?</h2>
-		    <p>A big critiques on the televoting system is that people don’t vote objectively for the song they like best, but also let cultural, historical and linguistic ties they have with other countries play a role in their voting. The data shows that this is definitely the case. The following chart displays the cumulative televoting points awarded from one country to another during the 2004-2018 period.</p>
-		    <h2>Who searches/votes for who?</h2>
+		    <!--h2>So who votes for who?</h2-->
+		    <p>Critics of the televoting system have suggested that countries fail to vote objectively for the best songs. It is suggested that Eurovision voters are heavily influenced by historical, cultural and linguistic ties with other countries when choosing where to cast their votes. This is backed up by the data. The following chart displays the cumulative televoting points awarded <strong>from one country to another</strong> during the 2004-2018 period.</p>
+		    <h2>Who searches/votes for whom?</h2>
 		</section>
 		<div id="votingpattern-container">
 		    <svg id="votingpattern"></svg>
-		</div>
-		<section>
-		    <p>The most consistent televoting patterns are Belarus awarding points to Russia, Cyprus to Greece, Denmark to Sweden and Moldova to Romania: all countries sharing borders, history and/or language.</p>
-		    <p>And there is a correlation between search activity and televoting. But the correlation isn’t perfect: some countries show more search activity for candidates of another country then they actually vote for candidates of that country (Belgium, why are you not voting for France, while you are clearly searching for the French candidates?). Or some countries don’t search much for other countries’ candidates, but they do vote for them (Moldova and Spain do this for Romanian candidates)</p>
+		</div>		<section>
+		    <h2>Search and Eurovision</h2>
+		    <p>Online search activity usually doesn’t have too much predictive power. You can’t predict elections and the outcome of things like sports events based on what people search for. But the Eurovision Song Contest is a special case: search activity is strongly correlated with the outcome of the Contest. There are two main reasons for this.</p>
+		    <p>The second reason is that <strong>people have a direct way of influencing  the outcome of the Contest</strong> through the televoting system. In sports, search activity for a team can’t predict the outcome of next weekend’s game. But in the Eurovision Song Contest, people searching for a candidate they like can have a direct say in the outcome.</p>
+		    <p>So do we still need the televoting system? Or should we just use search data to determine who gets our "douze points"?</p>
+		    <p></p>
 		</section>
 
 	</main>
 
 	<footer class='pudding-footer'>
-	
 		<section>
 			<h2>Methodology</h2>
 			<p>The televoting data is from Eurovision World and was also cross-referenced against Wikipedia. For the years 2009-13 this is combined data for jury + televoting. For the other years this is pure televoting.</p>
 			<p>The search interest data for 2004-18 was collected in March 2019. It spans the 7 days before the date of the Eurovision final for each year. Data is pulled using language-agnostic Google Knowledge Graph topics on each of the acts competing in the contest. Once the raw data has been collected, points are assigned according to the Eurovision scoring model. We have previously published data for 2017 and 2018.</p>
 			<p>Search interest for 2019 was collected on XXXX for the previous 7 days. We ran two semi-finals, and have simulated the final based on the predicted qualifiers.</p>
 		</section>
-	
-		<!--div class='footer-social'>
-			<p class='footer-social__preach'>Was this your jam? <span>Preach.</span></p>
-			<div class='footer-social__icons'>
-				<div class='footer-social__icon fb-like' data-href='' data-layout='button_count' data-action='like'
-					data-size='large' data-show-faces='true' data-share='false'></div>
-				<div class='footer-social__icon'>
-					<a href='https://twitter.com/share' data-size='large' class='twitter-share-button'>Tweet</a>
-				</div>
-			</div>
-		</div>
-	
-		<div id='fb-root'></div>
-	
-		<div class='footer-recirc'>
-			<div class='footer-recirc__articles'></div>
-		</div-->
-	
-		<!--div class='footer-company'>
-			<div class='footer-company__cta'>
-				<ul class='footer-company__cta-list'>
-					<li>
-						<a href='https://facebook.com/pudding.viz/'>
-							<img inline src='pudding/facebook.svg'>
-							<p>FACEBOOK</p>
-						</a>
-					</li>
-					<li>
-						<a href='https://twitter.com/puddingviz/'>
-							<img inline src='pudding/twitter.svg'>
-							<p>TWITTER</p>
-						</a>
-					</li>
-					<li>
-						<a href='https://www.instagram.com/pudding.cool'>
-							<img inline src='pudding/instagram.svg'>
-							<p>INSTAGRAM</p>
-						</a>
-					</li>
-					<li>
-						<a href='https://patreon.com/thepudding/'>
-							<img inline src='pudding/patreon.svg'>
-							<p>PATREON</p>
-						</a>
-					</li>
-					<li>
-						<a href='http://eepurl.com/czym6f'>
-							<img inline src='pudding/mail.svg'>
-							<p>NEWSLETTER</p>
-						</a>
-					</li>
-					<li>
-						<a href='https://pudding.cool/about'>
-							<img inline src='pudding/info.svg'>
-							<p>ABOUT</p>
-						</a>
-					</li>
-				</ul>
-			</div>
-	
-			<div class='footer-company__about'>
-				<img inline src='pudding/wordmark.svg'>
-				<p class='footer-company__description'><a href='https://pudding.cool'>The Pudding</a> is a digital publication
-					that
-					explains ideas debated in culture with visual essays.</p>
-				<p class='footer-company__trademark'>The Pudding<span>®</span> is made in Brooklyn, NY; Seattle, WA; San Antonio,
-					TX; and Great
-					Barrington, MA.</p>
-			</div>
-	
-		</div-->
+		<section>
+			<h2>Team</h2>
+			<p>Story, design and development: <a href="https://twitter.com/maartenzam">Maarten Lambrechts</a></p>
+			<p>Data gathering and editing: <a href="https://twitter.com/beckypinners">Rebecca Pinnington</a></p>
+			<p>Art direction: <a href="Alberto Cairo">Alberto Cairo</a></p>
+		</section>
 	</footer>
 
 	<script src='https://d3js.org/d3.v5.js'></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.independent.js"></script>
-	<script src='main.js?version=1557263725341' async></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.3.2/d3-annotation.independent.js"></script-->
+	<script src='main.js?version=1557316542416' async></script>
 </body>
 
 </html>

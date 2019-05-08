@@ -335,8 +335,10 @@ sub {
 }
 /*@require 'utils/no-ui-slider'*/
 footer.pudding-footer {
+  background: #fff;
+  color: #0d1730;
   padding: 3rem 1rem;
-  border-top: 4px solid #000;
+  border-top: 4px solid #fff;
   font-family: 'National 2 Web', Helvetica, Arial, sans-serif;
   margin-top: 3rem;
 }
