@@ -512,7 +512,24 @@ function init() {
     .attr("transform", `translate(0,0)`)
     .call(yAxis);
 
-  scatterOverallSvg.append("path")
+  scatterOverallSvg.append("line")
+    .attr("x1", scatterScaleX(0))
+    .attr("x2", scatterScaleX(200))
+    .attr("y1", scatterScaleY(0))
+    .attr("y2", scatterScaleY(200))
+    .attr("class", "fourtyfive");
+
+  scatterOverallSvg.append("text")
+    //.attr("x", scatterScaleX(150))
+    //.attr("y", scatterScaleY(200))
+    .text("Line of equal search and televoting points")
+    .attr("class", "annotation")
+    .style("fill", "#ffffff")
+    .style("font-size", 10)
+    .attr("transform", `translate(${scatterScaleX(160)},${scatterScaleY(160) - 3}) rotate(${-34})`);
+  
+
+  /*scatterOverallSvg.append("path")
     .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(200)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
     .style("fill", "#ffffff")
     .style("stroke", "#ffffff")
@@ -526,7 +543,7 @@ function init() {
     .style("stroke", "#ffffff")
     .style("stroke-width", 4)
     .style("filter", "url(#glow)")
-    .style("opacity", 0.2);
+    .style("opacity", 0.2);*/
 
   scatterOverallSvg.append("text")
     .attr("x", scatterScaleX(150))
@@ -544,15 +561,15 @@ function init() {
     .style("text-anchor", "start")
     .attr("class", "annotation");
 
-  scatterOverallSvg.selectAll("circle")
+  scatterOverallSvg.selectAll("img")
     .data(pointsMean)
-    .enter().append("circle")
-    .attr("cx", (d) => scatterScaleX(d.value.searchpoints))
-    .attr("cy", (d) => scatterScaleY(d.value.votepoints))
-    .attr("r", 5)
-    .attr("class", "circle-mean")
-    .style("filter", "url(#glow)")
-    .attr("id", (d) => d.key);
+    .enter().append("image")
+    .attr("xlink:href", function (d) { return "assets/images/flags/" + d.key + ".svg" })
+    .attr('width', countryheight)
+    .attr('height', countryheight)
+    .attr("x", (d) => scatterScaleX(d.value.searchpoints) - countryheight/2)
+    .attr("y", (d) => scatterScaleY(d.value.votepoints) - countryheight/2)
+    .style("filter", "url(#glow)");
 
     const labelPadding = 2;
 
@@ -583,7 +600,7 @@ function init() {
         return -d3.select(this.parentNode).attr("layout-width")/2;
       })
       .attr("dy", function(d) {
-        return -d3.select(this.parentNode).attr("layout-height")/2 - 3;
+        return -d3.select(this.parentNode).attr("layout-height")/2 - 8;
       });
 
   /*YEARLY SCATTER*/
@@ -615,7 +632,7 @@ function init() {
     .tickPadding(tickPadding)
     .tickSize(-scatterInnerWidth);
 
-  scatterYearlySvg.append("path")
+  /*scatterYearlySvg.append("path")
     .attr("d", `M${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(maxYearlyPoints - 10)} L${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)}`)
     .style("fill", "#ffffff")
     .style("stroke", "#ffffff")
@@ -629,7 +646,14 @@ function init() {
     .style("stroke", "#ffffff")
     .style("stroke-width", 4)
     .style("filter", "url(#glow)")
-    .style("opacity", 0.2);
+    .style("opacity", 0.2);*/
+
+  scatterYearlySvg.append("line")
+    .attr("x1", scatterYearlyScaleX(0))
+    .attr("x2", scatterYearlyScaleX(maxYearlyPoints))
+    .attr("y1", scatterYearlyScaleY(0))
+    .attr("y2", scatterYearlyScaleY(maxYearlyPoints))
+    .attr("class", "fourtyfive");
     
   scatterYearlySvg.append("g")
     .attr("class", "axis x-axis")
@@ -651,14 +675,27 @@ function init() {
     .attr("transform", `translate(0,0)`)
     .call(yYearlyAxis);
     
-  let yearlyCircles = scatterYearlySvg.selectAll("circle")
+  /*let yearlyCircles = scatterYearlySvg.selectAll("circle")
     .data(points)
     .enter().append("circle")
     .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
     .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
     .attr("r", 2)
     .attr("class", (d) => `circle-year circle-${d.year} circle-${d.to}`)
-    .attr("id", (d) => d.key);
+    .attr("id", (d) => d.key);*/
+
+  let dimSmall = 12;
+  let yearlyFlags = scatterYearlySvg.selectAll("img")
+    .data(points)
+    .enter().append("image")
+    .attr("xlink:href", function (d) { return "assets/images/flags/" + d.to + ".svg" })
+    .attr('width', dimSmall)
+    .attr('height', dimSmall)
+    .attr("x", (d) => scatterYearlyScaleX(d.searchpoints) - dimSmall/2)
+    .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - dimSmall/2)
+    .attr("class", (d) => `flag-year flag-${d.year} flag-${d.to}`)
+    .style("filter", "url(#glow)")
+    .style("opacity", 0.3);
 
   let yearTitle = scatterYearlySvg.append("text")
       .attr("x", scatterInnerWidth/2)
@@ -689,21 +726,34 @@ function init() {
   function highlightYear(yr){
     scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
     winnerText.classed("winner-highlight", false);
-    yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
+    /*yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
       .attr("r", 4)
+      .style("opacity", 0.1);*/
+    yearlyFlags.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
+      .attr('width', dimSmall)
+      .attr('height', dimSmall)
+      .attr("x", (d) => scatterYearlyScaleX(d.searchpoints) - dimSmall/2)
+      .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - dimSmall/2)
       .style("opacity", 0.1);
     let winner = winners[yr];
     
     //Sync winner animation
-    requestAnimationFrame(() => { startAnimation() })
+    /*requestAnimationFrame(() => { startAnimation() })
     let startAnimation = function(){
       scatterYearlySvg.select(`.circle-${yr}.circle-${winner}`).classed("winner-highlight", true);
       winnerText.classed("winner-highlight", true);
-    }
+    }*/
 
-    scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
+    /*scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
       .attr("r", 10)
       .style("opacity", 0.8)
+      .style("filter", "url(#glow)")*/
+    scatterYearlySvg.selectAll(".flag-" + yr).transition().duration(1000)
+      .attr('width', countryheight)
+      .attr('height', countryheight)
+      .attr("x", (d) => scatterYearlyScaleX(d.searchpoints) - countryheight/2)
+      .attr("y", (d) => scatterYearlyScaleY(d.votepoints) - countryheight/2)
+      .style("opacity", 1)
       .style("filter", "url(#glow)")
       .on("end", function() {
         scatterYearlySvg.datum(points.filter((el) => el.year == yr))
@@ -714,7 +764,7 @@ function init() {
             return -d3.select(this.parentNode).attr("layout-width")/2;
           })
           .attr("dy", function(d) {
-            return -d3.select(this.parentNode).attr("layout-height")/2 - 5;
+            return -d3.select(this.parentNode).attr("layout-height")/2 - 8;
           });
           scatterYearlySvg.selectAll("g.label text").transition().duration(500).style("opacity", 1);
         }

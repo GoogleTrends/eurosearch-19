@@ -16369,17 +16369,34 @@ function init() {
     scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
     scatterOverallSvg.append("text").text("Televoting points").attr("x", 0).attr("y", -40).attr("class", "y axis-title");
     scatterOverallSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yAxis);
-    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(10), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(210), ",").concat(scatterScaleY(0), " L").concat(scatterScaleX(210), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(10), ",").concat(scatterScaleY(0))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
-    scatterOverallSvg.append("path").attr("d", "M".concat(scatterScaleX(0), ",").concat(scatterScaleY(10), " L").concat(scatterScaleX(190), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(200), " L").concat(scatterScaleX(0), ",").concat(scatterScaleY(10))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
+    scatterOverallSvg.append("line").attr("x1", scatterScaleX(0)).attr("x2", scatterScaleX(200)).attr("y1", scatterScaleY(0)).attr("y2", scatterScaleY(200)).attr("class", "fourtyfive");
+    scatterOverallSvg.append("text") //.attr("x", scatterScaleX(150))
+    //.attr("y", scatterScaleY(200))
+    .text("Line of equal search and televoting points").attr("class", "annotation").style("fill", "#ffffff").style("font-size", 10).attr("transform", "translate(".concat(scatterScaleX(160), ",").concat(scatterScaleY(160) - 3, ") rotate(").concat(-34, ")"));
+    /*scatterOverallSvg.append("path")
+      .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(200)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
+      .style("fill", "#ffffff")
+      .style("stroke", "#ffffff")
+      .style("stroke-width", 4)
+      .style("filter", "url(#glow)")
+      .style("opacity", 0.2);
+     scatterOverallSvg.append("path")
+      .attr("d", `M${scatterScaleX(0)},${scatterScaleY(10)} L${scatterScaleX(190)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(10)}`)
+      .style("fill", "#ffffff")
+      .style("stroke", "#ffffff")
+      .style("stroke-width", 4)
+      .style("filter", "url(#glow)")
+      .style("opacity", 0.2);*/
+
     scatterOverallSvg.append("text").attr("x", scatterScaleX(150)).attr("y", scatterScaleY(30)).text("More search activity than televoting").style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
     scatterOverallSvg.append("text").attr("x", scatterScaleX(5)).attr("y", scatterScaleY(180)).text("More televoting than search activity").style("fill", "#ffffff").style("text-anchor", "start").attr("class", "annotation");
-    scatterOverallSvg.selectAll("circle").data(pointsMean).enter().append("circle").attr("cx", function (d) {
-      return scatterScaleX(d.value.searchpoints);
-    }).attr("cy", function (d) {
-      return scatterScaleY(d.value.votepoints);
-    }).attr("r", 5).attr("class", "circle-mean").style("filter", "url(#glow)").attr("id", function (d) {
-      return d.key;
-    });
+    scatterOverallSvg.selectAll("img").data(pointsMean).enter().append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.key + ".svg";
+    }).attr('width', countryheight).attr('height', countryheight).attr("x", function (d) {
+      return scatterScaleX(d.value.searchpoints) - countryheight / 2;
+    }).attr("y", function (d) {
+      return scatterScaleY(d.value.votepoints) - countryheight / 2;
+    }).style("filter", "url(#glow)");
     var labelPadding = 2; //Component used to render labels
 
     var textLabel = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
@@ -16399,7 +16416,7 @@ function init() {
     scatterOverallSvg.selectAll("g.label text").attr("dx", function (d) {
       return -d3.select(this.parentNode).attr("layout-width") / 2;
     }).attr("dy", function (d) {
-      return -d3.select(this.parentNode).attr("layout-height") / 2 - 3;
+      return -d3.select(this.parentNode).attr("layout-height") / 2 - 8;
     });
     /*YEARLY SCATTER*/
 
@@ -16415,21 +16432,45 @@ function init() {
     var scatterYearlyScaleY = d3.scaleLinear().domain([0, maxYearlyPoints]).range([scatterInnerHeight, 0]);
     var xYearlyAxis = d3.axisBottom(scatterYearlyScaleX).tickValues([100, 200, 300]).tickPadding(tickPadding).tickSize(-scatterInnerHeight);
     var yYearlyAxis = d3.axisLeft(scatterYearlyScaleY).tickValues([100, 200, 300]).ticks(5).tickPadding(tickPadding).tickSize(-scatterInnerWidth);
-    scatterYearlySvg.append("path").attr("d", "M".concat(scatterYearlyScaleX(10), ",").concat(scatterYearlyScaleY(0), " L").concat(scatterYearlyScaleX(maxYearlyPoints), ",").concat(scatterYearlyScaleY(0), " L").concat(scatterYearlyScaleX(maxYearlyPoints), ",").concat(scatterYearlyScaleY(maxYearlyPoints - 10), " L").concat(scatterYearlyScaleX(10), ",").concat(scatterYearlyScaleY(0))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
-    scatterYearlySvg.append("path").attr("d", "M".concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(10), " L").concat(scatterYearlyScaleX(maxYearlyPoints - 10), ",").concat(scatterYearlyScaleY(maxYearlyPoints), " L").concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(maxYearlyPoints), " L").concat(scatterYearlyScaleX(0), ",").concat(scatterYearlyScaleY(10))).style("fill", "#ffffff").style("stroke", "#ffffff").style("stroke-width", 4).style("filter", "url(#glow)").style("opacity", 0.2);
+    /*scatterYearlySvg.append("path")
+      .attr("d", `M${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(maxYearlyPoints - 10)} L${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)}`)
+      .style("fill", "#ffffff")
+      .style("stroke", "#ffffff")
+      .style("stroke-width", 4)
+      .style("filter", "url(#glow)")
+      .style("opacity", 0.2);
+     scatterYearlySvg.append("path")
+      .attr("d", `M${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)} L${scatterYearlyScaleX(maxYearlyPoints - 10)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)}`)
+      .style("fill", "#ffffff")
+      .style("stroke", "#ffffff")
+      .style("stroke-width", 4)
+      .style("filter", "url(#glow)")
+      .style("opacity", 0.2);*/
+
+    scatterYearlySvg.append("line").attr("x1", scatterYearlyScaleX(0)).attr("x2", scatterYearlyScaleX(maxYearlyPoints)).attr("y1", scatterYearlyScaleY(0)).attr("y2", scatterYearlyScaleY(maxYearlyPoints)).attr("class", "fourtyfive");
     scatterYearlySvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterInnerHeight, ")")).call(xYearlyAxis);
     scatterYearlySvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
     scatterYearlySvg.append("text").text("Televoting points").attr("x", 0).attr("y", -20).attr("class", "y axis-title");
     scatterYearlySvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yYearlyAxis);
-    var yearlyCircles = scatterYearlySvg.selectAll("circle").data(points).enter().append("circle").attr("cx", function (d) {
-      return scatterYearlyScaleX(d.searchpoints);
-    }).attr("cy", function (d) {
-      return scatterYearlyScaleY(d.votepoints);
-    }).attr("r", 2).attr("class", function (d) {
-      return "circle-year circle-".concat(d.year, " circle-").concat(d.to);
-    }).attr("id", function (d) {
-      return d.key;
-    });
+    /*let yearlyCircles = scatterYearlySvg.selectAll("circle")
+      .data(points)
+      .enter().append("circle")
+      .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
+      .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
+      .attr("r", 2)
+      .attr("class", (d) => `circle-year circle-${d.year} circle-${d.to}`)
+      .attr("id", (d) => d.key);*/
+
+    var dimSmall = 12;
+    var yearlyFlags = scatterYearlySvg.selectAll("img").data(points).enter().append("image").attr("xlink:href", function (d) {
+      return "assets/images/flags/" + d.to + ".svg";
+    }).attr('width', dimSmall).attr('height', dimSmall).attr("x", function (d) {
+      return scatterYearlyScaleX(d.searchpoints) - dimSmall / 2;
+    }).attr("y", function (d) {
+      return scatterYearlyScaleY(d.votepoints) - dimSmall / 2;
+    }).attr("class", function (d) {
+      return "flag-year flag-".concat(d.year, " flag-").concat(d.to);
+    }).style("filter", "url(#glow)").style("opacity", 0.3);
     var yearTitle = scatterYearlySvg.append("text").attr("x", scatterInnerWidth / 2).attr("y", -16).text("2018").attr("class", "yearly-title");
     var winnerText = scatterYearlySvg.append("text").attr("x", scatterInnerWidth * 9 / 10).attr("y", 30).attr("class", "winner-highlight").text("Winner");
     var textLabelYearly = (0, _d3fcLabelLayout.layoutTextLabel)().padding(labelPadding).value(function (d) {
@@ -16445,26 +16486,40 @@ function init() {
     function highlightYear(yr) {
       scatterYearlySvg.selectAll("g.label text").transition().duration(1000).style("opacity", 0);
       winnerText.classed("winner-highlight", false);
-      yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000).attr("r", 4).style("opacity", 0.1);
+      /*yearlyCircles.classed("winner-highlight", false).style("filter", "none").transition().duration(1000)
+        .attr("r", 4)
+        .style("opacity", 0.1);*/
+
+      yearlyFlags.classed("winner-highlight", false).style("filter", "none").transition().duration(1000).attr('width', dimSmall).attr('height', dimSmall).attr("x", function (d) {
+        return scatterYearlyScaleX(d.searchpoints) - dimSmall / 2;
+      }).attr("y", function (d) {
+        return scatterYearlyScaleY(d.votepoints) - dimSmall / 2;
+      }).style("opacity", 0.1);
       var winner = winners[yr]; //Sync winner animation
 
-      requestAnimationFrame(function () {
-        startAnimation();
-      });
-
-      var startAnimation = function startAnimation() {
-        scatterYearlySvg.select(".circle-".concat(yr, ".circle-").concat(winner)).classed("winner-highlight", true);
+      /*requestAnimationFrame(() => { startAnimation() })
+      let startAnimation = function(){
+        scatterYearlySvg.select(`.circle-${yr}.circle-${winner}`).classed("winner-highlight", true);
         winnerText.classed("winner-highlight", true);
-      };
+      }*/
 
-      scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000).attr("r", 10).style("opacity", 0.8).style("filter", "url(#glow)").on("end", function () {
+      /*scatterYearlySvg.selectAll(".circle-" + yr).transition().duration(1000)
+        .attr("r", 10)
+        .style("opacity", 0.8)
+        .style("filter", "url(#glow)")*/
+
+      scatterYearlySvg.selectAll(".flag-" + yr).transition().duration(1000).attr('width', countryheight).attr('height', countryheight).attr("x", function (d) {
+        return scatterYearlyScaleX(d.searchpoints) - countryheight / 2;
+      }).attr("y", function (d) {
+        return scatterYearlyScaleY(d.votepoints) - countryheight / 2;
+      }).style("opacity", 1).style("filter", "url(#glow)").on("end", function () {
         scatterYearlySvg.datum(points.filter(function (el) {
           return el.year == yr;
         })).call(labelsYearly);
         scatterYearlySvg.selectAll("g.label text").attr("dx", function (d) {
           return -d3.select(this.parentNode).attr("layout-width") / 2;
         }).attr("dy", function (d) {
-          return -d3.select(this.parentNode).attr("layout-height") / 2 - 5;
+          return -d3.select(this.parentNode).attr("layout-height") / 2 - 8;
         });
         scatterYearlySvg.selectAll("g.label text").transition().duration(500).style("opacity", 1);
       });
