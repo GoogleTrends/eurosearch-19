@@ -15657,6 +15657,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function resize() {}
 
 function init() {
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var screenRatio = windowWidth / windowHeight;
   Promise.all([d3.dsv(",", "assets/data/ranking.csv", function (d) {
     return {
       country: d.country,
@@ -16223,7 +16226,8 @@ function init() {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
       return d.key;
-    }) //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
+    }) //AFTER FINAL
+    //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
     .html(function (d, i) {
       return i + 1 + '. ?';
     });
@@ -16237,11 +16241,11 @@ function init() {
       'type': 'Feature',
       'geometry': {
         'type': 'Polygon',
-        'coordinates': [[[10, 70], [35, 70], [10, 30], [35, 30]]]
+        'coordinates': [[[-30, 70], [35, 70], [35, 30], [-30, 30]]]
       }
     };
     var projection = d3.geoAzimuthalEqualArea().rotate([-10, -52, 0]);
-    projection.fitExtent([[mapPadding, mapPadding + 25], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
+    projection.fitExtent([[mapPadding, mapPadding], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
     var geoPath = d3.geoPath().projection(projection);
 
     function getCountryVotingData(filterparams) {
@@ -16344,6 +16348,11 @@ function init() {
     /*MAP UPDATES*/
 
     var rectDim = 64;
+
+    if (windowWidth < 640) {
+      rectDim = windowWidth / 10;
+    }
+
     var gridMarginX = (mapWidth / 2 - 5 * rectDim) / rectDim;
     var gridMarginY = 120 / rectDim;
 
@@ -16432,9 +16441,10 @@ function init() {
       bottom: 60,
       left: 60
     };
-    var scatterWidth = document.querySelector("#scatter-container").clientWidth;
-    var scatterRatio = 2 / 3;
-    var scatterHeight = scatterWidth * scatterRatio;
+    var scatterWidth = document.querySelector("#scatter-container").clientWidth; //let scatterRatio = 2/3;
+    //const scatterHeight = scatterWidth * scatterRatio;
+
+    var scatterHeight = scatterWidth / screenRatio;
     var scatterInnerWidth = scatterWidth - scatterMargins.left - scatterMargins.right;
     var scatterInnerHeight = scatterHeight - scatterMargins.top - scatterMargins.bottom;
     var scatterOverallSvg = d3.select("svg#scatter").attr("width", scatterWidth).attr("height", scatterHeight).append("g").attr("transform", "translate(".concat(scatterMargins.left, ",").concat(scatterMargins.top, ")"));

@@ -5,6 +5,9 @@ import { annotation, annotationCalloutRect, annotationCallout } from 'd3-svg-ann
 function resize() {}
 
 function init() {
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const screenRatio = windowWidth/windowHeight;
 
   Promise.all([
     d3.dsv(",", "assets/data/ranking.csv", function(d) {
@@ -274,6 +277,7 @@ function init() {
       .style('text-anchor', 'end')
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
+      //AFTER FINAL
       //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
       .html(function (d, i) { return (i + 1) + '. ?'; });
 
@@ -285,16 +289,16 @@ function init() {
     .attr("width", mapWidth)
     .attr("height", mapHeight);
 
-    let extent = {
-      'type': 'Feature',
-      'geometry': {
-      'type': 'Polygon',
-      'coordinates': [[[10, 70], [35, 70], [10, 30], [35, 30]]]
-      }
+  let extent = {
+    'type': 'Feature',
+    'geometry': {
+    'type': 'Polygon',
+    'coordinates': [[[-30, 70], [35, 70], [35, 30], [-30, 30]]]
     }
+  }
   const projection = d3.geoAzimuthalEqualArea()
     .rotate([-10,-52,0]);
-  projection.fitExtent([[mapPadding, mapPadding + 25], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
+  projection.fitExtent([[mapPadding, mapPadding], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
 
   const geoPath = d3.geoPath()
     .projection(projection);
@@ -392,7 +396,8 @@ function init() {
   colorMap(filtervalues);
 
   /*MAP UPDATES*/
-  const rectDim = 64;
+  let rectDim = 64;
+  if(windowWidth < 640){rectDim = windowWidth/10}
   const gridMarginX = (mapWidth/2 - 5*rectDim)/rectDim;
   const gridMarginY = 120/rectDim;
   function rectToPath(x, y, dim){
@@ -478,8 +483,9 @@ function init() {
 
   const scatterMargins = {top: 70, right: 40, bottom: 60, left: 60};
   const scatterWidth = document.querySelector("#scatter-container").clientWidth;
-  let scatterRatio = 2/3;
-  const scatterHeight = scatterWidth * scatterRatio;
+  //let scatterRatio = 2/3;
+  //const scatterHeight = scatterWidth * scatterRatio;
+  const scatterHeight = scatterWidth/screenRatio;
 
   const scatterInnerWidth = scatterWidth - scatterMargins.left - scatterMargins.right;
   const scatterInnerHeight = scatterHeight - scatterMargins.top - scatterMargins.bottom;

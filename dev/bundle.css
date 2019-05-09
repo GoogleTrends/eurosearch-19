@@ -927,8 +927,13 @@ svg#ranking text {
   text-anchor: middle;
   pointer-events: none;
 }
-#scatter-container {
-/*max-width 60rem*/
+#scatter-container,
+#votingpattern-container {
+  max-width: 70rem;
+  margin: auto;
+}
+#voting-pattern-container {
+  max-width: 60rem;
   margin: auto;
 }
 #scatter-container svg {
