@@ -932,9 +932,8 @@ svg#ranking text {
   max-width: 70rem;
   margin: auto;
 }
-#voting-pattern-container {
-  max-width: 60rem;
-  margin: auto;
+#votingpattern-container {
+  position: relative;
 }
 #scatter-container svg {
   display: block;
@@ -1112,8 +1111,13 @@ input[type=range]:focus::-ms-fill-upper {
   stroke: #fff;
   stroke-width: 1;
   opacity: 0.7;
-  -webkit-animation: stroke 1s linear infinite;
-          animation: stroke 1s linear infinite;
+/*animation: stroke 1s linear infinite;
+
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}*/
 }
 circle.winner,
 .circle-winner-legend {
@@ -1135,14 +1139,25 @@ div.tooltip {
   -webkit-box-shadow: 0px 0px 4px #fff;
           box-shadow: 0px 0px 4px #fff;
 }
-@-webkit-keyframes stroke {
-  to {
-    stroke-dashoffset: 0;
-  }
+.y.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  margin-top: 5;
+  margin-bottom: 5;
+  text-align: center;
+  background: rgba(13,23,48,0.7);
+  float: left;
 }
-@keyframes stroke {
-  to {
-    stroke-dashoffset: 0;
-  }
+.x.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  right: 0px;
+  margin-top: 5;
+  margin-bottom: 5;
+  text-align: right;
+  background: rgba(13,23,48,0.7);
+  float: right;
 }
 /*# sourceMappingURL=bundle.css.map */

@@ -16462,30 +16462,17 @@ function init() {
     var xAxis = d3.axisBottom(scatterScaleX).tickValues([50, 100, 150]).tickPadding(tickPadding).tickSize(-scatterInnerHeight);
     var yAxis = d3.axisLeft(scatterScaleY).tickValues([50, 100, 150]).ticks(5).tickPadding(tickPadding).tickSize(-scatterInnerWidth);
     scatterOverallSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterInnerHeight, ")")).call(xAxis);
-    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
+    scatterOverallSvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 36).attr("class", "x axis-title");
     scatterOverallSvg.append("text").text("Televoting points").attr("x", 0).attr("y", -40).attr("class", "y axis-title");
     scatterOverallSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yAxis);
     scatterOverallSvg.append("line").attr("x1", scatterScaleX(0)).attr("x2", scatterScaleX(200)).attr("y1", scatterScaleY(0)).attr("y2", scatterScaleY(200)).attr("class", "fourtyfive");
-    scatterOverallSvg.append("text") //.attr("x", scatterScaleX(150))
-    //.attr("y", scatterScaleY(200))
-    .text("Line of equal search and televoting points").attr("class", "annotation").style("fill", "#ffffff").style("font-size", 10).attr("transform", "translate(".concat(scatterScaleX(160), ",").concat(scatterScaleY(160) - 3, ") rotate(").concat(-34, ")"));
-    /*scatterOverallSvg.append("path")
-      .attr("d", `M${scatterScaleX(10)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(0)} L${scatterScaleX(210)},${scatterScaleY(200)} L${scatterScaleX(10)},${scatterScaleY(0)}`)
-      .style("fill", "#ffffff")
-      .style("stroke", "#ffffff")
-      .style("stroke-width", 4)
-      .style("filter", "url(#glow)")
-      .style("opacity", 0.2);
-     scatterOverallSvg.append("path")
-      .attr("d", `M${scatterScaleX(0)},${scatterScaleY(10)} L${scatterScaleX(190)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(200)} L${scatterScaleX(0)},${scatterScaleY(10)}`)
-      .style("fill", "#ffffff")
-      .style("stroke", "#ffffff")
-      .style("stroke-width", 4)
-      .style("filter", "url(#glow)")
-      .style("opacity", 0.2);*/
-
-    scatterOverallSvg.append("text").attr("x", scatterScaleX(150)).attr("y", scatterScaleY(30)).text("More search activity than televoting").style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
-    scatterOverallSvg.append("text").attr("x", scatterScaleX(5)).attr("y", scatterScaleY(180)).text("More televoting than search activity").style("fill", "#ffffff").style("text-anchor", "start").attr("class", "annotation");
+    scatterOverallSvg.append("text").text("Line of equal search and televoting points").attr("class", "annotation").style("fill", "#ffffff").style("font-size", 10).attr("transform", "translate(".concat(scatterScaleX(160), ",").concat(scatterScaleY(160), ") rotate(").concat(-Math.atan(scatterScaleY(0) / scatterScaleX(190)) * 180 / Math.PI, ")")).attr("dy", -3);
+    var moreSearchOverall = scatterOverallSvg.append("text").attr("y", scatterScaleY(30)).style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
+    moreSearchOverall.append("tspan").attr("x", scatterScaleX(150)).text("More search");
+    moreSearchOverall.append("tspan").attr("x", scatterScaleX(150)).text("activity than televoting").attr("dy", "1em");
+    var moreTelevotingOverall = scatterOverallSvg.append("text").attr("y", scatterScaleY(180)).style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
+    moreTelevotingOverall.append("tspan").attr("x", scatterScaleX(25)).text("More televoting");
+    moreTelevotingOverall.append("tspan").attr("x", scatterScaleX(25)).text("than search activity").attr("dy", "1em");
     scatterOverallSvg.selectAll("img").data(pointsMean).enter().append("image").attr("xlink:href", function (d) {
       return "assets/images/flags/" + d.key + ".svg";
     }).attr('width', countryheight).attr('height', countryheight).attr("x", function (d) {
@@ -16535,35 +16522,11 @@ function init() {
     var scatterYearlyScaleY = d3.scaleLinear().domain([0, maxYearlyPoints]).range([scatterInnerHeight, 0]);
     var xYearlyAxis = d3.axisBottom(scatterYearlyScaleX).tickValues([100, 200, 300]).tickPadding(tickPadding).tickSize(-scatterInnerHeight);
     var yYearlyAxis = d3.axisLeft(scatterYearlyScaleY).tickValues([100, 200, 300]).ticks(5).tickPadding(tickPadding).tickSize(-scatterInnerWidth);
-    /*scatterYearlySvg.append("path")
-      .attr("d", `M${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(0)} L${scatterYearlyScaleX(maxYearlyPoints)},${scatterYearlyScaleY(maxYearlyPoints - 10)} L${scatterYearlyScaleX(10)},${scatterYearlyScaleY(0)}`)
-      .style("fill", "#ffffff")
-      .style("stroke", "#ffffff")
-      .style("stroke-width", 4)
-      .style("filter", "url(#glow)")
-      .style("opacity", 0.2);
-     scatterYearlySvg.append("path")
-      .attr("d", `M${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)} L${scatterYearlyScaleX(maxYearlyPoints - 10)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(maxYearlyPoints)} L${scatterYearlyScaleX(0)},${scatterYearlyScaleY(10)}`)
-      .style("fill", "#ffffff")
-      .style("stroke", "#ffffff")
-      .style("stroke-width", 4)
-      .style("filter", "url(#glow)")
-      .style("opacity", 0.2);*/
-
     scatterYearlySvg.append("line").attr("x1", scatterYearlyScaleX(0)).attr("x2", scatterYearlyScaleX(maxYearlyPoints)).attr("y1", scatterYearlyScaleY(0)).attr("y2", scatterYearlyScaleY(maxYearlyPoints)).attr("class", "fourtyfive");
     scatterYearlySvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,".concat(scatterInnerHeight, ")")).call(xYearlyAxis);
-    scatterYearlySvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 20).attr("class", "x axis-title");
+    scatterYearlySvg.append("text").text("Search activity points").attr("x", scatterInnerWidth).attr("y", scatterInnerHeight + 36).attr("class", "x axis-title");
     scatterYearlySvg.append("text").text("Televoting points").attr("x", 0).attr("y", -20).attr("class", "y axis-title");
     scatterYearlySvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yYearlyAxis);
-    /*let yearlyCircles = scatterYearlySvg.selectAll("circle")
-      .data(points)
-      .enter().append("circle")
-      .attr("cx", (d) => scatterYearlyScaleX(d.searchpoints))
-      .attr("cy", (d) => scatterYearlyScaleY(d.votepoints))
-      .attr("r", 2)
-      .attr("class", (d) => `circle-year circle-${d.year} circle-${d.to}`)
-      .attr("id", (d) => d.key);*/
-
     var dimSmall = 12;
     var yearlyFlags = scatterYearlySvg.selectAll("img").data(points).enter().append("image").attr("xlink:href", function (d) {
       return "assets/images/flags/" + d.to + ".svg";
@@ -16662,33 +16625,20 @@ function init() {
       return d.tele;
     });
     var maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
+    var stickyContainerLeft = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 170 + "px").style("top", "180px");
+    var stickyContainerRight = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 50 + "px").style("top", "0px");
+    stickyContainerLeft.append("div").attr("class", "y axis-title sticky").append("p").html("<img inline src='assets/images/arrow-up.svg' width='24px' height='24px'>MORE<br/>TELEVOTING<br/>POINTS").style("text-align", "center").style("font-size", "0.7em");
+    stickyContainerRight.append("div").attr("class", "x axis-title sticky").append("p").html("<img inline src='assets/images/arrow-right.svg' width='24px' height='24px'>MORE<br/>SEARCH ACTIVITY<br/>POINTS").style("text-align", "center").style("font-size", "0.7em");
     var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", patternscatterWidth).attr("height", patternscatterHeight).append("g").attr("transform", "translate(".concat(patternscatterMargins.left, ",").concat(patternscatterMargins.top, ")"));
     var scatterPatternScaleX = d3.scaleLinear().domain([30, maxPatternPoints]).range([0, patternscatterInnerWidth]);
     var scatterPatternScaleY = d3.scaleLinear().domain([30, maxPatternPoints]).range([patternscatterInnerHeight, 0]);
     var xPatternAxis = d3.axisTop(scatterPatternScaleX).tickValues([50, 100]).tickSize(-patternscatterInnerHeight);
     var yPatternAxis = d3.axisLeft(scatterPatternScaleY).tickValues([50, 75, 100, 125]).ticks(5).tickPadding(10).tickSize(-patternscatterInnerWidth);
     scatterPatternSvg.append("g").attr("class", "axis x-axis").attr("transform", "translate(0,10)").call(xPatternAxis);
-    scatterPatternSvg.append("text").text("MORE TELEVOTING POINTS").attr("x", scatterPatternScaleX(30) + 75).attr("y", 0).style("text-anchor", "end").attr("transform", "rotate(-90)").style("font-size", "0.7em").attr("class", "y axis-title");
     scatterPatternSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yPatternAxis);
     scatterPatternSvg.append("line").attr("x1", scatterPatternScaleX(0)).attr("x2", scatterPatternScaleX(200)).attr("y1", scatterPatternScaleY(0)).attr("y2", scatterPatternScaleY(200)).attr("class", "fourtyfive");
     var type = _d3SvgAnnotation.annotationCallout;
     var annotations = [{
-      note: {
-        label: "",
-        padding: 0,
-        wrap: 200
-      },
-      data: {
-        search: 30.5,
-        tele: maxPatternPoints + 3
-      },
-      dy: -1,
-      dx: -190,
-      connector: {
-        end: "arrow"
-      },
-      color: "#ffffff"
-    }, {
       note: {
         label: "LINE OF EQUAL SEARCH AND TELEVOTING POINTS",
         padding: 0
@@ -16699,21 +16649,6 @@ function init() {
       },
       dy: -1,
       dx: -100,
-      connector: {
-        end: "arrow"
-      },
-      color: "#ffffff"
-    }, {
-      note: {
-        label: "MORE SEARCH ACTIVITY",
-        padding: 0
-      },
-      data: {
-        search: 50,
-        tele: maxPatternPoints + 3
-      },
-      dy: -1,
-      dx: -50,
       connector: {
         end: "arrow"
       },
@@ -16848,7 +16783,6 @@ function init() {
       }
     });
     scatterPatternSvg.append("g").attr("class", "annotation-group").call(makeAnnotations);
-    d3.select(".annotations .annotation .annotation-connector").attr("transform", "rotate(-90)");
     var patternMarkers = scatterPatternSvg.selectAll("g.vote-icon").data(patterns).enter().append("g").attr("transform", function (d) {
       return "translate(".concat(scatterPatternScaleX(d.search) - (30 + countryheight) / 2, ",").concat(scatterPatternScaleY(d.tele) - countryheight / 2, ")");
     }).style("opacity", 1).style("filter", "url(#glow)").on("mouseover", function (d) {
