@@ -16370,8 +16370,7 @@ function init() {
           return (0, _flubber.combine)((0, _flubber.splitPathString)(d3.select(this).attr("d")), rectToPath(grid[d3.select(this).attr("id")].coords.x, grid[d3.select(this).attr("id")].coords.y, rectDim), {
             "single": true
           });
-        }); //.style("filter", "url(#glow)");
-
+        });
         setTimeout(function () {
           var country;
 
@@ -16625,8 +16624,8 @@ function init() {
       return d.tele;
     });
     var maxPatternPoints = d3.max([maxSearchPatternPoints, maxVotePatternPoints]);
-    var stickyContainerLeft = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 170 + "px").style("top", "180px");
-    var stickyContainerRight = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 50 + "px").style("top", "0px");
+    var stickyContainerLeft = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 170 + "px").style("top", "180px").style("pointer-events", "none");
+    var stickyContainerRight = d3.select("#votingpattern-container").insert("div", "svg").style("position", "absolute").style("width", patternscatterWidth + "px").style("height", patternscatterHeight - 50 + "px").style("top", "0px").style("pointer-events", "none");
     stickyContainerLeft.append("div").attr("class", "y axis-title sticky").append("p").html("<img inline src='assets/images/arrow-up.svg' width='24px' height='24px'>MORE<br/>TELEVOTING<br/>POINTS").style("text-align", "center").style("font-size", "0.7em");
     stickyContainerRight.append("div").attr("class", "x axis-title sticky").append("p").html("<img inline src='assets/images/arrow-right.svg' width='24px' height='24px'>MORE<br/>SEARCH ACTIVITY<br/>POINTS").style("text-align", "center").style("font-size", "0.7em");
     var scatterPatternSvg = d3.select("svg#votingpattern").attr("width", patternscatterWidth).attr("height", patternscatterHeight).append("g").attr("transform", "translate(".concat(patternscatterMargins.left, ",").concat(patternscatterMargins.top, ")"));
@@ -16783,7 +16782,7 @@ function init() {
       }
     });
     scatterPatternSvg.append("g").attr("class", "annotation-group").call(makeAnnotations);
-    var patternMarkers = scatterPatternSvg.selectAll("g.vote-icon").data(patterns).enter().append("g").attr("transform", function (d) {
+    var patternMarkers = scatterPatternSvg.selectAll("g.vote-icon").data(patterns).enter().append("g").attr("class", "vote-icon").attr("transform", function (d) {
       return "translate(".concat(scatterPatternScaleX(d.search) - (30 + countryheight) / 2, ",").concat(scatterPatternScaleY(d.tele) - countryheight / 2, ")");
     }).style("opacity", 1).style("filter", "url(#glow)").on("mouseover", function (d) {
       tooltip.transition().duration(200).style("opacity", .9);
