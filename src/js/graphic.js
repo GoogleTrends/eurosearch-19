@@ -283,7 +283,14 @@ function init() {
 
   /** MAP **/
   const mapWidth = document.querySelector("#map-container").clientWidth;
-  const mapHeight = 800;
+  let mapHeight = 800;
+  if(windowWidth < 600){
+    mapHeight = 600;
+  }
+  if(windowWidth < 450){
+    mapHeight = 450;
+  }
+
   const mapPadding = 20;
   let mapSvg = d3.select("#map")
     .attr("width", mapWidth)
@@ -449,7 +456,7 @@ function init() {
   d3.select("#countrylist").on("change", function(){
     filtervalues.country = d3.select(this).node().value;
     countries.classed("highlight", false);
-    d3.select(".country#" + filtervalues.country).raise().classed("highlight", true);
+    d3.select(".country#" + filtervalues.country).raise().classed("highlight", true).style("filter", "url(#glow)");
     colorMap(filtervalues);
   })
 

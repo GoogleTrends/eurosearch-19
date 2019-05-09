@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1557412971014'>
+<html lang='en' data-version='1557414519033'>
 
 <head>
 
@@ -286,36 +286,42 @@
 		    <p>The map below shows <strong>which countries searched the most for the contestant of other countries</strong>. Colors represent imaginary points awarded to and from each country, using the 12 point system. Switch from the geographic map to the grid map to better represent small countries. After the final, the map will be updated with the televoting results.</p>
 		    <h2>Search and televoting mapped</h2>
 		    <div id="map-controls">
-		        <div class="map-control-text">
-		            Show
+		        <div class="map-control-block">
+		            <div class="map-control-text">
+		                Show
+		            </div>
+		            <div class="stv-radio-buttons-wrapper">
+			            <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="search" id="button5" checked />
+			            <label for="button5">search</label>
+			            <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="tele" id="button6"/>
+			            <label for="button6">televoting</label>
+		            </div>
+		            <div class="map-control-text">
+		                points
+		            </div>
 		        </div>
-		        <div class="stv-radio-buttons-wrapper">
-			        <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="search" id="button5" checked />
-			        <label for="button5">search</label>
-			        <input type="radio" class="stv-radio-button searchteleswitch" name="searchteleswitch" value="tele" id="button6"/>
-			        <label for="button6">televoting</label>
+		        <div class="map-control-block">
+		            <div class="stv-radio-buttons-wrapper">
+			            <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="from" id="button3" />
+			            <label for="button3">from</label>
+			            <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="to" id="button4" checked/>
+			            <label for="button4">to</label>
+		            </div>
+		            <div class="stv-radio-buttons-wrapper">
+		                <select id="countrylist">
+		                </select>
+		            </div>
 		        </div>
-		        <div class="map-control-text">
-		            points
-		        </div>
-		        <div class="stv-radio-buttons-wrapper">
-			        <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="from" id="button3" />
-			        <label for="button3">from</label>
-			        <input type="radio" class="stv-radio-button fromtoswitch" name="fromtoswitch" value="to" id="button4" checked/>
-			        <label for="button4">to</label>
-		        </div>
-		        <div class="stv-radio-buttons-wrapper">
-		            <select id="countrylist">
-		            </select>
-		        </div>
-		        <div class="map-control-text">
-		            as a
-		        </div>
-		        <div class="stv-radio-buttons-wrapper mapswitch-wrapper">
-			        <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="geo" id="button1" checked />
-			        <label for="button1">map</label>
-			        <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="rects" id="button2" />
-			        <label for="button2">grid</label>
+		        <div class="map-control-block">
+		            <div class="map-control-text">
+		                as a
+		            </div>
+		            <div class="stv-radio-buttons-wrapper mapswitch-wrapper">
+			            <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="geo" id="button1" checked />
+			            <label for="button1">map</label>
+			            <input type="radio" class="stv-radio-button mapswitch" name="mapswitch" value="rects" id="button2" />
+			            <label for="button2">grid</label>
+		            </div>
 		        </div>
 		    </div>
 		    <div id="map-legend">
@@ -389,7 +395,7 @@
 	</footer>
 
 	<script src='https://d3js.org/d3.v5.js'></script>
-	<script src='main.js?version=1557412971014' async></script>
+	<script src='main.js?version=1557414519033' async></script>
 </body>
 
 </html>

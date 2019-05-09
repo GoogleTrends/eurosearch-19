@@ -16235,6 +16235,15 @@ function init() {
 
     var mapWidth = document.querySelector("#map-container").clientWidth;
     var mapHeight = 800;
+
+    if (windowWidth < 600) {
+      mapHeight = 600;
+    }
+
+    if (windowWidth < 450) {
+      mapHeight = 450;
+    }
+
     var mapPadding = 20;
     var mapSvg = d3.select("#map").attr("width", mapWidth).attr("height", mapHeight);
     var extent = {
@@ -16399,7 +16408,7 @@ function init() {
     d3.select("#countrylist").on("change", function () {
       filtervalues.country = d3.select(this).node().value;
       countries.classed("highlight", false);
-      d3.select(".country#" + filtervalues.country).raise().classed("highlight", true);
+      d3.select(".country#" + filtervalues.country).raise().classed("highlight", true).style("filter", "url(#glow)");
       colorMap(filtervalues);
     }); //DELETE AFTER FINAL
 

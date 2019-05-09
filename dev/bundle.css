@@ -879,6 +879,10 @@ svg#ranking text {
   margin-bottom: 2em;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+}
+.map-control-block {
+  display: inline-block;
 }
 .stv-radio-buttons-wrapper {
   clear: both;
