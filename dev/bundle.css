@@ -871,6 +871,12 @@ svg#ranking text {
           box-shadow: inset 0px 0px 4px #000;
   cursor: default;
 }
+.stv-radio-button:disabled + label {
+  background-color: #777;
+  color: #aaa;
+  cursor: default;
+  opacity: 0.5;
+}
 #countrylist {
   width: 120px;
 }
@@ -919,6 +925,7 @@ svg#ranking text {
   font-size: 0.7em;
   fill: #fff;
   text-anchor: middle;
+  pointer-events: none;
 }
 #scatter-container {
 /*max-width 60rem*/

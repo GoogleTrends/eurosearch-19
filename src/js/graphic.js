@@ -43,54 +43,55 @@ function init() {
   ])
   .then(([rankingdata, geodata, points, votingdata, patterns]) => {
     const grid = {
-      ALB: {"coords": { x: 5, y: 8 }, "name": "Albania"},
-      ARM: {"coords": { x: 9, y: 6 }, "name": "Armenia"},
-      AUS: {"coords": { x: 9, y: 9 }, "name": "Australia"},
-      AUT: {"coords": { x: 4, y: 5 }, "name": "Austria"},
-      AZE: {"coords": { x: 9, y: 5 }, "name": "Azerbaijan"},
-      BEL: {"coords": { x: 2, y: 3 }, "name": "Belgium"},
-      BGR: {"coords": { x: 7, y: 6 }, "name": "Bulgaria"},
-      BIH: {"coords": { x: 5, y: 6 }, "name": "Bosnia and Herzegovina"},
-      BLR: {"coords": { x: 6, y: 3 }, "name": "Belarus"},
-      CHE: {"coords": { x: 3, y: 4 }, "name": "Switzerland"},
-      CYP: {"coords": { x: 8, y: 7 }, "name": "Cyprus"},
-      CZE: {"coords": { x: 4, y: 4 }, "name": "Czechia"},
-      DEU: {"coords": { x: 4, y: 3 }, "name": "Germany"},
-      DNK: {"coords": { x: 4, y: 2 }, "name": "Denmark"},
-      ESP: {"coords": { x: 1, y: 5 }, "name": "Spain"},
-      EST: {"coords": { x: 6, y: 1 }, "name": "Estonia"},
-      FIN: {"coords": { x: 6, y: 0 }, "name": "Finland"},
-      FRA: {"coords": { x: 1, y: 4 }, "name": "France"},
-      GBR: {"coords": { x: 1, y: 2 }, "name": "UK"},
-      GEO: {"coords": { x: 8, y: 5 }, "name": "Georgia"},
-      GRC: {"coords": { x: 6, y: 8 }, "name": "Greece"},
-      HUN: {"coords": { x: 5, y: 5 }, "name": "Hungaria"},
-      HRV: {"coords": { x: 4, y: 6 }, "name": "Croatia"},
-      IRL: {"coords": { x: 0, y: 2 }, "name": "Ireland"},
-      ISL: {"coords": { x: 0, y: 0 }, "name": "Iceland"},
-      ISR: {"coords": { x: 8, y: 8 }, "name": "Israel"},
-      ITA: {"coords": { x: 3, y: 5 }, "name": "Italia"},
-      KOS: {"coords": { x: 6, y: 7 }, "name": "Kosovo"},
-      LTU: {"coords": { x: 6, y: 2 }, "name": "Lithuania"},
-      LUX: {"coords": { x: 2, y: 4 }, "name": "Luxembourg"},
-      LVA: {"coords": { x: 7, y: 2 }, "name": "Latvia"},
-      MDA: {"coords": { x: 7, y: 5 }, "name": "Moldova"},
-      MKD: {"coords": { x: 7, y: 7 }, "name": "North Macedonia"},
-      MLT: {"coords": { x: 1, y: 7 }, "name": "Malta"},
-      MNE: {"coords": { x: 5, y: 7 }, "name": "Montenegro"},
-      NLD: {"coords": { x: 3, y: 3 }, "name": "Netherlands"},
-      NOR: {"coords": { x: 4, y: 0 }, "name": "Norway"},
-      POL: {"coords": { x: 5, y: 3 }, "name": "Poland"},
-      PRT: {"coords": { x: 0, y: 5 }, "name": "Portugal"},
-      ROU: {"coords": { x: 6, y: 5 }, "name": "Romania"},
-      RUS: {"coords": { x: 7, y: 3 }, "name": "Russia"},
-      SMR: {"coords": { x: 2, y: 6 }, "name": "San Marino"},
-      SRB: {"coords": { x: 6, y: 6 }, "name": "Serbia"},
-      SVK: {"coords": { x: 5, y: 4 }, "name": "Slovakia"},
-      SVN: {"coords": { x: 3, y: 6 }, "name": "Slovenia"},
-      SWE: {"coords": { x: 5, y: 0 }, "name": "Sweden"},
-      UKR: {"coords": { x: 6, y: 4 }, "name": "Ukraine"},
-      TUR: {"coords": { x: 8, y: 6 }, "name": "Turkey"}
+      //UPDATE STATUS TO ELIMINATED AFTER SEMIS
+      ALB: {"status": "finalist", "coords": { x: 5, y: 8 }, "name": "Albania"},
+      ARM: {"status": "finalist", "coords": { x: 9, y: 6 }, "name": "Armenia"},
+      AUS: {"status": "finalist", "coords": { x: 9, y: 9 }, "name": "Australia"},
+      AUT: {"status": "finalist", "coords": { x: 4, y: 5 }, "name": "Austria"},
+      AZE: {"status": "finalist", "coords": { x: 9, y: 5 }, "name": "Azerbaijan"},
+      BEL: {"status": "finalist", "coords": { x: 2, y: 3 }, "name": "Belgium"},
+      BGR: {"status": "nonparticipant", "coords": { x: 7, y: 6 }, "name": "Bulgaria"},
+      BIH: {"status": "nonparticipant", "coords": { x: 5, y: 6 }, "name": "Bosnia and Herzegovina"},
+      BLR: {"status": "finalist", "coords": { x: 6, y: 3 }, "name": "Belarus"},
+      CHE: {"status": "finalist", "coords": { x: 3, y: 4 }, "name": "Switzerland"},
+      CYP: {"status": "finalist", "coords": { x: 8, y: 7 }, "name": "Cyprus"},
+      CZE: {"status": "finalist", "coords": { x: 4, y: 4 }, "name": "Czechia"},
+      DEU: {"status": "finalist", "coords": { x: 4, y: 3 }, "name": "Germany"},
+      DNK: {"status": "finalist", "coords": { x: 4, y: 2 }, "name": "Denmark"},
+      ESP: {"status": "finalist", "coords": { x: 1, y: 5 }, "name": "Spain"},
+      EST: {"status": "finalist", "coords": { x: 6, y: 1 }, "name": "Estonia"},
+      FIN: {"status": "finalist", "coords": { x: 6, y: 0 }, "name": "Finland"},
+      FRA: {"status": "finalist", "coords": { x: 1, y: 4 }, "name": "France"},
+      GBR: {"status": "finalist", "coords": { x: 1, y: 2 }, "name": "UK"},
+      GEO: {"status": "finalist", "coords": { x: 8, y: 5 }, "name": "Georgia"},
+      GRC: {"status": "finalist", "coords": { x: 6, y: 8 }, "name": "Greece"},
+      HUN: {"status": "finalist", "coords": { x: 5, y: 5 }, "name": "Hungaria"},
+      HRV: {"status": "finalist", "coords": { x: 4, y: 6 }, "name": "Croatia"},
+      IRL: {"status": "finalist", "coords": { x: 0, y: 2 }, "name": "Ireland"},
+      ISL: {"status": "finalist", "coords": { x: 0, y: 0 }, "name": "Iceland"},
+      ISR: {"status": "finalist", "coords": { x: 8, y: 8 }, "name": "Israel"},
+      ITA: {"status": "finalist", "coords": { x: 3, y: 5 }, "name": "Italia"},
+      KOS: {"status": "nonparticipant", "coords": { x: 6, y: 7 }, "name": "Kosovo"},
+      LTU: {"status": "finalist", "coords": { x: 6, y: 2 }, "name": "Lithuania"},
+      LUX: {"status": "nonparticipant", "coords": { x: 2, y: 4 }, "name": "Luxembourg"},
+      LVA: {"status": "finalist", "coords": { x: 7, y: 2 }, "name": "Latvia"},
+      MDA: {"status": "finalist", "coords": { x: 7, y: 5 }, "name": "Moldova"},
+      MKD: {"status": "finalist", "coords": { x: 7, y: 7 }, "name": "North Macedonia"},
+      MLT: {"status": "finalist", "coords": { x: 1, y: 7 }, "name": "Malta"},
+      MNE: {"status": "finalist", "coords": { x: 5, y: 7 }, "name": "Montenegro"},
+      NLD: {"status": "finalist", "coords": { x: 3, y: 3 }, "name": "Netherlands"},
+      NOR: {"status": "finalist", "coords": { x: 4, y: 0 }, "name": "Norway"},
+      POL: {"status": "finalist", "coords": { x: 5, y: 3 }, "name": "Poland"},
+      PRT: {"status": "finalist", "coords": { x: 0, y: 5 }, "name": "Portugal"},
+      ROU: {"status": "finalist", "coords": { x: 6, y: 5 }, "name": "Romania"},
+      RUS: {"status": "finalist", "coords": { x: 7, y: 3 }, "name": "Russia"},
+      SMR: {"status": "finalist", "coords": { x: 2, y: 6 }, "name": "San Marino"},
+      SRB: {"status": "finalist", "coords": { x: 6, y: 6 }, "name": "Serbia"},
+      SVK: {"status": "nonparticipant", "coords": { x: 5, y: 4 }, "name": "Slovakia"},
+      SVN: {"status": "finalist", "coords": { x: 3, y: 6 }, "name": "Slovenia"},
+      SWE: {"status": "finalist", "coords": { x: 5, y: 0 }, "name": "Sweden"},
+      UKR: {"status": "nonparticipant", "coords": { x: 6, y: 4 }, "name": "Ukraine"},
+      TUR: {"status": "nonparticipant", "coords": { x: 8, y: 6 }, "name": "Turkey"}
     }
     const winners = {
       "2004": "UKR",    
@@ -298,6 +299,33 @@ function init() {
   const geoPath = d3.geoPath()
     .projection(projection);
 
+  function getCountryVotingData(filterparams) {
+    let countryVotingData = votingdata.filter((el) => el[filterparams.fromto] == filterparams.country)
+    let countryVoting = countryVotingData.map(el => {
+      const obj = {};
+      obj.to = el.to;
+      obj.from = el.from;
+      obj.points = el[filterparams.searchtele];
+      return obj;
+    })
+    return countryVoting;
+  }
+  function getMapTooltipContent(countryID){
+    let countryData = getCountryVotingData(filtervalues);
+    let pointCategory = "Search activity";
+    if(filtervalues.searchtele == "tele"){ pointCategory = "Televoting"}
+    let direction = "from";
+    if(filtervalues.fromto == "from"){ direction = "to"; }
+    let tooltipData = countryData.filter((el) => el[direction] == countryID)[0];
+    if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} is not participating`}
+    //AFTER FINAL
+    //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
+    else if(filtervalues.fromto == "from" && grid[countryID].status == "eliminated"){return `${grid[countryID].name} was eliminated<br/> in the semi finals`}
+    else{
+      return `${pointCategory} points <br/> from ${grid[tooltipData.from].name} to ${grid[tooltipData.to].name}: ${tooltipData.points}`;
+    }
+  }
+
   let countries = mapSvg.selectAll('path')
     .data(geodata.features)
     .enter().append('path')
@@ -309,7 +337,8 @@ function init() {
       tooltip.transition()		
           .duration(200)		
           .style("opacity", .9);		
-      tooltip.html(`${grid[d.properties.ADM0_A3].name} <br/>`)	
+      tooltip.html(getMapTooltipContent(d.properties.ADM0_A3))   
+        //`${grid[d.properties.ADM0_A3].name} <br/>`)	
           .style("left", (d3.event.pageX + 28) + "px")		
           .style("top", (d3.event.pageY - 28) + "px");	
       })
@@ -334,19 +363,6 @@ function init() {
     .style('background-color', function (d) {
         return cols(d3.select(this).text());
     });
-
-  function getCountryVotingData(filterparams) {
-    let countryVotingData = votingdata.filter((el) => el[filterparams.fromto] == filterparams.country)
-    let countryVoting = countryVotingData.map(el => {
-      const obj = {};
-      obj.to = el.to;
-      obj.from = el.from;
-      obj.points = el[filterparams.searchtele];
-      return obj;
-    })
-    //countryVoting = countryVoting.filter((cntr) => cntr.points > 0)
-    return countryVoting;
-  }
 
   function colorMap(filterparams){
     let countrydata = getCountryVotingData(filterparams);
@@ -432,6 +448,9 @@ function init() {
     d3.select(".country#" + filtervalues.country).raise().classed("highlight", true);
     colorMap(filtervalues);
   })
+
+  //DELETE AFTER FINAL
+  d3.select("#button6").property("disabled", true);
 
   d3.selectAll("input.fromtoswitch").on("change", function(){
     filtervalues.fromto = d3.select(this).node().value;

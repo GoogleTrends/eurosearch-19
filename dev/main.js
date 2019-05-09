@@ -15624,7 +15624,7 @@ var index = {
 };
 var _default = index;
 exports.default = _default;
-},{"d3-selection":"4Gs4","d3-drag":"aj7N","d3-shape":"UQVl","d3-dispatch":"7UiF"}],"TAPd":[function(require,module,exports) {
+},{"d3-selection":"4Gs4","d3-drag":"aj7N","d3-shape":"UQVl","d3-dispatch":"7UiF"}],"graphic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15694,7 +15694,9 @@ function init() {
         patterns = _ref2[4];
 
     var grid = {
+      //UPDATE STATUS TO ELIMINATED AFTER SEMIS
       ALB: {
+        "status": "finalist",
         "coords": {
           x: 5,
           y: 8
@@ -15702,6 +15704,7 @@ function init() {
         "name": "Albania"
       },
       ARM: {
+        "status": "finalist",
         "coords": {
           x: 9,
           y: 6
@@ -15709,6 +15712,7 @@ function init() {
         "name": "Armenia"
       },
       AUS: {
+        "status": "finalist",
         "coords": {
           x: 9,
           y: 9
@@ -15716,6 +15720,7 @@ function init() {
         "name": "Australia"
       },
       AUT: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 5
@@ -15723,6 +15728,7 @@ function init() {
         "name": "Austria"
       },
       AZE: {
+        "status": "finalist",
         "coords": {
           x: 9,
           y: 5
@@ -15730,6 +15736,7 @@ function init() {
         "name": "Azerbaijan"
       },
       BEL: {
+        "status": "finalist",
         "coords": {
           x: 2,
           y: 3
@@ -15737,6 +15744,7 @@ function init() {
         "name": "Belgium"
       },
       BGR: {
+        "status": "nonparticipant",
         "coords": {
           x: 7,
           y: 6
@@ -15744,6 +15752,7 @@ function init() {
         "name": "Bulgaria"
       },
       BIH: {
+        "status": "nonparticipant",
         "coords": {
           x: 5,
           y: 6
@@ -15751,6 +15760,7 @@ function init() {
         "name": "Bosnia and Herzegovina"
       },
       BLR: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 3
@@ -15758,6 +15768,7 @@ function init() {
         "name": "Belarus"
       },
       CHE: {
+        "status": "finalist",
         "coords": {
           x: 3,
           y: 4
@@ -15765,6 +15776,7 @@ function init() {
         "name": "Switzerland"
       },
       CYP: {
+        "status": "finalist",
         "coords": {
           x: 8,
           y: 7
@@ -15772,6 +15784,7 @@ function init() {
         "name": "Cyprus"
       },
       CZE: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 4
@@ -15779,6 +15792,7 @@ function init() {
         "name": "Czechia"
       },
       DEU: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 3
@@ -15786,6 +15800,7 @@ function init() {
         "name": "Germany"
       },
       DNK: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 2
@@ -15793,6 +15808,7 @@ function init() {
         "name": "Denmark"
       },
       ESP: {
+        "status": "finalist",
         "coords": {
           x: 1,
           y: 5
@@ -15800,6 +15816,7 @@ function init() {
         "name": "Spain"
       },
       EST: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 1
@@ -15807,6 +15824,7 @@ function init() {
         "name": "Estonia"
       },
       FIN: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 0
@@ -15814,6 +15832,7 @@ function init() {
         "name": "Finland"
       },
       FRA: {
+        "status": "finalist",
         "coords": {
           x: 1,
           y: 4
@@ -15821,6 +15840,7 @@ function init() {
         "name": "France"
       },
       GBR: {
+        "status": "finalist",
         "coords": {
           x: 1,
           y: 2
@@ -15828,6 +15848,7 @@ function init() {
         "name": "UK"
       },
       GEO: {
+        "status": "finalist",
         "coords": {
           x: 8,
           y: 5
@@ -15835,6 +15856,7 @@ function init() {
         "name": "Georgia"
       },
       GRC: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 8
@@ -15842,6 +15864,7 @@ function init() {
         "name": "Greece"
       },
       HUN: {
+        "status": "finalist",
         "coords": {
           x: 5,
           y: 5
@@ -15849,6 +15872,7 @@ function init() {
         "name": "Hungaria"
       },
       HRV: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 6
@@ -15856,6 +15880,7 @@ function init() {
         "name": "Croatia"
       },
       IRL: {
+        "status": "finalist",
         "coords": {
           x: 0,
           y: 2
@@ -15863,6 +15888,7 @@ function init() {
         "name": "Ireland"
       },
       ISL: {
+        "status": "finalist",
         "coords": {
           x: 0,
           y: 0
@@ -15870,6 +15896,7 @@ function init() {
         "name": "Iceland"
       },
       ISR: {
+        "status": "finalist",
         "coords": {
           x: 8,
           y: 8
@@ -15877,6 +15904,7 @@ function init() {
         "name": "Israel"
       },
       ITA: {
+        "status": "finalist",
         "coords": {
           x: 3,
           y: 5
@@ -15884,6 +15912,7 @@ function init() {
         "name": "Italia"
       },
       KOS: {
+        "status": "nonparticipant",
         "coords": {
           x: 6,
           y: 7
@@ -15891,6 +15920,7 @@ function init() {
         "name": "Kosovo"
       },
       LTU: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 2
@@ -15898,6 +15928,7 @@ function init() {
         "name": "Lithuania"
       },
       LUX: {
+        "status": "nonparticipant",
         "coords": {
           x: 2,
           y: 4
@@ -15905,6 +15936,7 @@ function init() {
         "name": "Luxembourg"
       },
       LVA: {
+        "status": "finalist",
         "coords": {
           x: 7,
           y: 2
@@ -15912,6 +15944,7 @@ function init() {
         "name": "Latvia"
       },
       MDA: {
+        "status": "finalist",
         "coords": {
           x: 7,
           y: 5
@@ -15919,6 +15952,7 @@ function init() {
         "name": "Moldova"
       },
       MKD: {
+        "status": "finalist",
         "coords": {
           x: 7,
           y: 7
@@ -15926,6 +15960,7 @@ function init() {
         "name": "North Macedonia"
       },
       MLT: {
+        "status": "finalist",
         "coords": {
           x: 1,
           y: 7
@@ -15933,6 +15968,7 @@ function init() {
         "name": "Malta"
       },
       MNE: {
+        "status": "finalist",
         "coords": {
           x: 5,
           y: 7
@@ -15940,6 +15976,7 @@ function init() {
         "name": "Montenegro"
       },
       NLD: {
+        "status": "finalist",
         "coords": {
           x: 3,
           y: 3
@@ -15947,6 +15984,7 @@ function init() {
         "name": "Netherlands"
       },
       NOR: {
+        "status": "finalist",
         "coords": {
           x: 4,
           y: 0
@@ -15954,6 +15992,7 @@ function init() {
         "name": "Norway"
       },
       POL: {
+        "status": "finalist",
         "coords": {
           x: 5,
           y: 3
@@ -15961,6 +16000,7 @@ function init() {
         "name": "Poland"
       },
       PRT: {
+        "status": "finalist",
         "coords": {
           x: 0,
           y: 5
@@ -15968,6 +16008,7 @@ function init() {
         "name": "Portugal"
       },
       ROU: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 5
@@ -15975,6 +16016,7 @@ function init() {
         "name": "Romania"
       },
       RUS: {
+        "status": "finalist",
         "coords": {
           x: 7,
           y: 3
@@ -15982,6 +16024,7 @@ function init() {
         "name": "Russia"
       },
       SMR: {
+        "status": "finalist",
         "coords": {
           x: 2,
           y: 6
@@ -15989,6 +16032,7 @@ function init() {
         "name": "San Marino"
       },
       SRB: {
+        "status": "finalist",
         "coords": {
           x: 6,
           y: 6
@@ -15996,6 +16040,7 @@ function init() {
         "name": "Serbia"
       },
       SVK: {
+        "status": "nonparticipant",
         "coords": {
           x: 5,
           y: 4
@@ -16003,6 +16048,7 @@ function init() {
         "name": "Slovakia"
       },
       SVN: {
+        "status": "finalist",
         "coords": {
           x: 3,
           y: 6
@@ -16010,6 +16056,7 @@ function init() {
         "name": "Slovenia"
       },
       SWE: {
+        "status": "finalist",
         "coords": {
           x: 5,
           y: 0
@@ -16017,6 +16064,7 @@ function init() {
         "name": "Sweden"
       },
       UKR: {
+        "status": "nonparticipant",
         "coords": {
           x: 6,
           y: 4
@@ -16024,6 +16072,7 @@ function init() {
         "name": "Ukraine"
       },
       TUR: {
+        "status": "nonparticipant",
         "coords": {
           x: 8,
           y: 6
@@ -16194,11 +16243,56 @@ function init() {
     var projection = d3.geoAzimuthalEqualArea().rotate([-10, -52, 0]);
     projection.fitExtent([[mapPadding, mapPadding + 25], [mapWidth - mapPadding, mapHeight - mapPadding]], extent);
     var geoPath = d3.geoPath().projection(projection);
+
+    function getCountryVotingData(filterparams) {
+      var countryVotingData = votingdata.filter(function (el) {
+        return el[filterparams.fromto] == filterparams.country;
+      });
+      var countryVoting = countryVotingData.map(function (el) {
+        var obj = {};
+        obj.to = el.to;
+        obj.from = el.from;
+        obj.points = el[filterparams.searchtele];
+        return obj;
+      });
+      return countryVoting;
+    }
+
+    function getMapTooltipContent(countryID) {
+      var countryData = getCountryVotingData(filtervalues);
+      var pointCategory = "Search activity";
+
+      if (filtervalues.searchtele == "tele") {
+        pointCategory = "Televoting";
+      }
+
+      var direction = "from";
+
+      if (filtervalues.fromto == "from") {
+        direction = "to";
+      }
+
+      var tooltipData = countryData.filter(function (el) {
+        return el[direction] == countryID;
+      })[0];
+
+      if (grid[countryID].status == "nonparticipant") {
+        return "".concat(grid[countryID].name, " is not participating");
+      } //AFTER FINAL
+      //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
+      else if (filtervalues.fromto == "from" && grid[countryID].status == "eliminated") {
+          return "".concat(grid[countryID].name, " was eliminated<br/> in the semi finals");
+        } else {
+          return "".concat(pointCategory, " points <br/> from ").concat(grid[tooltipData.from].name, " to ").concat(grid[tooltipData.to].name, ": ").concat(tooltipData.points);
+        }
+    }
+
     var countries = mapSvg.selectAll('path').data(geodata.features).enter().append('path').attr("id", function (d) {
       return d.properties.ADM0_A3;
     }).attr("class", "country").attr("d", geoPath).style("fill", "#0D1730").on("mouseover", function (d) {
       tooltip.transition().duration(200).style("opacity", .9);
-      tooltip.html("".concat(grid[d.properties.ADM0_A3].name, " <br/>")).style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
+      tooltip.html(getMapTooltipContent(d.properties.ADM0_A3)) //`${grid[d.properties.ADM0_A3].name} <br/>`)	
+      .style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
     }).on("mousemove", function () {
       tooltip.style("left", d3.event.pageX + 28 + "px").style("top", d3.event.pageY - 28 + "px");
     }).on("mouseout", function (d) {
@@ -16212,21 +16306,6 @@ function init() {
     d3.selectAll('.legend-item').style('background-color', function (d) {
       return cols(d3.select(this).text());
     });
-
-    function getCountryVotingData(filterparams) {
-      var countryVotingData = votingdata.filter(function (el) {
-        return el[filterparams.fromto] == filterparams.country;
-      });
-      var countryVoting = countryVotingData.map(function (el) {
-        var obj = {};
-        obj.to = el.to;
-        obj.from = el.from;
-        obj.points = el[filterparams.searchtele];
-        return obj;
-      }); //countryVoting = countryVoting.filter((cntr) => cntr.points > 0)
-
-      return countryVoting;
-    }
 
     function colorMap(filterparams) {
       var countrydata = getCountryVotingData(filterparams);
@@ -16314,7 +16393,9 @@ function init() {
       countries.classed("highlight", false);
       d3.select(".country#" + filtervalues.country).raise().classed("highlight", true);
       colorMap(filtervalues);
-    });
+    }); //DELETE AFTER FINAL
+
+    d3.select("#button6").property("disabled", true);
     d3.selectAll("input.fromtoswitch").on("change", function () {
       filtervalues.fromto = d3.select(this).node().value;
       colorMap(filtervalues);
@@ -16838,5 +16919,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map
