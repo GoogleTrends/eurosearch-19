@@ -777,6 +777,13 @@ h2,
 time {
   font-family: "Noto Serif";
 }
+h2 {
+  margin-top: 5em;
+}
+h2,
+h3 {
+  text-align: center;
+}
 h1 {
   font-size: 4em;
   text-shadow: 0px 0px 10px #000;
@@ -786,6 +793,7 @@ h1 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 5rem;
 }
 .intro__dek {
   max-width: 50rem;
@@ -797,6 +805,7 @@ h1 {
   color: #fff;
   font-family: Roboto;
   font-weight: 100;
+  margin-top: 100px;
 }
 .intro__time {
   margin-top: 0;
@@ -807,9 +816,50 @@ h1 {
   text-decoration: underline;
   -webkit-text-decoration-color: #fff;
           text-decoration-color: #fff;
+  border: none;
+}
+.intro__byline a:hover,
+.intro__byline a:visited {
+  color: #fff;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #fff;
+          text-decoration-color: #fff;
 }
 .intro__logo {
   margin: auto;
+  text-align: center;
+}
+p.footnote {
+  font-size: 0.7em;
+}
+p a {
+  color: #ffeca6;
+  -webkit-text-decoration-color: #ffeca6;
+          text-decoration-color: #ffeca6;
+  text-decoration: underline;
+}
+p a:hover,
+p a:visited {
+  color: #ffd700;
+  -webkit-text-decoration-color: #ffd700;
+          text-decoration-color: #ffd700;
+}
+.pudding-footer p a {
+  color: #0d1730;
+  -webkit-text-decoration-color: #0d1730;
+          text-decoration-color: #0d1730;
+  text-decoration: underline;
+  border: none;
+}
+p.introduction {
+  font-size: 1.3em;
+  text-align: center;
+  font-family: Noto Serif;
+}
+p strong {
+  text-shadow: 0px 0px 20px #fff;
+}
+.team {
   text-align: center;
 }
 #ranking-container {

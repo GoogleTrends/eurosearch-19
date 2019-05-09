@@ -565,7 +565,7 @@ function init() {
     .text("Line of equal search and televoting points")
     .attr("class", "annotation")
     .style("fill", "#ffffff")
-    .style("font-size", 10)
+    .style("font-size", "10px")
     .attr("transform", `translate(${scatterScaleX(160)},${scatterScaleY(160)}) rotate(${-Math.atan(scatterScaleY(0)/scatterScaleX(190))
     *180/Math.PI})`)
     .attr("dy", -3)

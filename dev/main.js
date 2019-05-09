@@ -16466,7 +16466,7 @@ function init() {
     scatterOverallSvg.append("text").text("Televoting points").attr("x", 0).attr("y", -40).attr("class", "y axis-title");
     scatterOverallSvg.append("g").attr("class", "axis y-axis").attr("transform", "translate(0,0)").call(yAxis);
     scatterOverallSvg.append("line").attr("x1", scatterScaleX(0)).attr("x2", scatterScaleX(200)).attr("y1", scatterScaleY(0)).attr("y2", scatterScaleY(200)).attr("class", "fourtyfive");
-    scatterOverallSvg.append("text").text("Line of equal search and televoting points").attr("class", "annotation").style("fill", "#ffffff").style("font-size", 10).attr("transform", "translate(".concat(scatterScaleX(160), ",").concat(scatterScaleY(160), ") rotate(").concat(-Math.atan(scatterScaleY(0) / scatterScaleX(190)) * 180 / Math.PI, ")")).attr("dy", -3);
+    scatterOverallSvg.append("text").text("Line of equal search and televoting points").attr("class", "annotation").style("fill", "#ffffff").style("font-size", "10px").attr("transform", "translate(".concat(scatterScaleX(160), ",").concat(scatterScaleY(160), ") rotate(").concat(-Math.atan(scatterScaleY(0) / scatterScaleX(190)) * 180 / Math.PI, ")")).attr("dy", -3);
     var moreSearchOverall = scatterOverallSvg.append("text").attr("y", scatterScaleY(30)).style("fill", "#ffffff").style("text-anchor", "middle").attr("class", "annotation");
     moreSearchOverall.append("tspan").attr("x", scatterScaleX(150)).text("More search");
     moreSearchOverall.append("tspan").attr("x", scatterScaleX(150)).text("activity than televoting").attr("dy", "1em");
