@@ -283,12 +283,20 @@ function init() {
 
   /** MAP **/
   const mapWidth = document.querySelector("#map-container").clientWidth;
+  let rectDim = 64;
   let mapHeight = 800;
-  if(windowWidth < 600){
-    mapHeight = 600;
+  let gridMarginX = (mapWidth/2 - 5*rectDim)/rectDim;
+  let gridMarginY = 120/rectDim;
+
+  if(windowWidth < 640){
+    rectDim = windowWidth/10;
+    mapHeight = 640 + rectDim;
+    gridMarginX = 0;
+    gridMarginY = 0.5;
   }
+
   if(windowWidth < 450){
-    mapHeight = 450;
+    mapHeight = 450 + rectDim;
   }
 
   const mapPadding = 20;
@@ -403,10 +411,6 @@ function init() {
   colorMap(filtervalues);
 
   /*MAP UPDATES*/
-  let rectDim = 64;
-  if(windowWidth < 640){rectDim = windowWidth/10}
-  const gridMarginX = (mapWidth/2 - 5*rectDim)/rectDim;
-  const gridMarginY = 120/rectDim;
   function rectToPath(x, y, dim){
     x = x + gridMarginX;
     y = y + gridMarginY;
@@ -924,9 +928,10 @@ function init() {
       },
       data: { search: maxPatternPoints + 3, tele: maxPatternPoints + 3},
       dy: -1,
-      dx: -100,
+      dx: -70,
       connector: { end: "arrow" },
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 0
     },
     {
     note: {
@@ -939,18 +944,20 @@ function init() {
     connector: { end: "arrow" },
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 500
   },{
     note: {
       label: "The most consistent search activity",
       title: "Cyprus to Greece"
     },
     data: { search: 142, tele: 140},
-    dy: 200,
+    dy: 100,
     dx: -1,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 500
   },
   {
     note: {
@@ -958,11 +965,12 @@ function init() {
       title: "Moldova to Romania"
     },
     data: { search: 66, tele: 137},
-    dy: 100,
+    dy: 70,
     dx: -1,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 600
   },
   {
     note: {
@@ -974,7 +982,8 @@ function init() {
     dx: -1,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 700
   },
   {
     note: {
@@ -986,19 +995,22 @@ function init() {
     dx: 1,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 600
   },
   {
     note: {
       label: "A big Turkish diaspora drives searches and televoting from Germany and other countries like Belgium and France",
-      title: "Germany to Turkey"
+      title: "Germany to Turkey",
+      wrap: 200
     },
     data: { search: 64, tele: 84},
     dy: 0,
-    dx: 300,
+    dx: 200,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 600
   },
   {
     note: {
@@ -1007,22 +1019,11 @@ function init() {
     },
     data: { search: 91, tele: 43},
     dy: -200,
-    dx: 1,
+    dx: 50,
     subject: {
     },
-    color: "#ffffff"
-  },
-  {
-    note: {
-      label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
-      title: "Turkey to Greece"
-    },
-    data: { search: 91, tele: 43},
-    dy: -200,
-    dx: 1,
-    subject: {
-    },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 600
   },
   {
     note: {
@@ -1030,17 +1031,20 @@ function init() {
       title: "Belgium to France"
     },
     data: { search: 110, tele: 42},
-    dy: 100,
+    dy: 60,
     dx: 1,
     subject: {
     },
-    color: "#ffffff"
+    color: "#ffffff",
+    minwidth: 400
   }
 ]
+  let annotToRender = annotations.filter((anot) => anot.minwidth < windowWidth)
+
   const makeAnnotations = annotation()
     .notePadding(15)
     .type(type)
-    .annotations(annotations)
+    .annotations(annotToRender)
     .textWrap(150)
     .accessors({
       x: d => scatterPatternScaleX(d.search),

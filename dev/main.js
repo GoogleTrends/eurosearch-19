@@ -16234,14 +16234,20 @@ function init() {
     /** MAP **/
 
     var mapWidth = document.querySelector("#map-container").clientWidth;
+    var rectDim = 64;
     var mapHeight = 800;
+    var gridMarginX = (mapWidth / 2 - 5 * rectDim) / rectDim;
+    var gridMarginY = 120 / rectDim;
 
-    if (windowWidth < 600) {
-      mapHeight = 600;
+    if (windowWidth < 640) {
+      rectDim = windowWidth / 10;
+      mapHeight = 640 + rectDim;
+      gridMarginX = 0;
+      gridMarginY = 0.5;
     }
 
     if (windowWidth < 450) {
-      mapHeight = 450;
+      mapHeight = 450 + rectDim;
     }
 
     var mapPadding = 20;
@@ -16355,15 +16361,6 @@ function init() {
     ;
     colorMap(filtervalues);
     /*MAP UPDATES*/
-
-    var rectDim = 64;
-
-    if (windowWidth < 640) {
-      rectDim = windowWidth / 10;
-    }
-
-    var gridMarginX = (mapWidth / 2 - 5 * rectDim) / rectDim;
-    var gridMarginY = 120 / rectDim;
 
     function rectToPath(x, y, dim) {
       x = x + gridMarginX;
@@ -16656,11 +16653,12 @@ function init() {
         tele: maxPatternPoints + 3
       },
       dy: -1,
-      dx: -100,
+      dx: -70,
       connector: {
         end: "arrow"
       },
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 0
     }, {
       note: {
         label: "The most consistent voting pattern, 141 points awarded over xx Contests",
@@ -16676,7 +16674,8 @@ function init() {
         end: "arrow"
       },
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 500
     }, {
       note: {
         label: "The most consistent search activity",
@@ -16686,10 +16685,11 @@ function init() {
         search: 142,
         tele: 140
       },
-      dy: 200,
+      dy: 100,
       dx: -1,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 500
     }, {
       note: {
         label: "Moldova doesn't search much for Romanian candidates, but votes a lot for them",
@@ -16699,10 +16699,11 @@ function init() {
         search: 66,
         tele: 137
       },
-      dy: 100,
+      dy: 70,
       dx: -1,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 600
     }, {
       note: {
         label: "Romania returns the favour to Moldova, with slightly more search and a little less televoting",
@@ -16715,7 +16716,8 @@ function init() {
       dy: 50,
       dx: -1,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 700
     }, {
       note: {
         label: "Sweden is often at the receiving end of televoting points awarded from other Nordic countries",
@@ -16728,20 +16730,23 @@ function init() {
       dy: 50,
       dx: 1,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 600
     }, {
       note: {
         label: "A big Turkish diaspora drives searches and televoting from Germany and other countries like Belgium and France",
-        title: "Germany to Turkey"
+        title: "Germany to Turkey",
+        wrap: 200
       },
       data: {
         search: 64,
         tele: 84
       },
       dy: 0,
-      dx: 300,
+      dx: 200,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 600
     }, {
       note: {
         label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
@@ -16752,22 +16757,10 @@ function init() {
         tele: 43
       },
       dy: -200,
-      dx: 1,
+      dx: 50,
       subject: {},
-      color: "#ffffff"
-    }, {
-      note: {
-        label: "A high search activity for Greek participants in Turkey does not result in many televoting points",
-        title: "Turkey to Greece"
-      },
-      data: {
-        search: 91,
-        tele: 43
-      },
-      dy: -200,
-      dx: 1,
-      subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 600
     }, {
       note: {
         label: "The lowest televoting to search activity ratio is recorded by the Belgians, awarding points to France",
@@ -16777,12 +16770,16 @@ function init() {
         search: 110,
         tele: 42
       },
-      dy: 100,
+      dy: 60,
       dx: 1,
       subject: {},
-      color: "#ffffff"
+      color: "#ffffff",
+      minwidth: 400
     }];
-    var makeAnnotations = (0, _d3SvgAnnotation.annotation)().notePadding(15).type(type).annotations(annotations).textWrap(150).accessors({
+    var annotToRender = annotations.filter(function (anot) {
+      return anot.minwidth < windowWidth;
+    });
+    var makeAnnotations = (0, _d3SvgAnnotation.annotation)().notePadding(15).type(type).annotations(annotToRender).textWrap(150).accessors({
       x: function x(d) {
         return scatterPatternScaleX(d.search);
       },
