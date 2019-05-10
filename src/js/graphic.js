@@ -27,7 +27,7 @@ function init() {
         votepoints: +d.votepoints
       };
     }),
-    d3.dsv(",", "assets/data/votingdata_18.csv", function(d){
+    d3.dsv(",", "assets/data/votingdata_19.csv", function(d){
       return {
         to: d.to,
         from: d.from,
@@ -120,7 +120,7 @@ function init() {
       .style("opacity", 0);
     
     let filtervalues = {
-      "country": "ISR",
+      "country": "LVA",
       "fromto": "to",
       "searchtele": "search"
     }

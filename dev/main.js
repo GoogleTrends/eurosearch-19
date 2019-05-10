@@ -15674,7 +15674,7 @@ function init() {
       year: +d.year,
       votepoints: +d.votepoints
     };
-  }), d3.dsv(",", "assets/data/votingdata_18.csv", function (d) {
+  }), d3.dsv(",", "assets/data/votingdata_19.csv", function (d) {
     return {
       to: d.to,
       from: d.from,
@@ -16104,7 +16104,7 @@ function init() {
     };
     var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
     var filtervalues = {
-      "country": "ISR",
+      "country": "LVA",
       "fromto": "to",
       "searchtele": "search"
       /** SELECT LIST **/
