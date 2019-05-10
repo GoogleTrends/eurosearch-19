@@ -196,7 +196,12 @@ function init() {
       .attr("class", (d) => `label-${d}`)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
-      .attr('font-family', 'Rubik');
+      .attr('font-family', 'Rubik')
+      //AFTER FINAL: DELETE
+      .style("opacity", function(d){
+        if(d == "search"){ return 1;}
+        else{ return 0.3; }
+      });
 
     const countryheight = 24;
 
@@ -242,24 +247,26 @@ function init() {
       .data(rankingdata)
       .enter().append('image')
       //AFTER FINAL
-      .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
-      //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+      .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      .style("opacity", 0.15)
       .attr('x', voteScale("tele") - countryheight/2)
       .attr('y', (d) => countryScale(d.tele) - countryheight/2)
       .attr('class', 'question')
-      .attr('width', countryheight - 2)
-      .attr('height', countryheight - 2);
+      .attr('width', countryheight)
+      .attr('height', countryheight);
     rankingSvg.selectAll('image.question.overall')
       .data(rankingdata)
       .enter().append('image')
       //AFTER FINAL
       //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
       .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      .style("opacity", 0.15)
       .attr('x', voteScale("overall") - countryheight/2)
       .attr('y', (d) => countryScale(d.overall) - countryheight/2)
       .attr('class', 'question')
-      .attr('width', countryheight - 2)
-      .attr('height', countryheight - 2);
+      .attr('width', countryheight)
+      .attr('height', countryheight);
   rankingSvg.selectAll('text.countrylabel-left')
       .data(rankingdata)
       .enter().append('text')
@@ -276,8 +283,8 @@ function init() {
       .enter().append('text')
       .attr('x', rankingWidth)
       //AFTER FINAL
-      .attr("y", (d) => countryScale(d.overall))
-      //.attr("y", (d) => countryScale(d.search))
+      //.attr("y", (d) => countryScale(d.overall))
+      .attr("y", (d) => countryScale(d.search))
       .attr("dy", "0.3em")
       .style('font-family', 'Rubik')
       .style('font-size', '14px')
@@ -285,8 +292,9 @@ function init() {
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
       //AFTER FINAL
-      .html((d) => d.overall + '. ' + grid[d.country].name);
-      //.html((d) => d.search + '. ?');
+      //.html((d) => d.overall + '. ' + grid[d.country].name);
+      .html((d) => d.search + '. ?')
+      .style("opacity", 0.3);
 
   /** MAP **/
   const mapWidth = document.querySelector("#map-container").clientWidth;

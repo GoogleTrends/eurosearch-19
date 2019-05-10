@@ -16167,7 +16167,14 @@ function init() {
       return headers[d];
     }).attr("class", function (d) {
       return "label-".concat(d);
-    }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik');
+    }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik') //AFTER FINAL: DELETE
+    .style("opacity", function (d) {
+      if (d == "search") {
+        return 1;
+      } else {
+        return 0.3;
+      }
+    });
     var countryheight = 24; //Connecting lines
     //AFTER FINAL
 
@@ -16203,19 +16210,19 @@ function init() {
       return 'id-' + d.Country;
     }).attr('width', countryheight - 2).attr('height', countryheight - 2).style("filter", "url(#flagglow)");
     rankingSvg.selectAll('image.question.tele').data(rankingdata).enter().append('image') //AFTER FINAL
+    //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
     .attr("xlink:href", function (d) {
-      return 'assets/images/flags/' + d.country + '.svg';
-    }) //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
-    .attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
+      return 'assets/images/help-circle' + '.svg';
+    }).style("opacity", 0.15).attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
       return countryScale(d.tele) - countryheight / 2;
-    }).attr('class', 'question').attr('width', countryheight - 2).attr('height', countryheight - 2);
+    }).attr('class', 'question').attr('width', countryheight).attr('height', countryheight);
     rankingSvg.selectAll('image.question.overall').data(rankingdata).enter().append('image') //AFTER FINAL
     //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
     .attr("xlink:href", function (d) {
       return 'assets/images/help-circle' + '.svg';
-    }).attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
+    }).style("opacity", 0.15).attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
       return countryScale(d.overall) - countryheight / 2;
-    }).attr('class', 'question').attr('width', countryheight - 2).attr('height', countryheight - 2);
+    }).attr('class', 'question').attr('width', countryheight).attr('height', countryheight);
     rankingSvg.selectAll('text.countrylabel-left').data(rankingdata).enter().append('text').attr('x', 0).attr('y', function (d) {
       return countryScale(d.search);
     }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').attr('class', function (d) {
@@ -16226,18 +16233,18 @@ function init() {
       return i + 1 + '. ' + grid[d.country].name;
     });
     rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth) //AFTER FINAL
+    //.attr("y", (d) => countryScale(d.overall))
     .attr("y", function (d) {
-      return countryScale(d.overall);
-    }) //.attr("y", (d) => countryScale(d.search))
-    .attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
+      return countryScale(d.search);
+    }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
       return d.key;
     }) //AFTER FINAL
+    //.html((d) => d.overall + '. ' + grid[d.country].name);
     .html(function (d) {
-      return d.overall + '. ' + grid[d.country].name;
-    }); //.html((d) => d.search + '. ?');
-
+      return d.search + '. ?';
+    }).style("opacity", 0.3);
     /** MAP **/
 
     var mapWidth = document.querySelector("#map-container").clientWidth;
