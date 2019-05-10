@@ -15660,7 +15660,7 @@ function init() {
   var windowWidth = window.innerWidth;
   var windowHeight = window.innerHeight;
   var screenRatio = windowWidth / windowHeight;
-  Promise.all([d3.dsv(",", "assets/data/ranking.csv", function (d) {
+  Promise.all([d3.dsv(",", "assets/data/ranking_20190510.csv", function (d) {
     return {
       country: d.country,
       search: +d.search,
@@ -16152,8 +16152,8 @@ function init() {
     var flagfeMerge = flagfilter.append("feMerge");
     flagfeMerge.append("feMergeNode").attr("in", "coloredBlur");
     flagfeMerge.append("feMergeNode").attr("in", "SourceGraphic");
-    var countryScale = d3.scaleBand().domain(rankingdata.map(function (d) {
-      return d.country;
+    var countryScale = d3.scaleBand().domain(Array.from(new Array(26), function (val, index) {
+      return index + 1;
     })).range([rankingMargin.top, rankingHeight]);
     var voteScale = d3.scalePoint().domain(["search", "tele", "overall"]).range([rankingMargin.left, rankingWidth - rankingMargin.right]).padding(0);
     var headers = {
@@ -16169,6 +16169,7 @@ function init() {
       return "label-".concat(d);
     }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik');
     var countryheight = 24; //Connecting lines
+    //AFTER FINAL
 
     /*let line = d3.line()
       .x((d) => voteScale(d.key))
@@ -16197,22 +16198,26 @@ function init() {
     rankingSvg.selectAll('image.flag').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
       return 'assets/images/flags/' + d.country + '.svg';
     }).attr('x', voteScale("search") - countryheight / 2).attr("y", function (d) {
-      return countryScale(d.country) - countryheight / 2;
+      return countryScale(d.search) - countryheight / 2;
     }).attr('class', function (d) {
       return 'id-' + d.Country;
     }).attr('width', countryheight - 2).attr('height', countryheight - 2).style("filter", "url(#flagglow)");
-    rankingSvg.selectAll('image.question.tele').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
-      return 'assets/images/help-circle' + '.svg';
-    }).attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
-      return countryScale(d.country) - countryheight / 2;
+    rankingSvg.selectAll('image.question.tele').data(rankingdata).enter().append('image') //AFTER FINAL
+    .attr("xlink:href", function (d) {
+      return 'assets/images/flags/' + d.country + '.svg';
+    }) //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+    .attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
+      return countryScale(d.tele) - countryheight / 2;
     }).attr('class', 'question').attr('width', countryheight - 2).attr('height', countryheight - 2);
-    rankingSvg.selectAll('image.question.overall').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
+    rankingSvg.selectAll('image.question.overall').data(rankingdata).enter().append('image') //AFTER FINAL
+    //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+    .attr("xlink:href", function (d) {
       return 'assets/images/help-circle' + '.svg';
     }).attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
-      return countryScale(d.country) - countryheight / 2;
+      return countryScale(d.overall) - countryheight / 2;
     }).attr('class', 'question').attr('width', countryheight - 2).attr('height', countryheight - 2);
     rankingSvg.selectAll('text.countrylabel-left').data(rankingdata).enter().append('text').attr('x', 0).attr('y', function (d) {
-      return countryScale(d.country);
+      return countryScale(d.search);
     }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').attr('class', function (d) {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
@@ -16220,17 +16225,19 @@ function init() {
     }).html(function (d, i) {
       return i + 1 + '. ' + grid[d.country].name;
     });
-    rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth).attr('y', function (d) {
-      return countryScale(d.country);
-    }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
+    rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth) //AFTER FINAL
+    .attr("y", function (d) {
+      return countryScale(d.overall);
+    }) //.attr("y", (d) => countryScale(d.search))
+    .attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
       return d.key;
     }) //AFTER FINAL
-    //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
-    .html(function (d, i) {
-      return i + 1 + '. ?';
-    });
+    .html(function (d) {
+      return d.overall + '. ' + grid[d.country].name;
+    }); //.html((d) => d.search + '. ?');
+
     /** MAP **/
 
     var mapWidth = document.querySelector("#map-container").clientWidth;

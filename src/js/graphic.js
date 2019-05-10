@@ -10,7 +10,7 @@ function init() {
   const screenRatio = windowWidth/windowHeight;
 
   Promise.all([
-    d3.dsv(",", "assets/data/ranking.csv", function(d) {
+    d3.dsv(",", "assets/data/ranking_20190510.csv", function(d) {
       return {
         country: d.country,
         search: +d.search,
@@ -174,7 +174,7 @@ function init() {
       .attr("in","SourceGraphic");
 
     let countryScale = d3.scaleBand()
-      .domain(rankingdata.map((d) => d.country))
+      .domain(Array.from(new Array(26),(val,index)=>index+1))
       .range([rankingMargin.top, rankingHeight])
     let voteScale = d3.scalePoint()
       .domain(["search", "tele", "overall"])
@@ -201,6 +201,7 @@ function init() {
     const countryheight = 24;
 
     //Connecting lines
+    //AFTER FINAL
     /*let line = d3.line()
       .x((d) => voteScale(d.key))
       .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
@@ -232,7 +233,7 @@ function init() {
       .enter().append('image')
       .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
       .attr('x', voteScale("search") - countryheight/2)
-      .attr("y", (d) => countryScale(d.country) - countryheight/2)
+      .attr("y", (d) => countryScale(d.search) - countryheight/2)
       .attr('class', function (d) { return 'id-' + d.Country; })
       .attr('width', countryheight - 2)
       .attr('height', countryheight - 2)
@@ -240,18 +241,22 @@ function init() {
     rankingSvg.selectAll('image.question.tele')
       .data(rankingdata)
       .enter().append('image')
-      .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      //AFTER FINAL
+      .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+      //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
       .attr('x', voteScale("tele") - countryheight/2)
-      .attr('y', (d) => countryScale(d.country) - countryheight/2)
+      .attr('y', (d) => countryScale(d.tele) - countryheight/2)
       .attr('class', 'question')
       .attr('width', countryheight - 2)
       .attr('height', countryheight - 2);
     rankingSvg.selectAll('image.question.overall')
       .data(rankingdata)
       .enter().append('image')
+      //AFTER FINAL
+      //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
       .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
       .attr('x', voteScale("overall") - countryheight/2)
-      .attr('y', (d) => countryScale(d.country) - countryheight/2)
+      .attr('y', (d) => countryScale(d.overall) - countryheight/2)
       .attr('class', 'question')
       .attr('width', countryheight - 2)
       .attr('height', countryheight - 2);
@@ -259,7 +264,7 @@ function init() {
       .data(rankingdata)
       .enter().append('text')
       .attr('x', 0)
-      .attr('y', (d) => countryScale(d.country))
+      .attr('y', (d) => countryScale(d.search))
       .attr("dy", "0.3em")
       .style('font-family', 'Rubik')
       .style('font-size', '14px')
@@ -270,7 +275,9 @@ function init() {
       .data(rankingdata)
       .enter().append('text')
       .attr('x', rankingWidth)
-      .attr('y', (d) => countryScale(d.country))
+      //AFTER FINAL
+      .attr("y", (d) => countryScale(d.overall))
+      //.attr("y", (d) => countryScale(d.search))
       .attr("dy", "0.3em")
       .style('font-family', 'Rubik')
       .style('font-size', '14px')
@@ -278,8 +285,8 @@ function init() {
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
       //AFTER FINAL
-      //.html(function (d, i) { return (i + 1) + '. ' + d.country; });
-      .html(function (d, i) { return (i + 1) + '. ?'; });
+      .html((d) => d.overall + '. ' + grid[d.country].name);
+      //.html((d) => d.search + '. ?');
 
   /** MAP **/
   const mapWidth = document.querySelector("#map-container").clientWidth;
