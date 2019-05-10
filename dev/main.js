@@ -16103,13 +16103,7 @@ function init() {
 
     };
     var tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
-    var filtervalues = {
-      "country": "LVA",
-      "fromto": "to",
-      "searchtele": "search"
-      /** SELECT LIST **/
-
-    };
+    /** SELECT LIST **/
 
     var froms = _toConsumableArray(new Set(votingdata.map(function (el) {
       return el.from;
@@ -16135,8 +16129,14 @@ function init() {
       return d;
     }).text(function (d) {
       return grid[d].name;
-    });
-    d3.select("option[value='ISR']").property("selected", true);
+    }); //UPDATE
+
+    var filtervalues = {
+      "country": "LVA",
+      "fromto": "to",
+      "searchtele": "search"
+    };
+    d3.select("option[value='LVA']").property("selected", true);
     /** RANKING **/
 
     var rankingHeight = 800;

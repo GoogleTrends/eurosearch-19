@@ -119,11 +119,6 @@ function init() {
       .attr("class", "tooltip")				
       .style("opacity", 0);
     
-    let filtervalues = {
-      "country": "LVA",
-      "fromto": "to",
-      "searchtele": "search"
-    }
     /** SELECT LIST **/
     let froms = [...new Set(votingdata.map(el => el.from))];
     let tos  = [...new Set(votingdata.map(el => el.to))];
@@ -147,7 +142,13 @@ function init() {
       .enter().append("option")
       .attr("value", (d) => d)
       .text((d) => grid[d].name);
-    d3.select("option[value='ISR']").property("selected", true);
+    //UPDATE
+    let filtervalues = {
+      "country": "LVA",
+      "fromto": "to",
+      "searchtele": "search"
+    }
+    d3.select("option[value='LVA']").property("selected", true);
     
     /** RANKING **/
     const rankingHeight = 800;
