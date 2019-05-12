@@ -15660,7 +15660,7 @@ function init() {
   var windowWidth = window.innerWidth;
   var windowHeight = window.innerHeight;
   var screenRatio = windowWidth / windowHeight;
-  Promise.all([d3.dsv(",", "assets/data/ranking_20190510.csv", function (d) {
+  Promise.all([d3.dsv(",", "assets/data/ranking_20190512.csv", function (d) {
     return {
       country: d.country,
       search: +d.search,
@@ -15674,7 +15674,7 @@ function init() {
       year: +d.year,
       votepoints: +d.votepoints
     };
-  }), d3.dsv(",", "assets/data/votingdata_19.csv", function (d) {
+  }), d3.dsv(",", "assets/data/votingdata_19_20190512.csv", function (d) {
     return {
       to: d.to,
       from: d.from,
@@ -16132,19 +16132,19 @@ function init() {
     }); //UPDATE
 
     var filtervalues = {
-      "country": "LVA",
+      "country": "NLD",
       "fromto": "to",
       "searchtele": "search"
     };
-    d3.select("option[value='LVA']").property("selected", true);
+    d3.select("option[value='NLD']").property("selected", true);
     /** RANKING **/
 
     var rankingHeight = 800;
     var rankingWidth = document.querySelector("#ranking-container").clientWidth;
     var rankingMargin = {
       top: 40,
-      left: 120,
-      right: 120
+      left: 150,
+      right: 150
     };
     var rankingSvg = d3.select("#ranking").attr("width", rankingWidth).attr("height", rankingHeight);
     var flagfilter = rankingSvg.append("filter").attr("id", "flagglow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");

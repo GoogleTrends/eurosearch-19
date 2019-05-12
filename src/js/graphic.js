@@ -10,7 +10,7 @@ function init() {
   const screenRatio = windowWidth/windowHeight;
 
   Promise.all([
-    d3.dsv(",", "assets/data/ranking_20190510.csv", function(d) {
+    d3.dsv(",", "assets/data/ranking_20190512.csv", function(d) {
       return {
         country: d.country,
         search: +d.search,
@@ -27,7 +27,7 @@ function init() {
         votepoints: +d.votepoints
       };
     }),
-    d3.dsv(",", "assets/data/votingdata_19.csv", function(d){
+    d3.dsv(",", "assets/data/votingdata_19_20190512.csv", function(d){
       return {
         to: d.to,
         from: d.from,
@@ -144,16 +144,16 @@ function init() {
       .text((d) => grid[d].name);
     //UPDATE
     let filtervalues = {
-      "country": "LVA",
+      "country": "NLD",
       "fromto": "to",
       "searchtele": "search"
     }
-    d3.select("option[value='LVA']").property("selected", true);
+    d3.select("option[value='NLD']").property("selected", true);
     
     /** RANKING **/
     const rankingHeight = 800;
     const rankingWidth = document.querySelector("#ranking-container").clientWidth;
-    const rankingMargin = {top: 40, left: 120, right: 120};
+    const rankingMargin = {top: 40, left: 150, right: 150};
 
     let rankingSvg = d3.select("#ranking")
       .attr("width", rankingWidth) 
