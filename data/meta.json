@@ -3,8 +3,9 @@
 	"description": "Can search activity predict the winner of the Eurovision Song Contest?",
 	"url": "https://",
 	"keywords": "eurovision",
-	"imgFacebook": "",
-	"imgTwitter": "",
+	"imgFacebook": "https://googletrends.github.io/eurosearch-19/assets/social/social-facebook.jpg",
+	"imgTwitter": "https://googletrends.github.io/eurosearch-19/assets/social/social-twitter.jpg",
+	"url": "https://googletrends.github.io/eurosearch-19/",
 	"author": {
 		"name": "Maarten Lambrechts",
 		"url": "https://www.maartenlambrechts.com",
