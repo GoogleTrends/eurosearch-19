@@ -15624,7 +15624,7 @@ var index = {
 };
 var _default = index;
 exports.default = _default;
-},{"d3-selection":"4Gs4","d3-drag":"aj7N","d3-shape":"UQVl","d3-dispatch":"7UiF"}],"graphic.js":[function(require,module,exports) {
+},{"d3-selection":"4Gs4","d3-drag":"aj7N","d3-shape":"UQVl","d3-dispatch":"7UiF"}],"TAPd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15872,7 +15872,7 @@ function init() {
           x: 5,
           y: 5
         },
-        "name": "Hungaria"
+        "name": "Hungary"
       },
       HRV: {
         "status": "finalist",
@@ -15912,7 +15912,7 @@ function init() {
           x: 3,
           y: 5
         },
-        "name": "Italia"
+        "name": "Italy"
       },
       KOS: {
         "status": "nonparticipant",
@@ -16882,5 +16882,5 @@ function init() {
 }
 
 init();
-},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js"}]},{},["epB2"], null)
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd"}]},{},["epB2"], null)
 //# sourceMappingURL=/main.js.map
