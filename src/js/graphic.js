@@ -10,7 +10,7 @@ function init() {
   const screenRatio = windowWidth/windowHeight;
 
   Promise.all([
-    d3.dsv(",", "assets/data/ranking_20190512.csv", function(d) {
+    d3.dsv(",", "assets/data/ranking_20190517.csv", function(d) {
       return {
         country: d.country,
         search: +d.search,
@@ -27,7 +27,7 @@ function init() {
         votepoints: +d.votepoints
       };
     }),
-    d3.dsv(",", "assets/data/votingdata_19_20190512.csv", function(d){
+    d3.dsv(",", "assets/data/votingdata_19_20190517.csv", function(d){
       return {
         to: d.to,
         from: d.from,
@@ -48,11 +48,11 @@ function init() {
     const grid = {
       //UPDATE STATUS TO ELIMINATED AFTER SEMIS
       ALB: {"status": "finalist", "coords": { x: 5, y: 8 }, "name": "Albania"},
-      ARM: {"status": "finalist", "coords": { x: 9, y: 6 }, "name": "Armenia"},
+      ARM: {"status": "eliminated", "coords": { x: 9, y: 6 }, "name": "Armenia"},
       AUS: {"status": "finalist", "coords": { x: 9, y: 9 }, "name": "Australia"},
-      AUT: {"status": "finalist", "coords": { x: 4, y: 5 }, "name": "Austria"},
+      AUT: {"status": "eliminated", "coords": { x: 4, y: 5 }, "name": "Austria"},
       AZE: {"status": "finalist", "coords": { x: 9, y: 5 }, "name": "Azerbaijan"},
-      BEL: {"status": "finalist", "coords": { x: 2, y: 3 }, "name": "Belgium"},
+      BEL: {"status": "eliminated", "coords": { x: 2, y: 3 }, "name": "Belgium"},
       BGR: {"status": "nonparticipant", "coords": { x: 7, y: 6 }, "name": "Bulgaria"},
       BIH: {"status": "nonparticipant", "coords": { x: 5, y: 6 }, "name": "Bosnia and Herzegovina"},
       BLR: {"status": "finalist", "coords": { x: 6, y: 3 }, "name": "Belarus"},
@@ -63,30 +63,30 @@ function init() {
       DNK: {"status": "finalist", "coords": { x: 4, y: 2 }, "name": "Denmark"},
       ESP: {"status": "finalist", "coords": { x: 1, y: 5 }, "name": "Spain"},
       EST: {"status": "finalist", "coords": { x: 6, y: 1 }, "name": "Estonia"},
-      FIN: {"status": "finalist", "coords": { x: 6, y: 0 }, "name": "Finland"},
+      FIN: {"status": "eliminated", "coords": { x: 6, y: 0 }, "name": "Finland"},
       FRA: {"status": "finalist", "coords": { x: 1, y: 4 }, "name": "France"},
       GBR: {"status": "finalist", "coords": { x: 1, y: 2 }, "name": "UK"},
-      GEO: {"status": "finalist", "coords": { x: 8, y: 5 }, "name": "Georgia"},
+      GEO: {"status": "eliminated", "coords": { x: 8, y: 5 }, "name": "Georgia"},
       GRC: {"status": "finalist", "coords": { x: 6, y: 8 }, "name": "Greece"},
-      HUN: {"status": "finalist", "coords": { x: 5, y: 5 }, "name": "Hungary"},
-      HRV: {"status": "finalist", "coords": { x: 4, y: 6 }, "name": "Croatia"},
-      IRL: {"status": "finalist", "coords": { x: 0, y: 2 }, "name": "Ireland"},
+      HUN: {"status": "eliminated", "coords": { x: 5, y: 5 }, "name": "Hungary"},
+      HRV: {"status": "eliminated", "coords": { x: 4, y: 6 }, "name": "Croatia"},
+      IRL: {"status": "eliminated", "coords": { x: 0, y: 2 }, "name": "Ireland"},
       ISL: {"status": "finalist", "coords": { x: 0, y: 0 }, "name": "Iceland"},
       ISR: {"status": "finalist", "coords": { x: 8, y: 8 }, "name": "Israel"},
       ITA: {"status": "finalist", "coords": { x: 3, y: 5 }, "name": "Italy"},
       KOS: {"status": "nonparticipant", "coords": { x: 6, y: 7 }, "name": "Kosovo"},
-      LTU: {"status": "finalist", "coords": { x: 6, y: 2 }, "name": "Lithuania"},
+      LTU: {"status": "eliminated", "coords": { x: 6, y: 2 }, "name": "Lithuania"},
       LUX: {"status": "nonparticipant", "coords": { x: 2, y: 4 }, "name": "Luxembourg"},
-      LVA: {"status": "finalist", "coords": { x: 7, y: 2 }, "name": "Latvia"},
-      MDA: {"status": "finalist", "coords": { x: 7, y: 5 }, "name": "Moldova"},
+      LVA: {"status": "eliminated", "coords": { x: 7, y: 2 }, "name": "Latvia"},
+      MDA: {"status": "eliminated", "coords": { x: 7, y: 5 }, "name": "Moldova"},
       MKD: {"status": "finalist", "coords": { x: 7, y: 7 }, "name": "North Macedonia"},
       MLT: {"status": "finalist", "coords": { x: 1, y: 7 }, "name": "Malta"},
-      MNE: {"status": "finalist", "coords": { x: 5, y: 7 }, "name": "Montenegro"},
+      MNE: {"status": "eliminated", "coords": { x: 5, y: 7 }, "name": "Montenegro"},
       NLD: {"status": "finalist", "coords": { x: 3, y: 3 }, "name": "Netherlands"},
       NOR: {"status": "finalist", "coords": { x: 4, y: 0 }, "name": "Norway"},
-      POL: {"status": "finalist", "coords": { x: 5, y: 3 }, "name": "Poland"},
-      PRT: {"status": "finalist", "coords": { x: 0, y: 5 }, "name": "Portugal"},
-      ROU: {"status": "finalist", "coords": { x: 6, y: 5 }, "name": "Romania"},
+      POL: {"status": "eliminated", "coords": { x: 5, y: 3 }, "name": "Poland"},
+      PRT: {"status": "eliminated", "coords": { x: 0, y: 5 }, "name": "Portugal"},
+      ROU: {"status": "eliminated", "coords": { x: 6, y: 5 }, "name": "Romania"},
       RUS: {"status": "finalist", "coords": { x: 7, y: 3 }, "name": "Russia"},
       SMR: {"status": "finalist", "coords": { x: 2, y: 6 }, "name": "San Marino"},
       SRB: {"status": "finalist", "coords": { x: 6, y: 6 }, "name": "Serbia"},
@@ -144,11 +144,11 @@ function init() {
       .text((d) => grid[d].name);
     //UPDATE
     let filtervalues = {
-      "country": "NLD",
+      "country": "FRA",
       "fromto": "to",
       "searchtele": "search"
     }
-    d3.select("option[value='NLD']").property("selected", true);
+    d3.select("option[value='FRA']").property("selected", true);
     
     /** RANKING **/
     const rankingHeight = 800;
@@ -355,7 +355,7 @@ function init() {
     if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} is not participating`}
     //AFTER FINAL
     //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
-    else if(filtervalues.fromto == "from" && grid[countryID].status == "eliminated"){return `${grid[countryID].name} was eliminated<br/> in the semi finals`}
+    else if(filtervalues.fromto == "from" && grid[countryID].status == "eliminated"){return `${grid[countryID].name} was eliminated<br/> in the semi-finals`}
     else{
       return `${pointCategory} points <br/> from ${grid[tooltipData.from].name} to ${grid[tooltipData.to].name}: ${tooltipData.points}`;
     }
