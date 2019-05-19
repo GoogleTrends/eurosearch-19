@@ -16680,7 +16680,7 @@ function init() {
       minwidth: 0
     }, {
       note: {
-        label: "The most consistent voting pattern, 141 points awarded over xx Contests",
+        label: "The most consistent voting pattern, 141 points awarded over 15 Contests",
         title: "Belarus to Russia"
       },
       data: {
