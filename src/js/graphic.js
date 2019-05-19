@@ -19,7 +19,7 @@ function init() {
       };
     }),
     d3.json('assets/data/eurovision_50m_simple.json'),
-    d3.dsv(",", "assets/data/tele-search-by-year.csv", function(d) {
+    d3.dsv(",", "assets/data/tele-search-by-year-20190519.csv", function(d) {
       return {
         to: d.to,
         searchpoints: +d.searchpoints,
@@ -848,7 +848,7 @@ function init() {
     yearTitle.text(yr);
   }
 
-  highlightYear(2018);
+  highlightYear(2019);
 
   d3.select("input#slider").on("change", function(){
     highlightYear(this.value);
