@@ -15660,7 +15660,7 @@ function init() {
   var windowWidth = window.innerWidth;
   var windowHeight = window.innerHeight;
   var screenRatio = windowWidth / windowHeight;
-  Promise.all([d3.dsv(",", "assets/data/ranking_20190517.csv", function (d) {
+  Promise.all([d3.dsv(",", "assets/data/ranking_20190519.csv", function (d) {
     return {
       country: d.country,
       search: +d.search,
@@ -15674,7 +15674,7 @@ function init() {
       year: +d.year,
       votepoints: +d.votepoints
     };
-  }), d3.dsv(",", "assets/data/votingdata_19_20190517.csv", function (d) {
+  }), d3.dsv(",", "assets/data/votingdata_19_20190519.csv", function (d) {
     return {
       to: d.to,
       from: d.from,
@@ -16098,7 +16098,8 @@ function init() {
       "2015": "SWE",
       "2016": "UKR",
       "2017": "PRT",
-      "2018": "ISR"
+      "2018": "ISR",
+      "2019": "NLD"
       /*TOOLTIP*/
 
     };
@@ -16124,19 +16125,18 @@ function init() {
     }
 
     var losers = compare(froms, tos);
-    d3.select("#countrylist").selectAll("option") //.data(tofromCountries[filtervalues.fromto])
-    .data(froms).enter().append("option").attr("value", function (d) {
+    d3.select("#countrylist").selectAll("option").data(froms).enter().append("option").attr("value", function (d) {
       return d;
     }).text(function (d) {
       return grid[d].name;
-    }); //UPDATE
+    }); //UPDATE  
 
     var filtervalues = {
-      "country": "FRA",
+      "country": "NLD",
       "fromto": "to",
       "searchtele": "search"
     };
-    d3.select("option[value='FRA']").property("selected", true);
+    d3.select("option[value='NLD']").property("selected", true);
     /** RANKING **/
 
     var rankingHeight = 800;
@@ -16167,40 +16167,43 @@ function init() {
       return headers[d];
     }).attr("class", function (d) {
       return "label-".concat(d);
-    }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik') //AFTER FINAL: DELETE
-    .style("opacity", function (d) {
-      if (d == "search") {
-        return 1;
-      } else {
-        return 0.3;
-      }
-    });
+    }).attr('text-anchor', 'middle').attr('font-size', '16px').attr('font-family', 'Rubik'); //AFTER FINAL: DELETE
+
+    /*.style("opacity", function(d){
+      if(d == "search"){ return 1;}
+      else{ return 0.3; }
+    });*/
+
     var countryheight = 24; //Connecting lines
     //AFTER FINAL
 
-    /*let line = d3.line()
-      .x((d) => voteScale(d.key))
-      .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
-      .curve(d3.curveMonotoneX);
-     let linedata = [];
-    rankingdata.forEach(function(el){
-      let obj = {};
+    var line = d3.line().x(function (d) {
+      return voteScale(d.key);
+    }).y(function (d) {
+      return d.value * countryScale.bandwidth() + countryheight / 2;
+    }).curve(d3.curveMonotoneX);
+    var linedata = [];
+    rankingdata.forEach(function (el) {
+      var obj = {};
       obj.country = el.country;
       obj.values = [];
-      obj.values.push({"key": "search", "value": el.search});
-      obj.values.push({"key": "tele", "value": el.tele});
-      obj.values.push({"key": "overall", "value": el.overall});
-      linedata.push(obj)
+      obj.values.push({
+        "key": "search",
+        "value": el.search
+      });
+      obj.values.push({
+        "key": "tele",
+        "value": el.tele
+      });
+      obj.values.push({
+        "key": "overall",
+        "value": el.overall
+      });
+      linedata.push(obj);
     });
-     rankingSvg.selectAll("line.connection")
-      .data(linedata)
-      .enter().append("path")
-      .attr("d", (d) => line(d.values))
-      .style("stroke-width", 1)
-      .style("stroke", "white")
-      .style("fill", "none")
-      .style("filter", "url(#flagglow)");*/
-    //Left part, search results
+    rankingSvg.selectAll("line.connection").data(linedata).enter().append("path").attr("d", function (d) {
+      return line(d.values);
+    }).style("stroke-width", 1).style("stroke", "white").style("fill", "none").style("filter", "url(#flagglow)"); //Left part, search results
 
     rankingSvg.selectAll('image.flag').data(rankingdata).enter().append('image').attr("xlink:href", function (d) {
       return 'assets/images/flags/' + d.country + '.svg';
@@ -16210,17 +16213,19 @@ function init() {
       return 'id-' + d.Country;
     }).attr('width', countryheight - 2).attr('height', countryheight - 2).style("filter", "url(#flagglow)");
     rankingSvg.selectAll('image.question.tele').data(rankingdata).enter().append('image') //AFTER FINAL
-    //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
     .attr("xlink:href", function (d) {
-      return 'assets/images/help-circle' + '.svg';
-    }).style("opacity", 0.15).attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
+      return 'assets/images/flags/' + d.country + '.svg';
+    }) //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+    //.style("opacity", 0.15)
+    .attr('x', voteScale("tele") - countryheight / 2).attr('y', function (d) {
       return countryScale(d.tele) - countryheight / 2;
     }).attr('class', 'question').attr('width', countryheight).attr('height', countryheight);
     rankingSvg.selectAll('image.question.overall').data(rankingdata).enter().append('image') //AFTER FINAL
-    //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
     .attr("xlink:href", function (d) {
-      return 'assets/images/help-circle' + '.svg';
-    }).style("opacity", 0.15).attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
+      return 'assets/images/flags/' + d.country + '.svg';
+    }) //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+    //.style("opacity", 0.15)
+    .attr('x', voteScale("overall") - countryheight / 2).attr('y', function (d) {
       return countryScale(d.overall) - countryheight / 2;
     }).attr('class', 'question').attr('width', countryheight).attr('height', countryheight);
     rankingSvg.selectAll('text.countrylabel-left').data(rankingdata).enter().append('text').attr('x', 0).attr('y', function (d) {
@@ -16233,18 +16238,19 @@ function init() {
       return i + 1 + '. ' + grid[d.country].name;
     });
     rankingSvg.selectAll('text.countrylabel-right').data(rankingdata).enter().append('text').attr('x', rankingWidth) //AFTER FINAL
-    //.attr("y", (d) => countryScale(d.overall))
     .attr("y", function (d) {
-      return countryScale(d.search);
-    }).attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
+      return countryScale(d.overall);
+    }) //.attr("y", (d) => countryScale(d.search))
+    .attr("dy", "0.3em").style('font-family', 'Rubik').style('font-size', '14px').style('text-anchor', 'end').attr('class', function (d) {
       return 'countrylabel id-' + d.country;
     }).attr('id', function (d) {
       return d.key;
     }) //AFTER FINAL
-    //.html((d) => d.overall + '. ' + grid[d.country].name);
     .html(function (d) {
-      return d.search + '. ?';
-    }).style("opacity", 0.3);
+      return d.overall + '. ' + grid[d.country].name;
+    }); //.html((d) => d.search + '. ?')
+    //.style("opacity", 0.3);
+
     /** MAP **/
 
     var mapWidth = document.querySelector("#map-container").clientWidth;
@@ -16307,17 +16313,16 @@ function init() {
 
       var tooltipData = countryData.filter(function (el) {
         return el[direction] == countryID;
-      })[0];
+      })[0]; //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} is not participating`}
+      //AFTER FINAL
 
       if (grid[countryID].status == "nonparticipant") {
-        return "".concat(grid[countryID].name, " is not participating");
-      } //AFTER FINAL
-      //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
-      else if (filtervalues.fromto == "from" && grid[countryID].status == "eliminated") {
-          return "".concat(grid[countryID].name, " was eliminated<br/> in the semi-finals");
-        } else {
-          return "".concat(pointCategory, " points <br/> from ").concat(grid[tooltipData.from].name, " to ").concat(grid[tooltipData.to].name, ": ").concat(tooltipData.points);
-        }
+        return "".concat(grid[countryID].name, " did not participate");
+      } else if (filtervalues.fromto == "from" && grid[countryID].status == "eliminated") {
+        return "".concat(grid[countryID].name, " was eliminated<br/> in the semi-finals");
+      } else {
+        return "".concat(pointCategory, " points <br/> from ").concat(grid[tooltipData.from].name, " to ").concat(grid[tooltipData.to].name, ": ").concat(tooltipData.points);
+      }
     }
 
     var countries = mapSvg.selectAll('path').data(geodata.features).enter().append('path').attr("id", function (d) {
@@ -16422,8 +16427,8 @@ function init() {
       d3.select(".country#" + filtervalues.country).raise().classed("highlight", true).style("filter", "url(#glow)");
       colorMap(filtervalues);
     }); //DELETE AFTER FINAL
+    //d3.select("#button6").property("disabled", true);
 
-    d3.select("#button6").property("disabled", true);
     d3.selectAll("input.fromtoswitch").on("change", function () {
       filtervalues.fromto = d3.select(this).node().value;
       colorMap(filtervalues);

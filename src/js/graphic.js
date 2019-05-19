@@ -10,7 +10,7 @@ function init() {
   const screenRatio = windowWidth/windowHeight;
 
   Promise.all([
-    d3.dsv(",", "assets/data/ranking_20190517.csv", function(d) {
+    d3.dsv(",", "assets/data/ranking_20190519.csv", function(d) {
       return {
         country: d.country,
         search: +d.search,
@@ -27,7 +27,7 @@ function init() {
         votepoints: +d.votepoints
       };
     }),
-    d3.dsv(",", "assets/data/votingdata_19_20190517.csv", function(d){
+    d3.dsv(",", "assets/data/votingdata_19_20190519.csv", function(d){
       return {
         to: d.to,
         from: d.from,
@@ -111,7 +111,8 @@ function init() {
       "2015": "SWE",
       "2016": "UKR",
       "2017": "PRT",
-      "2018": "ISR"
+      "2018": "ISR",
+      "2019": "NLD"
     }
 
     /*TOOLTIP*/
@@ -137,18 +138,17 @@ function init() {
     const losers = compare(froms, tos);
     
     d3.select("#countrylist").selectAll("option")
-      //.data(tofromCountries[filtervalues.fromto])
       .data(froms)
       .enter().append("option")
       .attr("value", (d) => d)
       .text((d) => grid[d].name);
-    //UPDATE
+    //UPDATE  
     let filtervalues = {
-      "country": "FRA",
+      "country": "NLD",
       "fromto": "to",
       "searchtele": "search"
     }
-    d3.select("option[value='FRA']").property("selected", true);
+    d3.select("option[value='NLD']").property("selected", true);
     
     /** RANKING **/
     const rankingHeight = 800;
@@ -197,18 +197,18 @@ function init() {
       .attr("class", (d) => `label-${d}`)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
-      .attr('font-family', 'Rubik')
+      .attr('font-family', 'Rubik');
       //AFTER FINAL: DELETE
-      .style("opacity", function(d){
+      /*.style("opacity", function(d){
         if(d == "search"){ return 1;}
         else{ return 0.3; }
-      });
+      });*/
 
     const countryheight = 24;
 
     //Connecting lines
     //AFTER FINAL
-    /*let line = d3.line()
+    let line = d3.line()
       .x((d) => voteScale(d.key))
       .y((d) => d.value*countryScale.bandwidth() + countryheight/2)
       .curve(d3.curveMonotoneX);
@@ -231,7 +231,7 @@ function init() {
       .style("stroke-width", 1)
       .style("stroke", "white")
       .style("fill", "none")
-      .style("filter", "url(#flagglow)");*/
+      .style("filter", "url(#flagglow)");
 
   //Left part, search results
   rankingSvg.selectAll('image.flag')
@@ -248,9 +248,9 @@ function init() {
       .data(rankingdata)
       .enter().append('image')
       //AFTER FINAL
-      //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
-      .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
-      .style("opacity", 0.15)
+      .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+      //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      //.style("opacity", 0.15)
       .attr('x', voteScale("tele") - countryheight/2)
       .attr('y', (d) => countryScale(d.tele) - countryheight/2)
       .attr('class', 'question')
@@ -260,9 +260,9 @@ function init() {
       .data(rankingdata)
       .enter().append('image')
       //AFTER FINAL
-      //.attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
-      .attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
-      .style("opacity", 0.15)
+      .attr("xlink:href", function (d) { return 'assets/images/flags/' + d.country + '.svg' })
+      //.attr("xlink:href", function (d) { return 'assets/images/help-circle' + '.svg' })
+      //.style("opacity", 0.15)
       .attr('x', voteScale("overall") - countryheight/2)
       .attr('y', (d) => countryScale(d.overall) - countryheight/2)
       .attr('class', 'question')
@@ -284,8 +284,8 @@ function init() {
       .enter().append('text')
       .attr('x', rankingWidth)
       //AFTER FINAL
-      //.attr("y", (d) => countryScale(d.overall))
-      .attr("y", (d) => countryScale(d.search))
+      .attr("y", (d) => countryScale(d.overall))
+      //.attr("y", (d) => countryScale(d.search))
       .attr("dy", "0.3em")
       .style('font-family', 'Rubik')
       .style('font-size', '14px')
@@ -293,9 +293,9 @@ function init() {
       .attr('class', function (d) { return 'countrylabel id-' + d.country; })
       .attr('id', function (d) { return d.key; })
       //AFTER FINAL
-      //.html((d) => d.overall + '. ' + grid[d.country].name);
-      .html((d) => d.search + '. ?')
-      .style("opacity", 0.3);
+      .html((d) => d.overall + '. ' + grid[d.country].name);
+      //.html((d) => d.search + '. ?')
+      //.style("opacity", 0.3);
 
   /** MAP **/
   const mapWidth = document.querySelector("#map-container").clientWidth;
@@ -352,9 +352,9 @@ function init() {
     let direction = "from";
     if(filtervalues.fromto == "from"){ direction = "to"; }
     let tooltipData = countryData.filter((el) => el[direction] == countryID)[0];
-    if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} is not participating`}
+    //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} is not participating`}
     //AFTER FINAL
-    //if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
+    if(grid[countryID].status == "nonparticipant"){return `${grid[countryID].name} did not participate`}
     else if(filtervalues.fromto == "from" && grid[countryID].status == "eliminated"){return `${grid[countryID].name} was eliminated<br/> in the semi-finals`}
     else{
       return `${pointCategory} points <br/> from ${grid[tooltipData.from].name} to ${grid[tooltipData.to].name}: ${tooltipData.points}`;
@@ -481,7 +481,7 @@ function init() {
   })
 
   //DELETE AFTER FINAL
-  d3.select("#button6").property("disabled", true);
+  //d3.select("#button6").property("disabled", true);
 
   d3.selectAll("input.fromtoswitch").on("change", function(){
     filtervalues.fromto = d3.select(this).node().value;
